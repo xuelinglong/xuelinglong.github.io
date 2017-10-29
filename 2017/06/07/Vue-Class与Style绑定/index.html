@@ -1,0 +1,723 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Vue.js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="数据绑定一个常见需求是操作元素的 class 列表和它的内联样式。因为它们都是属性 ，我们可以用v-bind 处理它们：只需要计算出表达式最终的字符串。不过，字符串拼接麻烦又易错。因此，在 v-bind 用于 class 和 style 时， Vue.js 专门增强了它。表达式的结果类型除了字符串之外，还可以是对象或数组。">
+<meta name="keywords" content="Vue.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-Class与Style绑定">
+<meta property="og:url" content="http://yoursite.com/2017/06/07/Vue-Class与Style绑定/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="数据绑定一个常见需求是操作元素的 class 列表和它的内联样式。因为它们都是属性 ，我们可以用v-bind 处理它们：只需要计算出表达式最终的字符串。不过，字符串拼接麻烦又易错。因此，在 v-bind 用于 class 和 style 时， Vue.js 专门增强了它。表达式的结果类型除了字符串之外，还可以是对象或数组。">
+<meta property="og:updated_time" content="2017-06-25T01:16:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue-Class与Style绑定">
+<meta name="twitter:description" content="数据绑定一个常见需求是操作元素的 class 列表和它的内联样式。因为它们都是属性 ，我们可以用v-bind 处理它们：只需要计算出表达式最终的字符串。不过，字符串拼接麻烦又易错。因此，在 v-bind 用于 class 和 style 时， Vue.js 专门增强了它。表达式的结果类型除了字符串之外，还可以是对象或数组。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/07/Vue-Class与Style绑定/"/>
+
+
+
+
+
+  <title>Vue-Class与Style绑定 | Vue</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/07/Vue-Class与Style绑定/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue-Class与Style绑定</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-07T22:45:41+08:00">
+                2017-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/07/Vue-Class与Style绑定/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/07/Vue-Class与Style绑定/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数据绑定一个常见需求是操作元素的 class 列表和它的内联样式。因为它们都是属性 ，我们可以用v-bind 处理它们：只需要计算出表达式最终的字符串。不过，字符串拼接麻烦又易错。因此，在 v-bind 用于 class 和 style 时， Vue.js 专门增强了它。表达式的结果类型除了字符串之外，还可以是对象或数组。<br><a id="more"></a><br>普通的v-bind指令示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app-2&quot;&gt;</div><div class="line">    &lt;!--</div><div class="line">        v-bind被称为指令，有前缀 v-的指令是Vue 提供的特殊属性</div><div class="line">        作用：它们会在渲染的 DOM 上应用特殊的响应式行为    </div><div class="line">    --&gt;</div><div class="line">    &lt;!--该指令的作用是将这个元素节点的 title 属性和 Vue 实例的 message 属性保持一致--&gt;</div><div class="line">    &lt;span v-bind:title=&quot;message&quot;&gt;</div><div class="line">    鼠标悬停几秒钟查看此处动态绑定的提示信息！</div><div class="line">    &lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;script&gt;       </div><div class="line">    var app2 = new Vue(&#123;</div><div class="line">        el: &apos;#app-2&apos;,</div><div class="line">        data: &#123;</div><div class="line">            message: &apos;页面加载于 &apos; + new Date()</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<h1 id="绑定HTML-Class"><a href="#绑定HTML-Class" class="headerlink" title="绑定HTML Class"></a>绑定HTML Class</h1><h2 id="对象语法"><a href="#对象语法" class="headerlink" title="对象语法"></a>对象语法</h2><p>我们可以传给 v-bind:class 一个对象，以动态地切换 class 。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div v-bind:class=&quot;&#123; active: isActive &#125;&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>上面的语法表示 class active的更新将取决于数据属性 isActive是否为真值 。</p>
+<p>我们也可以在对象中传入更多属性用来动态切换多个 class 。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;static&quot;</div><div class="line">        v-bind:class=&quot;&#123; &apos;class-a&apos;: isActive, &apos;class-b&apos;: isB &#125;&quot;&gt;</div><div class="line">        &lt;!--text-danger是属性名   hasError是属性值--&gt;</div><div class="line">    &lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">data: &#123;</div><div class="line">    isA: true,</div><div class="line">    isB: false</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>渲染为：<code>&lt;div class=&quot;static class-a&quot;&gt;&lt;/div&gt;</code><br>当 isA 和 isB 变化时，class 列表将相应地更新：<br>例如，如果 isB 变为 true，class 列表将变为 “static class-a class-b”。</p>
+<p>此外， v-bind:class 指令可以与普通的 class 属性共存：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;static&quot;</div><div class="line">     v-bind:class=&quot;&#123; active: isActive, &apos;text-danger&apos;: hasError &#125;&quot;&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">data: &#123;</div><div class="line">    isActive: true,</div><div class="line">    hasError: false</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>渲染为：<code>&lt;div class=&quot;static active&quot;&gt;&lt;/div&gt;</code><br>当 isActive 或者 hasError 变化时，class 列表将相应地更新：<br>例如，如果 hasError 的值为 true ， class列表将变为 “static active text-danger”。</p>
+<p>我们也可以直接绑定数据里的一个对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div v-bind:class=&quot;classObject&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">data: &#123;</div><div class="line">  classObject: &#123;</div><div class="line">    active: true,</div><div class="line">    &apos;text-danger&apos;: false</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也可以在这里绑定返回对象的计算属性。<br>这是一个常用且强大的模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div v-bind:class=&quot;classObject&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">data: &#123;</div><div class="line">  isActive: true,</div><div class="line">  error: null</div><div class="line">&#125;,</div><div class="line">computed: &#123;</div><div class="line">  classObject: function () &#123;</div><div class="line">    return &#123;</div><div class="line">      active: this.isActive &amp;&amp; !this.error,</div><div class="line">      &apos;text-danger&apos;: this.error &amp;&amp; this.error.type === &apos;fatal&apos;,</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="数组语法"><a href="#数组语法" class="headerlink" title="数组语法"></a>数组语法</h2><p>我们也可以把一个数组传给 v-bind:class ，以应用一个 class 列表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div v-bind:class=&quot;[classA, classB]&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">data: &#123;</div><div class="line">  classA: &apos;class-a&apos;,</div><div class="line">  classB: &apos;class-b&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>渲染为：<code>&lt;div class=&quot;class-a class-b&quot;&gt;&lt;/div&gt;</code><br>如果你也想根据条件切换列表中的 class ，可以用三元表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div v-bind:class=&quot;[classA, isB ? classB : &apos;&apos;]&quot;&gt; </div><div class="line">&lt;!-- 始终添加 classA，但是只有在 isB 是 true 时添加 classB 。--&gt;</div><div class="line">&lt;div v-bind:class=&quot;[isA ? ClassA : &apos;&apos;, ClassB]&quot;&gt;</div><div class="line">&lt;!-- 始终添加 classB，但是只有在 isA 是 true 时添加 classA 。--&gt;</div></pre></td></tr></table></figure></p>
+<p>不过，当有多个条件 class 时这样写有些繁琐。<br>可以在数组语法中使用对象语法：<br><code>&lt;div v-bind:class=&quot;[{ class-a: isA }, ClassB]&quot;&gt;</code></p>
+<h1 id="绑定内联样式"><a href="#绑定内联样式" class="headerlink" title="绑定内联样式"></a>绑定内联样式</h1><h2 id="对象语法-1"><a href="#对象语法-1" class="headerlink" title="对象语法"></a>对象语法</h2><p>v-bind:style 的对象语法十分直观——看着非常像 CSS ，其实它是一个 JavaScript 对象。 CSS 属性名可以用驼峰式（camelCase）或短横分隔命名（kebab-case）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div v-bind:style=&quot;&#123; color: activeColor, fontSize: fontSize + &apos;px&apos; &#125;&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">data: &#123;</div><div class="line">  activeColor: &apos;red&apos;,</div><div class="line">  fontSize: 30</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>直接绑定到一个样式对象通常更好，让模板更清晰：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div v-bind:style=&quot;styleObject&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>data:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">data: &#123;</div><div class="line">  styleObject: &#123;</div><div class="line">    color: &apos;red&apos;,</div><div class="line">    fontSize: &apos;13px&apos;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对象语法也常常结合返回对象的计算属性使用。</p>
+<h2 id="数组语法-1"><a href="#数组语法-1" class="headerlink" title="数组语法"></a>数组语法</h2><p>v-bind:style 的数组语法可以将多个样式对象应用到一个元素上：<br><code>&lt;div v-bind:style=&quot;[baseStyles, overridingStyles]&quot;&gt;</code></p>
+<h2 id="自动添加前缀"><a href="#自动添加前缀" class="headerlink" title="自动添加前缀"></a>自动添加前缀</h2><p>当 v-bind:style 使用需要特定前缀的 CSS 属性时，如 transform ，Vue.js 会自动侦测并添加相应的前缀。</p>
+<h2 id="多重值-（vue2-3版本开始）"><a href="#多重值-（vue2-3版本开始）" class="headerlink" title="多重值 （vue2.3版本开始）"></a>多重值 （vue2.3版本开始）</h2><p>可以为 style 绑定中的属性提供一个包含多个值的数组，常用于提供多个带前缀的值：<br><code>&lt;div :style=&quot;{ display: [&quot;-webkit-box&quot;, &quot;-ms-flexbox&quot;, &quot;flex&quot;] }&quot;&gt;</code></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue-js/" rel="tag"># Vue.js</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/06/Vue计算属性/" rel="next" title="Vue计算属性">
+                <i class="fa fa-chevron-left"></i> Vue计算属性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/07/Vue-条件渲染/" rel="prev" title="Vue-条件渲染">
+                Vue-条件渲染 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xue Ling" />
+          <p class="site-author-name" itemprop="name">Xue Ling</p>
+           
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#绑定HTML-Class"><span class="nav-number">1.</span> <span class="nav-text">绑定HTML Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象语法"><span class="nav-number">1.1.</span> <span class="nav-text">对象语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组语法"><span class="nav-number">1.2.</span> <span class="nav-text">数组语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绑定内联样式"><span class="nav-number">2.</span> <span class="nav-text">绑定内联样式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象语法-1"><span class="nav-number">2.1.</span> <span class="nav-text">对象语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组语法-1"><span class="nav-number">2.2.</span> <span class="nav-text">数组语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动添加前缀"><span class="nav-number">2.3.</span> <span class="nav-text">自动添加前缀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多重值-（vue2-3版本开始）"><span class="nav-number">2.4.</span> <span class="nav-text">多重值 （vue2.3版本开始）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/06/07/Vue-Class与Style绑定/';
+          this.page.identifier = '2017/06/07/Vue-Class与Style绑定/';
+          this.page.title = 'Vue-Class与Style绑定';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

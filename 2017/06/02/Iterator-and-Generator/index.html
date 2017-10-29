@@ -1,0 +1,882 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="十五. Iterator和for…of循环Iterator(遍历器)是一种接口，为各种不同的数据结构提供统一的访问机制。数据结构只要有了Iterator接口，就可以被遍历。 for…of循环：针对所有具有Iterator接口的数据结构。 Iterator遍历时会创建一个指针对象，遍历器本质上也是一个指针对象。调用指针对象的next方法就可以遍历事先给定的数据结构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Iterator and Generator">
+<meta property="og:url" content="http://yoursite.com/2017/06/02/Iterator-and-Generator/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="十五. Iterator和for…of循环Iterator(遍历器)是一种接口，为各种不同的数据结构提供统一的访问机制。数据结构只要有了Iterator接口，就可以被遍历。 for…of循环：针对所有具有Iterator接口的数据结构。 Iterator遍历时会创建一个指针对象，遍历器本质上也是一个指针对象。调用指针对象的next方法就可以遍历事先给定的数据结构。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-3e6b507df516df71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-aea8e197f02964e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-2c6b3ec9826e1ef7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-3781267463917721.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-06-25T01:14:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Iterator and Generator">
+<meta name="twitter:description" content="十五. Iterator和for…of循环Iterator(遍历器)是一种接口，为各种不同的数据结构提供统一的访问机制。数据结构只要有了Iterator接口，就可以被遍历。 for…of循环：针对所有具有Iterator接口的数据结构。 Iterator遍历时会创建一个指针对象，遍历器本质上也是一个指针对象。调用指针对象的next方法就可以遍历事先给定的数据结构。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1393082-3e6b507df516df71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/02/Iterator-and-Generator/"/>
+
+
+
+
+
+  <title>Iterator and Generator | Vue</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/Iterator-and-Generator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Iterator and Generator</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T21:23:02+08:00">
+                2017-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/02/Iterator-and-Generator/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/02/Iterator-and-Generator/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="十五-Iterator和for…of循环"><a href="#十五-Iterator和for…of循环" class="headerlink" title="十五. Iterator和for…of循环"></a>十五. Iterator和for…of循环</h1><p>Iterator(遍历器)是一种接口，为各种不同的数据结构提供统一的访问机制。数据结构只要有了Iterator接口，就可以被遍历。</p>
+<p>for…of循环：针对所有具有Iterator接口的数据结构。</p>
+<p>Iterator遍历时会创建一个指针对象，遍历器本质上也是一个指针对象。调用指针对象的next方法就可以遍历事先给定的数据结构。<br><a id="more"></a><br>示例：<br><img src="http://upload-images.jianshu.io/upload_images/1393082-3e6b507df516df71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>原生具有Iterator接口的数据结构（3类）：<br>数组、某些类似数组的对象、Set和Map结构。<br>此类数据结构可以直接被for…of循环遍历。<br>原因：具有Symbol.iterator属性（称部署了遍历器接口）</p>
+<p>除以上三类之外的其他数据结构（主要是对象）的Iterator接口，都需要自己在Symbol.iterator属性上面部署，这样才会被for…of循环遍历。</p>
+<p>Symbol.iterator属性：本身是一个函数，就是当前数据结构默认的遍历器生成函数。执行这个函数，就会返回一个遍历器对象（特征是具有next方法）。</p>
+<p>调用Iterator接口（即Symbol.iterator方法）的场合：</p>
+<ol>
+<li>解构赋值；</li>
+<li>扩展运算符（…）</li>
+<li>yield*</li>
+<li>任何接受数组作为参数的场合：<blockquote>
+<ol>
+<li>for…of</li>
+<li>Array.from()</li>
+<li>Map(), Set(), WeakMap(), WeakSet()（比如new &gt;&gt;4. Map([[‘a’,1],[‘b’,2]])）</li>
+<li>Promise.all()</li>
+<li>Promise.race()</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<p>遍历器对象除了具有三个方法：</p>
+<ol>
+<li>next方法(返回的是一个对象)；</li>
+<li>return方法（可选）；<blockquote>
+<ol>
+<li>作用：for…of循环提前退出（出错，或者有break语句或continue语句）</li>
+<li>return方法必须返回一个对象</li>
+</ol>
+</blockquote>
+</li>
+<li>throw方法（可选）。<blockquote>
+<ol>
+<li>作用：抛出错误</li>
+<li>throw方法主要是配合Generator函数使用。</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<p>for…of循环：<br>可以遍历数组、Set 和 Map 结构、某些类似数组的对象（比如arguments对象、DOM NodeList 对象）、后文的 Generator 对象，以及字符串。</p>
+<p>for…of循环解析：</p>
+<ol>
+<li>遍历返回的是成员的值</li>
+<li>遍历所有部署了Symbol.iterator属性（即被视为具有iterator接口）的数据结构</li>
+<li>for…of循环内部调用的是数据结构的Symbol.iterator方法（本质上是调用这个接口产生的遍历器）</li>
+<li>是遍历所有数据结构的统一的方法。</li>
+</ol>
+<p>循环方法比较：</p>
+<ol>
+<li>for…in：只能获得键名，不能直接获取键值<blockquote>
+<ol>
+<li>缺点1：数组的键名是数字，但是for…in循环是以字符串作为键名“0”、“1”、“2”等等</li>
+<li>缺点2：for…in循环不仅遍历数字键名，还会遍历手动添加的其他键，甚至包括原型链上的键。</li>
+<li>缺点3：某些情况下，for…in循环会以任意顺序遍历键名。</li>
+<li>总结：for…in循环主要是为遍历对象而设计的，不适用于遍历数组。</li>
+</ol>
+</blockquote>
+</li>
+<li>for…of：允许遍历获得键值，<blockquote>
+<ol>
+<li>语法简洁，但是没有for…in那些缺点。</li>
+<li>可以与break、continue和return配合使用。</li>
+<li>提供了遍历所有数据结构的统一操作接口。</li>
+<li>获取数组的索引，可以借助数组实例的entries方法和keys方法，<blockquote>
+<ol>
+<li>entries() 返回一个遍历器对象，用来遍历[键名, 键值]组成的数组。</li>
+<li>keys() 返回一个遍历器对象，用来遍历所有的键名。</li>
+<li>values() 返回一个遍历器对象，用来遍历所有的键值。</li>
+</ol>
+</blockquote>
+</li>
+<li>注意：数组的遍历器接口只返回具有数字索引的属性（即不返回手动另加的其他键，例：arr.foo = ‘hello’;）</li>
+</ol>
+</blockquote>
+</li>
+<li>数组的foreach：无法中途跳出forEach循环。</li>
+</ol>
+<h1 id="十六-Generator-函数"><a href="#十六-Generator-函数" class="headerlink" title="十六. Generator 函数"></a>十六. Generator 函数</h1><p>概念：</p>
+<ol>
+<li>Generator 函数是 ES6 提供的一种异步编程解决方案。</li>
+<li>从语法上，首先可以把它理解成，Generator 函数是一个状态机，封装了多个内部状态。<blockquote>
+<ol>
+<li>执行 Generator 函数会返回一个遍历器对象</li>
+<li>即Generator 函数还是一个遍历器对象生成函数</li>
+<li>返回的遍历器对象，可以依次遍历 Generator 函数内部的每一个状态。</li>
+</ol>
+</blockquote>
+</li>
+<li>形式上，Generator 函数是一个普通函数，但是有两个特征。</li>
+</ol>
+<p>Generator 函数的形式特征：</p>
+<ol>
+<li>function关键字与函数名之间有一个星号；<blockquote>
+<p>默认写法是星号紧跟在function关键字后面</p>
+</blockquote>
+</li>
+<li>函数体内部使用yield表达式，定义不同的内部状态。</li>
+</ol>
+<p>Generator 函数的调用：</p>
+<ol>
+<li>调用 Generator 函数，返回一个遍历器对象，代表 Generator 函数的内部指针。</li>
+<li>以后，每次调用遍历器对象的next方法，就会返回一个有着value和done两个属性的对象。<blockquote>
+<ol>
+<li>value属性表示当前的内部状态的值，是yield表达式后面那个表达式的值；</li>
+<li>done属性是一个布尔值，表示是否遍历结束。</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<p>示例：<br><img src="http://upload-images.jianshu.io/upload_images/1393082-aea8e197f02964e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>遍历器对象的next方法的运行逻辑：</p>
+<ol>
+<li>遇到yield表达式就暂停执行，返回一个对象：value值为yield后面那个表达式的值。</li>
+<li>下一次调用next方法时，再继续往下执行，直到遇到下一个yield表达式。</li>
+<li>如果没有再遇到新的yield表达式，就一直运行到函数结束，直到return语句为止，返回一个对象：value值为return语句后面那个表达式的值。</li>
+<li>如果该函数没有return语句，则返回的对象的value属性值为undefined。<blockquote>
+<ol>
+<li>注意：一个函数里面，只能执行一次（或者说一个）return语句。</li>
+<li>注意：Generator 函数可以不用yield表达式，这时就变成了一个单纯的暂缓执行函数（只有调用next方法时函数才会执行）。</li>
+<li>注意：yield表达式只能用在 Generator 函数里面</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1393082-2c6b3ec9826e1ef7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>Generator 函数执行后，返回一个遍历器对象。该对象本身也具有Symbol.iterator属性，执行后返回自身：<br><img src="http://upload-images.jianshu.io/upload_images/1393082-3781267463917721.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>next方法可以带一个参数：<br>该参数就会被当作上一个yield表达式的返回值。</p>
+<blockquote>
+<ol>
+<li>原因：yield表达式本身没有返回值，或者说总是返回undefined</li>
+<li>作用：通过next方法的参数，可以在 Generator 函数运行的不同阶段，从外部向内部注入不同的值，从而调整函数行为。</li>
+<li>想要第一次调用next方法时，就能够输入值的方法：在 Generator 函数外面再包一层。</li>
+</ol>
+</blockquote>
+<p>for…of循环可以自动遍历 Generator 函数时生成的Iterator对象，且此时不再需要调用next方法：</p>
+<blockquote>
+<p>注意：一旦next方法的返回对象的done属性为true，for…of循环就会中止，且不包含该返回对象。</p>
+</blockquote>
+<p>Generator 函数返回的遍历器对象，都有一个throw方法：</p>
+<ol>
+<li>作用：抛出错误</li>
+<li>与Generator函数体内的catch语句配合使用，遍历器对象的throw方法抛出的错误只能被函数体内外部的catch语句捕获。<blockquote>
+<p>注意：如果 Generator 函数内部和外部，都没有部署try…catch代码块，那么程序将报错，直接中断执行。</p>
+</blockquote>
+</li>
+<li>throw方法可以接受一个参数，该参数会被catch语句接收，建议抛出Error对象的实例。</li>
+<li>throw方法被捕获以后，会附带执行下一条yield表达式。即会附带执行一次next方法。<blockquote>
+<p>注意：只要 Generator 函数内部部署了try…catch代码块，那么遍历器的throw方法抛出的错误，不影响下一次遍历。</p>
+</blockquote>
+</li>
+<li>Generator 函数体外抛出的错误，可以在函数体内捕获；反过来，Generator 函数体内抛出的错误，也可以被函数体外的catch捕获</li>
+</ol>
+<p>Generator 函数返回的遍历器对象，还有一个return方法：</p>
+<ol>
+<li>作用：返回给定的值，并且终结遍历Generator函数</li>
+<li>如果return方法调用时，不提供参数，则返回值的value属性为undefined。</li>
+<li>如果 Generator 函数内部有try…finally代码块，那么return方法会推迟到finally代码块执行完再执行。</li>
+</ol>
+<p>yield*表达式可以用来在一个 Generator 函数里面执行另一个 Generator 函数：</p>
+<ol>
+<li>如果yield表达式后面跟的是一个遍历器对象，需要在yield表达式后面加上星号，表明它返回的是一个遍历器对象。这被称为yield*表达式。</li>
+<li>yield generator（）调用返回一个遍历器对象，yield* generator（）调用返回该遍历器对象的内部值。<blockquote>
+<ol>
+<li>yield命令后面如果不加星号，返回的是整个数组,整个字符串……</li>
+<li>yield*，返回的是数组的遍历器对象，单个字符……</li>
+</ol>
+</blockquote>
+</li>
+<li>yield*后面的 Generator 函数（没有return语句时），等同于在 Generator 函数内部，部署一个for…of循环。</li>
+<li>如果被代理的 Generator 函数有return语句，那么就可以向代理它的 Generator 函数返回数据。</li>
+<li>yield*命令可以很方便地取出嵌套数组的所有成员。</li>
+</ol>
+<p>Generator 函数总是返回一个遍历器，这个遍历器是 Generator 函数的实例，也继承了 Generator 函数的prototype对象上的方法。<br><code>let obj = g();</code><br>Generator 函数g返回的遍历器obj，是g的实例，而且继承了g.prototype。g返回的总是遍历器对象，而不是this对象。</p>
+<p>Thunk 函数：</p>
+<ol>
+<li>是自动执行 Generator 函数的一种方法。</li>
+<li>编译器的“传名调用”实现，往往是将参数放到一个临时函数之中，再将这个临时函数传入函数体。这个临时函数就叫做 Thunk 函数。</li>
+<li>它是“传名调用”的一种实现策略，用来替换某个表达式。</li>
+</ol>
+<p>Thunk 函数现在可以用于 Generator 函数的自动流程管理：</p>
+<ol>
+<li>yield命令用于将程序的执行权移出 Generator 函数，</li>
+<li>Thunk 函数可以在回调函数里将执行权交还给 Generator 函数。</li>
+<li>Thunk 函数真正的威力，在于可以自动执行 Generator 函数。</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/30/SIMD/" rel="next" title="SIMD">
+                <i class="fa fa-chevron-left"></i> SIMD
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/03/Async-and-Class/" rel="prev" title="Async and Class">
+                Async and Class <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xue Ling" />
+          <p class="site-author-name" itemprop="name">Xue Ling</p>
+           
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#十五-Iterator和for…of循环"><span class="nav-number">1.</span> <span class="nav-text">十五. Iterator和for…of循环</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十六-Generator-函数"><span class="nav-number">2.</span> <span class="nav-text">十六. Generator 函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/06/02/Iterator-and-Generator/';
+          this.page.identifier = '2017/06/02/Iterator-and-Generator/';
+          this.page.title = 'Iterator and Generator';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

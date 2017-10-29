@@ -1,0 +1,823 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="一. 浏览器标签加载传统方法在 HTML 网页中，浏览器通过标签加载 JavaScript 脚本。`    // module code ` `   `由于浏览器脚本的默认语言是 JavaScript，因此type=”application/javascript”可以省略 如果脚本体积很大，下载和执行的时间就会很长，因此造成浏览器堵塞，用户会感觉到浏览器“卡死”了，没有任何响应。这显然是很不好的体">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Module的加载实现">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/Module的加载实现/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="一. 浏览器标签加载传统方法在 HTML 网页中，浏览器通过标签加载 JavaScript 脚本。`    // module code ` `   `由于浏览器脚本的默认语言是 JavaScript，因此type=”application/javascript”可以省略 如果脚本体积很大，下载和执行的时间就会很长，因此造成浏览器堵塞，用户会感觉到浏览器“卡死”了，没有任何响应。这显然是很不好的体">
+<meta property="og:updated_time" content="2017-06-25T01:15:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Module的加载实现">
+<meta name="twitter:description" content="一. 浏览器标签加载传统方法在 HTML 网页中，浏览器通过标签加载 JavaScript 脚本。`    // module code ` `   `由于浏览器脚本的默认语言是 JavaScript，因此type=”application/javascript”可以省略 如果脚本体积很大，下载和执行的时间就会很长，因此造成浏览器堵塞，用户会感觉到浏览器“卡死”了，没有任何响应。这显然是很不好的体">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/27/Module的加载实现/"/>
+
+
+
+
+
+  <title>Module的加载实现 | Vue</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/Module的加载实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Module的加载实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T23:26:36+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/27/Module的加载实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/27/Module的加载实现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一-浏览器标签加载"><a href="#一-浏览器标签加载" class="headerlink" title="一. 浏览器标签加载"></a>一. 浏览器标签加载</h1><h3 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h3><p>在 HTML 网页中，浏览器通过<script>标签加载 JavaScript 脚本。<br>` <!-- 页面内嵌的脚本 --></p>
+<p><script type="application/javascript"><br>  // module code<br></script> `</p>
+<p>` <!-- 外部脚本 --></p>
+<p><script type="application/javascript" src="path/to/myModule.js"><br></script> `<br>由于浏览器脚本的默认语言是 JavaScript，因此type=”application/javascript”可以省略</p>
+<p>如果脚本体积很大，下载和执行的时间就会很长，因此造成浏览器堵塞，用户会感觉到浏览器“卡死”了，没有任何响应。这显然是很不好的体验，所以浏览器允许脚本异步加载<br><a id="more"></a><br>两种异步加载的语法：<br>` <script src="path/to/myModule.js" defer></script></p>
+<p><script src="path/to/myModule.js" async></script> `</p>
+<p><script>标签打开defer或async属性，脚本就会异步加载。渲染引擎遇到这一行命令，就会开始下载外部脚本，但不会等它下载和执行，而是直接执行后面的命令。</p>
+<p>defer与async的区别是：</p>
+<ol>
+<li>defer要等到整个页面正常渲染结束，才会执行；</li>
+<li>async一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染。</li>
+<li>即defer是“渲染完再执行”，async是“下载完就执行”。</li>
+<li>另外，如果有多个defer脚本，会按照它们在页面出现的顺序加载，而多个async脚本是不能保证加载顺序的。</li>
+</ol>
+<h3 id="加载规则"><a href="#加载规则" class="headerlink" title="加载规则"></a>加载规则</h3><p>浏览器加载 ES6 模块，也使用<script>标签，但是要加入type=”module”属性。</p>
+<p>在网页中插入一个模块foo.js，由于type属性设为module，所以浏览器知道这是一个 ES6 模块。<br><code>&lt;script type=&quot;module&quot; src=&quot;foo.js&quot;&gt;&lt;/script&gt;</code><br>浏览器对于带有type=”module”的<script>，都是异步加载，不会造成堵塞浏览器，即等到整个页面渲染完，再执行模块脚本，等同于打开了<script>标签的defer属性。<br>` <script type="module" src="foo.js"></script><br><!-- 等同于 --></p>
+<p><script type="module" src="foo.js" defer></script> `</p>
+<p><script>标签的async属性也可以打开，这时只要加载完成，渲染引擎就会中断渲染立即执行。执行完成后，再恢复渲染。<br><code>&lt;script type=&quot;module&quot; src=&quot;foo.js&quot; async&gt;&lt;/script&gt;</code></p>
+<p>ES6 模块也允许内嵌在网页中，语法行为与加载外部脚本完全一致。<br><code>&lt;script type=&quot;module&quot;&gt;
+  import utils from &quot;./utils.js&quot;;
+  // other code
+&lt;/script&gt;</code></p>
+<p>对于外部的模块脚本（上例是foo.js），有几点需要注意：</p>
+<ol>
+<li>代码是在模块作用域之中运行，而不是在全局作用域运行。模块内部的顶层变量，外部不可见。</li>
+<li>模块脚本自动采用严格模式，不管有没有声明use strict。</li>
+<li>模块之中，可以使用import命令加载其他模块（.js后缀不可省略，需要提供绝对 URL 或相对 URL），也可以使用export命令输出对外接口。</li>
+<li>模块之中，顶层的this关键字返回undefined，而不是指向window。也就是说，在模块顶层使用this关键字，是无意义的。<br>同一个模块如果加载多次，将只执行一次。</li>
+</ol>
+<p>利用顶层的this等于undefined这个语法点，可以侦测当前代码是否在 ES6 模块之中。<br><code>const isNotModuleScript = this !== undefined;</code></p>
+<h1 id="二-ES6-模块与-CommonJS-模块的差异"><a href="#二-ES6-模块与-CommonJS-模块的差异" class="headerlink" title="二. ES6 模块与 CommonJS 模块的差异"></a>二. ES6 模块与 CommonJS 模块的差异</h1><p>ES6 模块与 CommonJS 模块有两个重大差异：</p>
+<ol>
+<li>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
+<li>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。</li>
+</ol>
+<p>第二个差异是因为CommonJS 加载的是一个对象（即module.exports属性），该对象只有在脚本运行完才会生成。而 ES6 模块不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成。</p>
+<p>CommonJS 模块输出的是值的拷贝，也就是说，一旦输出一个值，模块内部的变化就影响不到这个值</p>
+<p><code>// lib.js
+var counter = 3;
+function incCounter() {
+  counter++;
+}
+module.exports = {
+  counter: counter,           //输出内部变量counter
+  incCounter: incCounter,     //输出counter变量的内部方法incCounter
+};</code><br>在main.js里面加载这个模块：<br><code>// main.js
+var mod = require(&#39;./lib&#39;);
+console.log(mod.counter);  // 3
+mod.incCounter();
+console.log(mod.counter); // 3</code><br>因为mod.counter是一个原始类型的值，会被缓存，所以lib.js模块加载以后，它的内部变化就影响不到输出的mod.counter了。<br>除非写成一个函数，才能得到内部变动后的值。<br><code>// lib.js
+var counter = 3;
+function incCounter() {
+  counter++;
+}
+module.exports = {
+  get counter() {
+    return counter  //输出的counter属性实际上是一个取值器函数
+  },
+  incCounter: incCounter,
+};</code><br> 现在再执行main.js，就可以正确读取内部变量counter的变动了。</p>
+<p>ES6 模块的运行机制与 CommonJS 不一样。<br>JS 引擎对脚本静态分析的时候，遇到模块加载命令import，就会生成一个只读引用。等到脚本真正执行时，再根据这个只读引用，到被加载的那个模块里面去取值。<br>换句话说，ES6 的import有点像 Unix 系统的“符号连接”，原始值变了，import加载的值也会跟着变。因此，ES6 模块是动态引用，并且不会缓存值，模块里面的变量绑定其所在的模块。</p>
+<h1 id="三-Node-加载"><a href="#三-Node-加载" class="headerlink" title="三. Node 加载"></a>三. Node 加载</h1><p>Node 对 ES6 模块的处理比较麻烦，因为它有自己的 CommonJS 模块格式，与 ES6 模块格式是不兼容的。目前的解决方案是，将两者分开，ES6 模块和 CommonJS 采用各自的加载方案。</p>
+<p>在静态分析阶段，一个模块脚本只要有一行import或export语句，Node 就会认为该脚本为 ES6 模块，否则就为 CommonJS 模块。如果不输出任何接口，但是希望被 Node 认为是 ES6 模块，可以在脚本中加一行语句。<br><code>export {};</code><br>上面的命令并不是输出一个空对象，而是不输出任何接口的 ES6 标准写法。</p>
+<p>如果不指定绝对路径，Node 加载 ES6 模块会依次寻找以下脚本，与require()的规则一致。<br><code>import &#39;./foo&#39;;
+// 依次寻找
+//   ./foo.js
+//   ./foo/package.json
+//   ./foo/index.js
+import &#39;baz&#39;;
+// 依次寻找
+//   ./node_modules/baz.js
+//   ./node_modules/baz/package.json
+//   ./node_modules/baz/index.js
+// 寻找上一级目录
+//   ../node_modules/baz.js
+//   ../node_modules/baz/package.json
+//   ../node_modules/baz/index.js
+// 再上一级目录</code></p>
+<p>ES6 模块之中，顶层的this指向undefined；CommonJS 模块的顶层this指向当前模块，这是两者的一个重大差异。</p>
+<h3 id="import命令加载-CommonJS-模块"><a href="#import命令加载-CommonJS-模块" class="headerlink" title="import命令加载 CommonJS 模块"></a>import命令加载 CommonJS 模块</h3><p>Node 采用 CommonJS 模块格式，模块的输出都定义在module.exports这个属性上面。在 Node 环境中，使用import命令加载 CommonJS 模块，Node 会自动将module.exports属性，当作模块的默认输出，即等同于export default。</p>
+<p>CommonJS 模块的输出缓存机制，在 ES6 加载方式下依然有效。<br><code>// foo.js
+module.exports = 123;
+setTimeout(_ =&gt; module.exports = null);</code><br>上面代码中，对于加载foo.js的脚本，module.exports将一直是123，而不会变成null。</p>
+<p>由于 ES6 模块是编译时确定输出接口，CommonJS 模块是运行时确定输出接口，所以采用import命令加载 CommonJS 模块时，不允许采用下面的写法。<br><code>import {readfile} from &#39;fs&#39;;</code><br>上面的写法不正确，因为fs是 CommonJS 格式，只有在运行时才能确定readfile接口，而import命令要求编译时就确定这个接口。</p>
+<h3 id="require命令加载-ES6-模块"><a href="#require命令加载-ES6-模块" class="headerlink" title="require命令加载 ES6 模块"></a>require命令加载 ES6 模块</h3><p>采用require命令加载 ES6 模块时，ES6 模块的所有输出接口，会成为输入对象的属性。</p>
+<h1 id="四-循环加载"><a href="#四-循环加载" class="headerlink" title="四. 循环加载"></a>四. 循环加载</h1><p>“循环加载”（circular dependency）指的是，a脚本的执行依赖b脚本，而b脚本的执行又依赖a脚本。<br><code>// a.js
+var b = require(&#39;b&#39;);
+// b.js
+var a = require(&#39;a&#39;);</code><br>通常，“循环加载”表示存在强耦合，如果处理不好，还可能导致递归加载，使得程序无法执行，因此应该避免出现。</p>
+<p>但是实际上，这是很难避免的，尤其是依赖关系复杂的大项目，很容易出现a依赖b，b依赖c，c又依赖a这样的情况。这意味着，模块加载机制必须考虑“循环加载”的情况。</p>
+<p>对于JavaScript语言来说，目前最常见的两种模块格式CommonJS和ES6，处理“循环加载”的方法是不一样的，返回的结果也不一样。</p>
+<h3 id="CommonJS模块格式的加载原理"><a href="#CommonJS模块格式的加载原理" class="headerlink" title="CommonJS模块格式的加载原理"></a>CommonJS模块格式的加载原理</h3><p>CommonJS的一个模块，就是一个脚本文件。require命令第一次加载该脚本，就会执行整个脚本，然后在内存生成一个对象。<br><code>{
+  id: &#39;...&#39;,
+  exports: { ... },
+  loaded: true,
+  ...
+}</code><br>该对象的id属性是模块名；<br>exports属性是模块输出的各个接口；<br>loaded属性是一个布尔值，表示该模块的脚本是否执行完毕；其他还有很多属性，这里都省略了。</p>
+<p>以后需要用到这个模块的时候，就会到exports属性上面取值。即使再次执行require命令，也不会再次执行该模块，而是到缓存之中取值。<br>即CommonJS模块无论加载多少次，都只会在第一次加载时运行一次，以后再加载，就返回第一次运行的结果，除非手动清除系统缓存。</p>
+<h3 id="CommonJS模块的循环加载"><a href="#CommonJS模块的循环加载" class="headerlink" title="CommonJS模块的循环加载"></a>CommonJS模块的循环加载</h3><p>CommonJS模块的重要特性是加载时执行，即脚本代码在require的时候，就会全部执行。一旦出现某个模块被”循环加载”，就只输出已经执行的部分，还未执行的部分不会输出。</p>
+<h3 id="ES6模块的循环加载"><a href="#ES6模块的循环加载" class="headerlink" title="ES6模块的循环加载"></a>ES6模块的循环加载</h3><p>ES6模块是动态引用，如果使用import从一个模块加载变量（即import foo from ‘foo’），那些变量不会被缓存，而是成为一个指向被加载模块的引用，需要开发者自己保证，真正取值的时候能够取到值。<br><code>// a.js如下
+import {bar} from &#39;./b.js&#39;;
+console.log(&#39;a.js&#39;);
+console.log(bar);
+export let foo = &#39;foo&#39;;
+// b.js
+import {foo} from &#39;./a.js&#39;;
+console.log(&#39;b.js&#39;);
+console.log(foo);
+export let bar = &#39;bar&#39;;
+//执行a.js，结果如下:
+$ babel-node a.js
+b.js
+undefined
+a.js
+bar</code></p>
+<ol>
+<li>由于a.js的第一行是加载b.js，所以先执行的是b.js。</li>
+<li>而b.js的第一行又是加载a.js，这时由于a.js已经开始执行了，所以不会重复执行，而是继续往下执行b.js，所以第一行输出的是b.js。</li>
+<li>接着，b.js要打印变量foo，这时a.js还没执行完，取不到foo的值，导致打印出来是undefined。</li>
+<li>b.js执行完，开始执行a.js，这时就一切正常了。</li>
+</ol>
+<h1 id="五-ES6模块的转码"><a href="#五-ES6模块的转码" class="headerlink" title="五. ES6模块的转码"></a>五. ES6模块的转码</h1><p>浏览器目前还不支持ES6模块，为了现在就能使用，可以将转为ES5的写法。除了Babel可以用来转码之外，还有以下两个方法，也可以用来转码。</p>
+<h3 id="1-ES6-module-transpiler"><a href="#1-ES6-module-transpiler" class="headerlink" title="1. ES6 module transpiler"></a>1. ES6 module transpiler</h3><p>可以将 ES6 模块转为 CommonJS 模块或 AMD 模块的写法，从而在浏览器中使用。</p>
+<p>首先，安装这个转码器。<br><code>$ npm install -g es6-module-transpiler</code></p>
+<p>然后，使用compile-modules convert命令，将 ES6 模块文件转码。<br><code>$ compile-modules convert file1.js file2.js</code></p>
+<p>-o参数可以指定转码后的文件名。<br><code>$ compile-modules convert -o out.js file1.js</code></p>
+<h3 id="2-SystemJS"><a href="#2-SystemJS" class="headerlink" title="2. SystemJS"></a>2. SystemJS</h3><p>它是一个垫片库（polyfill），可以在浏览器内加载 ES6 模块、AMD 模块和 CommonJS 模块，将其转为 ES5 格式。它在后台调用的是 Google 的 Traceur 转码器。</p>
+<p>使用时，先在网页内载入system.js文件。<br><code>&lt;script src=&quot;system.js&quot;&gt;&lt;/script&gt;</code></p>
+<p>然后，使用System.import方法加载模块文件。<br><code>&lt;script&gt;
+   System.import(&#39;./app.js&#39;);   
+ &lt;/script&gt;</code><br>./app，指的是当前目录下的app.js文件。它可以是ES6模块文件，System.import会自动将其转码。</p>
+<p>需要注意的是，System.import使用异步加载，返回一个 Promise 对象，可以针对这个对象编程。</p>
+</script></p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/27/Module的语法/" rel="next" title="Module的语法">
+                <i class="fa fa-chevron-left"></i> Module的语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/27/编程风格/" rel="prev" title="编程风格">
+                编程风格 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xue Ling" />
+          <p class="site-author-name" itemprop="name">Xue Ling</p>
+           
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-浏览器标签加载"><span class="nav-number">1.</span> <span class="nav-text">一. 浏览器标签加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传统方法"><span class="nav-number">1.0.1.</span> <span class="nav-text">传统方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/27/Module的加载实现/';
+          this.page.identifier = '2017/05/27/Module的加载实现/';
+          this.page.title = 'Module的加载实现';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

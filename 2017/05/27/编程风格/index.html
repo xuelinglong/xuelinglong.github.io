@@ -1,0 +1,799 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="一. 块级作用域 let 取代 varES6提出了两个新的声明变量的命令：let和const。let完全可以取代var，因为两者语义相同，而且let没有副作用。let：生命的变量只在代码块内有效，不存在变量提升。var：声明的是全局变量，存在变量提升  所以，建议不再使用var命令，而是使用let命令取代。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编程风格">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/编程风格/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="一. 块级作用域 let 取代 varES6提出了两个新的声明变量的命令：let和const。let完全可以取代var，因为两者语义相同，而且let没有副作用。let：生命的变量只在代码块内有效，不存在变量提升。var：声明的是全局变量，存在变量提升  所以，建议不再使用var命令，而是使用let命令取代。">
+<meta property="og:updated_time" content="2017-06-25T01:19:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编程风格">
+<meta name="twitter:description" content="一. 块级作用域 let 取代 varES6提出了两个新的声明变量的命令：let和const。let完全可以取代var，因为两者语义相同，而且let没有副作用。let：生命的变量只在代码块内有效，不存在变量提升。var：声明的是全局变量，存在变量提升  所以，建议不再使用var命令，而是使用let命令取代。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/27/编程风格/"/>
+
+
+
+
+
+  <title>编程风格 | Vue</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/编程风格/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">编程风格</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T23:27:55+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/27/编程风格/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/27/编程风格/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一-块级作用域"><a href="#一-块级作用域" class="headerlink" title="一. 块级作用域"></a>一. 块级作用域</h1><ol>
+<li>let 取代 var<br>ES6提出了两个新的声明变量的命令：let和const。<br>let完全可以取代var，因为两者语义相同，而且let没有副作用。<br>let：生命的变量只在代码块内有效，不存在变量提升。<br>var：声明的是全局变量，存在变量提升</li>
+</ol>
+<p>所以，建议不再使用var命令，而是使用let命令取代。<br><a id="more"></a></p>
+<ol>
+<li>全局常量和线程安全<br>在let和const之间，建议优先使用const，尤其是在全局环境，不应该设置变量，只应设置常量。<br>const优于let有几个原因：<pre><code>1. 可以提醒阅读程序的人，这个变量不应该改变；
+2. const比较符合函数式编程思想，运算不改变值，只是新建值，而且这样也有利于将来的分布式运算；
+ 3. JavaScript 编译器会对const进行优化，所以多使用const，有利于提供程序的运行效率。
+</code></pre>let和const的本质区别，其实是编译器内部的处理不同。</li>
+</ol>
+<p>const声明常量还有两个好处：<br>一是阅读代码的人立刻会意识到不应该修改这个值；<br>二是防止了无意间修改变量值所导致的错误。<br><code>const [a, b, c] = [1, 2, 3];</code><br>所有的函数都应该设置为常量。<br>长远来看，JavaScript可能会有多线程的实现（比如Intel的River Trail那一类的项目），这时let表示的变量，只应出现在单线程运行的代码中，不能是多线程共享的，这样有利于保证线程安全。</p>
+<h1 id="二-字符串"><a href="#二-字符串" class="headerlink" title="二. 字符串"></a>二. 字符串</h1><p>静态字符串一律使用单引号或反引号，不使用双引号。<br>动态字符串使用反引号。</p>
+<h1 id="三-解构赋值"><a href="#三-解构赋值" class="headerlink" title="三. 解构赋值"></a>三. 解构赋值</h1><p>使用数组成员对变量赋值时，优先使用解构赋值<br><code>const arr = [1, 2, 3, 4]; 
+const [first, second] = arr;</code></p>
+<p>函数的参数如果是对象的成员，优先使用解构赋值。<br><code>function getFullName({ firstName, lastName }) {
+}</code></p>
+<p>如果函数返回多个值，优先使用对象的解构赋值，而不是数组的解构赋值。这样便于以后添加返回值，以及更改返回值的顺序。<br><code>function processInput(input) {
+  return { left, right, top, bottom };
+}
+const { left, right } = processInput(input);</code></p>
+<h1 id="四-对象"><a href="#四-对象" class="headerlink" title="四. 对象"></a>四. 对象</h1><p>单行定义的对象，最后一个成员不以逗号结尾。<br><code>const a = { k1: v1, k2: v2 };</code><br>多行定义的对象，最后一个成员以逗号结尾。<br><code>const b = {
+  k1: v1,
+  k2: v2,
+};</code></p>
+<p>对象尽量静态化，一旦定义，就不得随意添加新的属性。如果添加属性不可避免，要使用Object.assign方法。<br><code>const a = {};
+Object.assign(a, { x: 3 });</code></p>
+<p>如果对象的属性名是动态的，可以在创造对象的时候，使用属性表达式定义。<br>` const obj = {<br>  id: 5,<br>  name: ‘San Francisco’,</p>
+<p>}; `<br>对象obj的最后一个属性名，需要计算得到。这时最好采用属性表达式，在新建obj的时候，将该属性与其他属性定义在一起。这样一来，所有属性就在一个地方定义了。</p>
+<p>对象的属性和方法，尽量采用简洁表达法，这样易于描述和书写。<br><code>var ref = &#39;some value&#39;;
+const atom = {
+  ref,
+  value: 1,
+  addValue(value) {
+    return atom.value + value;
+  },
+};</code></p>
+<h1 id="五-数组"><a href="#五-数组" class="headerlink" title="五. 数组"></a>五. 数组</h1><p>使用扩展运算符（…）拷贝数组。<br><code>const itemsCopy = [...items];</code></p>
+<p>使用Array.from方法，将类似数组的对象转为数组。<br><code>const foo = document.querySelectorAll(&#39;.foo&#39;);
+const nodes = Array.from(foo);</code></p>
+<h1 id="六-函数"><a href="#六-函数" class="headerlink" title="六. 函数"></a>六. 函数</h1><p>立即执行函数可以写成箭头函数的形式。<br><code>(() =&gt; {
+  console.log(&#39;Welcome to the Internet.&#39;);
+})();</code></p>
+<p>那些需要使用函数表达式的场合，尽量用箭头函数代替。因为这样更简洁，而且绑定了this。<br><code>// good
+[1, 2, 3].map((x) =&gt; {
+  return x * x;
+});
+// best
+[1, 2, 3].map(x =&gt; x * x);</code></p>
+<p>简单的、单行的、不会复用的函数，建议采用箭头函数。如果函数体较为复杂，行数较多，还是应该采用传统的函数写法。</p>
+<p>所有配置项都应该集中在一个对象，放在最后一个参数，布尔值不可以直接作为参数。<br><code>function divide(a, b, { option = false } = {}) {
+}</code></p>
+<p>不要在函数体内使用arguments变量，使用rest运算符（…）代替。因为rest运算符显式表明你想要获取参数，而且arguments是一个类似数组的对象，而rest运算符可以提供一个真正的数组。<br><code>function concatenateAll(...args) {
+  return args.join(&#39;&#39;);
+}</code></p>
+<p>使用默认值语法设置函数参数的默认值。<br><code>function handleThings(opts = {}) {
+  // ...
+}</code></p>
+<h1 id="七-Map结构"><a href="#七-Map结构" class="headerlink" title="七. Map结构"></a>七. Map结构</h1><p>注意区分Object和Map，只有模拟现实世界的实体对象时，才使用Object。如果只是需要key: value的数据结构，使用Map结构。因为Map有内建的遍历机制。<br><code>let map = new Map(arr);
+for (let key of map.keys()) {
+  console.log(key);
+}
+for (let value of map.values()) {
+  console.log(value);
+}
+for (let item of map.entries()) {
+  console.log(item[0], item[1]);
+}</code></p>
+<h1 id="八-Class"><a href="#八-Class" class="headerlink" title="八. Class"></a>八. Class</h1><p>总是用Class，取代需要prototype的操作。因为Class的写法更简洁，更易于理解。<br><code>class Queue {     //定义了Queue类
+  constructor(contents = []) {       //构造方法
+    this._queue = [...contents];
+  }
+  pop() {         //类的方法
+    const value = this._queue[0];
+    this._queue.splice(0, 1);
+    return value;
+  }
+}</code></p>
+<p>使用extends实现继承，因为这样更简单，不会有破坏instanceof运算的危险。<br><code>class PeekableQueue extends Queue {
+  peek() {
+    return this._queue[0];
+  }
+}</code></p>
+<h1 id="九-模块"><a href="#九-模块" class="headerlink" title="九. 模块"></a>九. 模块</h1><p>Module语法是JavaScript模块的标准写法，坚持使用这种写法。使用import取代require。<br><code>import { func1, func2 } from &#39;moduleA&#39;;</code></p>
+<p>使用export取代module.exports（commonJS的写法）。<br><code>import React from &#39;react&#39;;
+const Breadcrumbs = React.createClass({
+  render() {
+    return &lt;nav /&gt;;
+  }
+});
+export default Breadcrumbs</code><br>如果模块只有一个输出值，就使用export default；<br>如果模块有多个输出值，就不使用export default；<br>export default与普通的export不要同时使用。</p>
+<p>不要在模块输入中使用通配符 * 。因为这样可以确保你的模块之中，有一个默认输出（export default）。<br><code>import myObject from &#39;./importModule&#39;;</code></p>
+<p>如果模块默认输出一个函数，函数名的首字母应该小写。<br><code>function makeStyleGuide() {
+}
+export default makeStyleGuide;</code></p>
+<p>如果模块默认输出一个对象，对象名的首字母应该大写。<br><code>const StyleGuide = {
+  es6: {
+  }
+};
+export default StyleGuide;</code></p>
+<h1 id="十-ESLint的使用"><a href="#十-ESLint的使用" class="headerlink" title="十. ESLint的使用"></a>十. ESLint的使用</h1><p>ESLint是一个语法规则和代码风格的检查工具，可以用来保证写出语法正确、风格统一的代码。</p>
+<ol>
+<li>安装ESLint：<br><code>$ npm i -g eslint</code></li>
+<li>安装Airbnb语法规则：<br><code>$ npm i -g eslint-config-airbnb</code></li>
+<li>在项目的根目录下新建一个.eslintrc文件，配置ESLint：<br><code>{
+ &quot;extends&quot;: &quot;eslint-config-airbnb&quot;
+}</code></li>
+<li>ESLint检查文件：<br><code>$ eslint 文件名.扩展名</code></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/27/Module的加载实现/" rel="next" title="Module的加载实现">
+                <i class="fa fa-chevron-left"></i> Module的加载实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/27/读懂规格/" rel="prev" title="读懂规格">
+                读懂规格 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xue Ling" />
+          <p class="site-author-name" itemprop="name">Xue Ling</p>
+           
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-块级作用域"><span class="nav-number">1.</span> <span class="nav-text">一. 块级作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-字符串"><span class="nav-number">2.</span> <span class="nav-text">二. 字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-解构赋值"><span class="nav-number">3.</span> <span class="nav-text">三. 解构赋值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四-对象"><span class="nav-number">4.</span> <span class="nav-text">四. 对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五-数组"><span class="nav-number">5.</span> <span class="nav-text">五. 数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六-函数"><span class="nav-number">6.</span> <span class="nav-text">六. 函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七-Map结构"><span class="nav-number">7.</span> <span class="nav-text">七. Map结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八-Class"><span class="nav-number">8.</span> <span class="nav-text">八. Class</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#九-模块"><span class="nav-number">9.</span> <span class="nav-text">九. 模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十-ESLint的使用"><span class="nav-number">10.</span> <span class="nav-text">十. ESLint的使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/27/编程风格/';
+          this.page.identifier = '2017/05/27/编程风格/';
+          this.page.title = '编程风格';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

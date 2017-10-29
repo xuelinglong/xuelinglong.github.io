@@ -1,0 +1,972 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Javascript 语言的执行环境是“单线程”的，如果没有异步编程，根本没法用，非卡死不可。 一. 传统方法ES6 诞生以前，异步编程的方法，大概有下面四种:  回调函数； 事件监听； 发布/订阅； Promise 对象。Generator 函数将 JavaScript 异步编程带入了一个全新的阶段。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Generator函数的异步应用">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/Generator函数的异步应用/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="Javascript 语言的执行环境是“单线程”的，如果没有异步编程，根本没法用，非卡死不可。 一. 传统方法ES6 诞生以前，异步编程的方法，大概有下面四种:  回调函数； 事件监听； 发布/订阅； Promise 对象。Generator 函数将 JavaScript 异步编程带入了一个全新的阶段。">
+<meta property="og:updated_time" content="2017-06-25T01:14:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Generator函数的异步应用">
+<meta name="twitter:description" content="Javascript 语言的执行环境是“单线程”的，如果没有异步编程，根本没法用，非卡死不可。 一. 传统方法ES6 诞生以前，异步编程的方法，大概有下面四种:  回调函数； 事件监听； 发布/订阅； Promise 对象。Generator 函数将 JavaScript 异步编程带入了一个全新的阶段。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/27/Generator函数的异步应用/"/>
+
+
+
+
+
+  <title>Generator函数的异步应用 | Vue</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/Generator函数的异步应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Generator函数的异步应用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T23:16:30+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/27/Generator函数的异步应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/27/Generator函数的异步应用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Javascript 语言的执行环境是“单线程”的，如果没有异步编程，根本没法用，非卡死不可。</p>
+<h1 id="一-传统方法"><a href="#一-传统方法" class="headerlink" title="一. 传统方法"></a>一. 传统方法</h1><p>ES6 诞生以前，异步编程的方法，大概有下面四种:</p>
+<ol>
+<li>回调函数；</li>
+<li>事件监听；</li>
+<li>发布/订阅；</li>
+<li>Promise 对象。<br>Generator 函数将 JavaScript 异步编程带入了一个全新的阶段。<a id="more"></a>
+</li>
+</ol>
+<h1 id="二-基本概念"><a href="#二-基本概念" class="headerlink" title="二. 基本概念"></a>二. 基本概念</h1><h3 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h3><p>所谓”异步”，简单说就是一个任务不是连续完成的，可以理解成该任务被人为分成两段，先执行第一段，然后转而执行其他任务，等做好了准备，再回过头执行第二段。</p>
+<p>比如，有一个任务是读取文件进行处理：<br>任务的第一段是向操作系统发出请求，要求读取文件。<br>然后，程序执行其他任务，等到操作系统返回文件，<br>最后再接着执行任务的第二段（处理文件）。<br>这种不连续的执行，就叫做异步。</p>
+<p>相应地，连续的执行就叫做同步。由于是连续执行，不能插入其他任务，所以操作系统从硬盘读取文件的这段时间，程序只能干等着。</p>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><p>JavaScript 语言对异步编程的实现，就是回调函数。<br>所谓回调函数：就是把任务的第二段单独写在一个函数里面，等到重新执行这个任务的时候，就直接调用这个函数。回调函数的英语名字callback，直译过来就是”重新调用”。</p>
+<p><code>fs.readFile(&#39;/etc/passwd&#39;, &#39;utf-8&#39;, function (err, data) {
+  if (err) throw err;
+  console.log(data);
+});</code><br>上面为读取文件进行处理的代码，readFile函数的第三个参数，就是回调函数，也就是任务的第二段。等到操作系统返回了/etc/passwd这个文件以后，回调函数才会执行。</p>
+<p>Node 约定，回调函数的第一个参数，必须是错误对象err（如果没有错误，该参数就是null），原因是执行分成两段，第一段执行完以后，任务所在的上下文环境就已经结束了。在这以后抛出的错误，原来的上下文环境已经无法捕捉，只能当作参数，传入第二段。</p>
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><p>回调函数本身并没有问题，它的问题出现在多个回调函数嵌套。<br>如果依次读取两个以上的文件，就会出现多重嵌套。代码不是纵向发展，而是横向发展，很快就会乱成一团，无法管理。因为多个异步操作形成了强耦合，只要有一个操作需要修改，它的上层回调函数和下层回调函数，可能都要跟着修改。这种情况就称为”回调函数地狱”（callback hell）。</p>
+<p>Promise 对象就是为了解决这个问题而提出的。它不是新的语法功能，而是一种新的写法，允许将回调函数的嵌套，改成链式调用。</p>
+<p>采用 Promise，连续读取多个文件，写法如下：<br><code>var readFile = require(&#39;fs-readfile-promise&#39;);</code><br>fs-readfile-promise模块的作用就是返回一个 Promise 版本的readFile函数。<br><code>readFile(fileA)
+.then(function (data) {
+  console.log(data.toString());
+})
+.then(function () {
+  return readFile(fileB);
+})
+.then(function (data) {
+  console.log(data.toString());
+})
+.catch(function (err) {
+  console.log(err);
+});</code><br>Promise 提供then方法加载回调函数，catch方法捕捉执行过程中抛出的错误。<br>Promise 的最大问题是代码冗余，原来的任务被 Promise 包装了一下，不管什么操作，一眼看去都是一堆then，原来的语义变得很不清楚。</p>
+<h1 id="三-Generator函数"><a href="#三-Generator函数" class="headerlink" title="三. Generator函数"></a>三. Generator函数</h1><h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3><p>协程（coroutine），意思是多个线程互相协作，完成异步任务。是一种异步编程的解决方案（其实是多任务的解决方案）。</p>
+<p>协程有点像函数，又有点像线程。它的运行流程大致如下：<br>第一步，协程A开始执行。<br>第二步，协程A执行到一半，进入暂停，执行权转移到协程B。<br>第三步，（一段时间后）协程B交还执行权。<br>第四步，协程A恢复执行。<br>上面流程的协程A，就是异步任务，因为它分成两段（或多段）执行。</p>
+<p>读取文件的协程写法：<br><code>function *asyncJob() {
+  // ...其他代码
+  var f = yield readFile(fileA);
+  // ...其他代码
+}</code><br>函数asyncJob是一个协程，它的奥妙就在其中的yield命令。它表示执行到此处，执行权将交给其他协程。也就是说，yield命令是异步两个阶段的分界线。</p>
+<p>协程遇到yield命令就暂停，等到执行权返回，再从暂停的地方继续往后执行。它的最大优点，就是代码的写法非常像同步操作，如果去除yield命令，简直一模一样。</p>
+<h3 id="协程的Generator函数实现"><a href="#协程的Generator函数实现" class="headerlink" title="协程的Generator函数实现"></a>协程的Generator函数实现</h3><p>Generator 函数是协程在 ES6 的实现，最大特点就是可以交出函数的执行权（即暂停执行）。</p>
+<p>整个 Generator 函数就是一个封装的异步任务，或者说是异步任务的容器。异步操作需要暂停的地方，都用yield语句注明。</p>
+<p>Generator 函数的执行方法如下：<br><code>function* gen(x) {
+  var y = yield x + 2;
+  return y;
+}
+var g = gen(1);
+g.next() // { value: 3, done: false }
+g.next() // { value: undefined, done: true }</code><br>调用 Generator 函数，会返回一个内部指针（即遍历器）g。<br>调用指针g的next方法，会移动内部指针（即执行异步任务的第一段），指向第一个遇到的yield语句，上例是执行到x + 2为止。</p>
+<h3 id="Generator函数的数据交换和错误处理"><a href="#Generator函数的数据交换和错误处理" class="headerlink" title="Generator函数的数据交换和错误处理"></a>Generator函数的数据交换和错误处理</h3><p>Generator 函数可以暂停执行和恢复执行，这是它能封装异步任务的根本原因。除此之外，它还有两个特性，使它可以作为异步编程的完整解决方案：函数体内外的数据交换和错误处理机制。</p>
+<p>next返回值的value属性，是 Generator 函数向外输出数据；next方法还可以接受参数，向 Generator 函数体内输入数据：<br>next方法带有参数，这个参数可以传入 Generator 函数，作为上个阶段异步任务的返回结果。</p>
+<p>Generator 函数内部还可以部署错误处理代码，捕获函数体外抛出的错误。<br>Generator 函数体外，使用指针对象的throw方法抛出的错误，可以被函数体内的try…catch代码块捕获。这意味着，出错的代码与处理错误的代码，实现了时间和空间上的分离，这对于异步编程无疑是很重要的。</p>
+<h3 id="异步任务的封装"><a href="#异步任务的封装" class="headerlink" title="异步任务的封装"></a>异步任务的封装</h3><p>下面看看如何使用 Generator 函数，执行一个真实的异步任务：<br><code>var fetch = require(&#39;node-fetch&#39;);
+function* gen(){
+  var url = &#39;https://api.github.com/users/github&#39;;
+  var result = yield fetch(url);
+  console.log(result.bio);
+}</code><br>Generator 函数封装了一个异步操作，该操作先读取一个远程接口，然后从 JSON 格式的数据解析信息。就像前面说过的，这段代码非常像同步操作，除了加上了yield命令。</p>
+<p>执行这段代码的方法如下：<br>首先执行 Generator 函数，获取遍历器对象：<br><code>var g = gen();</code><br>然后使用next方法（第二行），执行异步任务的第一阶段：<br><code>var result = g.next();</code><br>由于Fetch模块返回的是一个 Promise 对象，因此要用then方法调用下一个next方法：<br><code>result.value.then(function(data){
+  return data.json();
+}).then(function(data){
+  g.next(data);
+});</code></p>
+<p>可以看到，虽然 Generator 函数将异步操作表示得很简洁，但是流程管理却不方便（即何时执行第一阶段、何时执行第二阶段）。</p>
+<h1 id="四-Thunk函数"><a href="#四-Thunk函数" class="headerlink" title="四. Thunk函数"></a>四. Thunk函数</h1><p>Thunk 函数是自动执行 Generator 函数的一种方法。</p>
+<h3 id="参数的求值策略"><a href="#参数的求值策略" class="headerlink" title="参数的求值策略"></a>参数的求值策略</h3><p><code>var x = 1;
+function f(m){
+  return m * 2;
+}
+f(x + 5)</code><br>“求值策略”，即函数的参数到底应该何时求值（两种提议）：<br>第一种是”传值调用”（call by value），即在进入函数体之前，就计算x + 5的值（等于6），再将这个值传入函数f。<br>第二种是“传名调用”（call by name），即直接将表达式x + 5传入函数体，只在用到它的时候求值。</p>
+<p>传值调用比较简单，但是对参数求值的时候，实际上还没用到这个参数，有可能造成性能损失。</p>
+<h3 id="Thunk函数的定义"><a href="#Thunk函数的定义" class="headerlink" title="Thunk函数的定义"></a>Thunk函数的定义</h3><p>编译器的“传名调用”实现，往往是将参数放到一个临时函数之中，再将这个临时函数传入函数体。这个临时函数就叫做 Thunk 函数。<br><code>function f(m) {
+  return m * 2;
+}
+f(x + 5); 
+// 等同于
+var thunk = function () {
+  return x + 5;
+};
+function f(thunk) {
+  return thunk() * 2;
+}</code></p>
+<p>函数f的参数x + 5被一个函数替换了。凡是用到原参数的地方，对Thunk函数求值即可。</p>
+<p>由此得到Thunk 函数的定义，它是“传名调用”的一种实现策略，用来替换某个表达式。</p>
+<h3 id="JavaScript语言的-Thunk-函数"><a href="#JavaScript语言的-Thunk-函数" class="headerlink" title="JavaScript语言的 Thunk 函数"></a>JavaScript语言的 Thunk 函数</h3><p>JavaScript 语言是传值调用，在 JavaScript 语言中，Thunk 函数替换的不是表达式，而是多参数函数，将其替换成一个只接受回调函数作为参数的单参数函数。</p>
+<p><code>// 正常版本的readFile（多参数版本）
+fs.readFile(fileName, callback);</code><br>经过转换器处理，它变成了一个单参数函数，只接受回调函数作为参数。这个单参数版本，就叫做 Thunk 函数。<br><code>// Thunk版本的readFile（单参数版本）
+var Thunk = function (fileName) {
+  return function (callback) {
+    return fs.readFile(fileName, callback);
+  };
+};
+var readFileThunk = Thunk(fileName);
+readFileThunk(callback);</code><br>任何函数，只要参数有回调函数，就能写成 Thunk 函数的形式。</p>
+<p>一个简单的Thunk 函数转换器：<br><code>const Thunk = function(fn) {
+  return function (...args) {
+    return function (callback) {
+      return fn.call(this, ...args, callback);
+    }
+  };
+};</code><br>使用上面的转换器，生成fs.readFile的 Thunk 函数：<br><code>var readFileThunk = Thunk(fs.readFile);
+readFileThunk(fileA)(callback);</code></p>
+<p>一个完整的例子：<br><code>function f(a, cb) {
+  cb(a);
+}
+const ft = Thunk(f);
+ft(1)(console.log) // 1</code></p>
+<h3 id="Thunkify模块"><a href="#Thunkify模块" class="headerlink" title="Thunkify模块"></a>Thunkify模块</h3><p>生产环境的转换器，建议使用 Thunkify 模块。<br>安装：<br><code>$ npm install thunkify</code></p>
+<p>使用方式如下：<br><code>var thunkify = require(&#39;thunkify&#39;);
+var fs = require(&#39;fs&#39;);
+var read = thunkify(fs.readFile);
+read(&#39;package.json&#39;)(function(err, str){
+  // ...
+});</code></p>
+<p>Thunkify 的源码与上一节那个简单的转换器非常像，但它的源码主要多了一个检查机制，<br><code>function thunkify(fn) {
+  return function() {
+    var args = new Array(arguments.length);
+    var ctx = this;
+    for (var i = 0; i &lt; args.length; ++i) {
+      args[i] = arguments[i];
+    }
+    return function (done) {
+      var called;
+      args.push(function () {
+        if (called) return;
+        called = true;
+        done.apply(null, arguments);
+      });
+      try {
+        fn.apply(ctx, args);
+      } catch (err) {
+        done(err);
+      }
+    }
+  }
+};</code><br>变量called确保回调函数只运行一次。这样的设计与下文的 Generator 函数相关。</p>
+<p><code>function f(a, b, callback){
+  var sum = a + b;
+  callback(sum);
+  callback(sum);
+}
+var ft = thunkify(f);
+var print = console.log.bind(console);
+ft(1, 2)(print);
+// 3</code><br>上面代码中，由于thunkify只允许回调函数执行一次，所以只输出一行结果。</p>
+<h3 id="Generator函数的流程管理"><a href="#Generator函数的流程管理" class="headerlink" title="Generator函数的流程管理"></a>Generator函数的流程管理</h3><p>Thunk 函数现在可以用于 Generator 函数的自动流程管理。</p>
+<p>yield命令用于将程序的执行权移出 Generator 函数，Thunk 函数可以在回调函数里，将执行权交还给 Generator 函数。</p>
+<h3 id="Thunk函数的自动流程管理"><a href="#Thunk函数的自动流程管理" class="headerlink" title="Thunk函数的自动流程管理"></a>Thunk函数的自动流程管理</h3><p>Thunk 函数真正的威力，在于可以自动执行 Generator 函数。<br><code>function run(fn) {
+  var gen = fn();
+  function next(err, data) {
+    var result = gen.next(data);
+    if (result.done) return;
+    result.value(next);
+  }
+  next();
+}
+function* g() {
+  // ...
+}
+run(g);</code><br>run函数，就是一个 Generator 函数的自动执行器。<br>内部的next函数就是 Thunk 的回调函数。<br>next函数先将指针移到 Generator 函数的下一步（gen.next方法），然后判断 Generator 函数是否结束（result.done属性），如果没结束，就将next函数再传入 Thunk 函数（result.value属性），否则就直接退出。</p>
+<p>有了这个执行器，执行 Generator 函数方便多了。不管内部有多少个异步操作，直接把 Generator 函数传入run函数即可。当然，前提是每一个异步操作，都要是 Thunk 函数，也就是说，跟在yield命令后面的必须是 Thunk 函数。<br><code>var g = function* (){
+  var f1 = yield readFile(&#39;fileA&#39;);
+  var f2 = yield readFile(&#39;fileB&#39;);
+  // ...
+  var fn = yield readFile(&#39;fileN&#39;);
+};
+run(g);</code><br>函数g封装了n个异步的读取文件操作，只要执行run函数，这些操作就会自动完成。这样一来，异步操作不仅可以写得像同步操作，而且一行代码就可以执行。</p>
+<p>Thunk 函数并不是 Generator 函数自动执行的唯一方案。因为自动执行的关键是，必须有一种机制，自动控制 Generator 函数的流程，接收和交还程序的执行权。回调函数可以做到这一点，Promise 对象也可以做到这一点。</p>
+<h1 id="co模块"><a href="#co模块" class="headerlink" title="co模块"></a>co模块</h1><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>co模块是一个小工具，用于 Generator 函数的自动执行。</p>
+<p>Generator 函数只要传入co函数，就会自动执行。<br><code>//一个 Generator 函数，用于依次读取两个文件
+var gen = function* () {     
+  var f1 = yield readFile(&#39;/etc/fstab&#39;);
+  var f2 = yield readFile(&#39;/etc/shells&#39;);
+  console.log(f1.toString());
+  console.log(f2.toString());
+};
+var co = require(&#39;co&#39;);
+co(gen);</code></p>
+<p>co函数返回一个Promise对象，因此可以用then方法添加回调函数。<br><code>co(gen).then(function (){
+   console.log(&#39;Generator 函数执行完成&#39;);
+});</code><br>等到 Generator 函数执行结束，就会输出一行提示。</p>
+<h3 id="co模块的原理"><a href="#co模块的原理" class="headerlink" title="co模块的原理"></a>co模块的原理</h3><p>为什么 co 可以自动执行 Generator 函数？<br>Generator 就是一个异步操作的容器。它的自动执行需要一种机制，当异步操作有了结果，能够自动交回执行权。</p>
+<p>两种方法可以做到这一点：</p>
+<ol>
+<li>回调函数。将异步操作包装成 Thunk 函数，在回调函数里面交回执行权。</li>
+<li>Promise 对象。将异步操作包装成 Promise 对象，用then方法交回执行权。</li>
+</ol>
+<p>co 模块其实就是将两种自动执行器（Thunk 函数和 Promise 对象），包装成一个模块。<br>使用 co 的前提条件是，Generator 函数的yield命令后面，只能是 Thunk 函数或 Promise 对象。如果数组或对象的成员，全部都是 Promise 对象，也可以使用 co，详见后文的例子。（co v4.0版以后，yield命令后面只能是 Promise 对象，不再支持 Thunk 函数。）</p>
+<h3 id="基于Promise对象的自动执行"><a href="#基于Promise对象的自动执行" class="headerlink" title="基于Promise对象的自动执行"></a>基于Promise对象的自动执行</h3><p>还是沿用上面的例子。首先，把fs模块的readFile方法包装成一个 Promise 对象。<br><code>var fs = require(&#39;fs&#39;);
+var readFile = function (fileName){
+  return new Promise(function (resolve, reject){
+    fs.readFile(fileName, function(error, data){
+      if (error) return reject(error);
+      resolve(data);
+    });
+  });
+};
+var gen = function* (){
+  var f1 = yield readFile(&#39;/etc/fstab&#39;);
+  var f2 = yield readFile(&#39;/etc/shells&#39;);
+  console.log(f1.toString());
+  console.log(f2.toString());
+};</code></p>
+<p>然后，手动执行上面的 Generator 函数，手动执行其实就是用then方法，层层添加回调函数。<br><code>var g = gen();
+g.next().value.then(function(data){
+  g.next(data).value.then(function(data){
+    g.next(data);
+  });
+});</code></p>
+<p>按照手动执行的原理可以写出一个自动执行器：<br><code>function run(gen){
+  var g = gen();
+  function next(data){
+    var result = g.next(data);
+    if (result.done) return result.value;
+    result.value.then(function(data){
+      next(data);
+    });
+  }
+  next();
+}
+run(gen);</code><br>只要 Generator 函数还没执行到最后一步，next函数就调用自身，以此实现自动执行。</p>
+<h3 id="co模块的源码"><a href="#co模块的源码" class="headerlink" title="co模块的源码"></a>co模块的源码</h3><p>co 就是上面那个自动执行器的扩展，co 函数接受 Generator 函数作为参数，返回一个 Promise 对象。<br><code>function co(gen) {
+  var ctx = this;
+  return new Promise(function(resolve, reject) {
+  });
+}</code><br>在返回的 Promise 对象里面，co 先检查参数gen是否为 Generator 函数。如果是，就执行该函数，得到一个内部指针对象；如果不是就返回，并将 Promise 对象的状态改为resolved。<br><code>function co(gen) {
+  var ctx = this;
+  return new Promise(function(resolve, reject) {
+    if (typeof gen === &#39;function&#39;) gen = gen.call(ctx);
+    if (!gen || typeof gen.next !== &#39;function&#39;) return resolve(gen);
+  });
+}</code><br>接着，co 将 Generator 函数的内部指针对象的next方法，包装成onFulfilled函数。这主要是为了能够捕捉抛出的错误。<br><code>function co(gen) {
+  var ctx = this;
+  return new Promise(function(resolve, reject) {
+    if (typeof gen === &#39;function&#39;) gen = gen.call(ctx);
+    if (!gen || typeof gen.next !== &#39;function&#39;) return resolve(gen);
+    onFulfilled();
+    function onFulfilled(res) {
+      var ret;
+      try {
+        ret = gen.next(res);
+      } catch (e) {
+        return reject(e);
+      }
+      next(ret);
+    }
+  });
+}</code><br>最后，就是关键的next函数，它会反复调用自身。<br>` function next(ret) {<br>  if (ret.done) return resolve(ret.value);<br>  var value = toPromise.call(ctx, ret.value);<br>  if (value &amp;&amp; isPromise(value)) return value.then(onFulfilled, onRejected);<br>  return onRejected(<br>    new TypeError(<br>      ‘You may only yield a function, promise, generator, array, or object, ‘</p>
+<pre><code>  + &apos;but the following object was passed: &quot;&apos;
+  + String(ret.value)
+  + &apos;&quot;&apos;
+)
+</code></pre><p>  );<br>} `<br>next函数的内部代码，一共只有四行命令。<br>第一行，检查当前是否为 Generator 函数的最后一步，如果是就返回。<br>第二行，确保每一步的返回值，是 Promise 对象。<br>第三行，使用then方法，为返回值加上回调函数，然后通过onFulfilled函数再次调用next函数。<br>第四行，在参数不符合要求的情况下（参数非 Thunk 函数和 Promise 对象），将 Promise 对象的状态改为rejected，从而终止执行。</p>
+<h3 id="处理并发的异步操作"><a href="#处理并发的异步操作" class="headerlink" title="处理并发的异步操作"></a>处理并发的异步操作</h3><p>co 支持并发的异步操作，即允许某些操作同时进行，等到它们全部完成，才进行下一步。</p>
+<p>这时，要把并发的操作都放在数组或对象里面，跟在yield语句后面。<br><code>// 数组的写法
+co(function* () {
+  var res = yield [
+    Promise.resolve(1),
+    Promise.resolve(2)
+  ];
+  console.log(res);
+}).catch(onerror);</code></p>
+<p><code>// 对象的写法
+co(function* () {
+  var res = yield {
+    1: Promise.resolve(1),
+    2: Promise.resolve(2),
+  };
+  console.log(res);
+}).catch(onerror);</code></p>
+<p>下面代码允许并发三个somethingAsync异步操作，等到它们全部完成，才会进行下一步。<br><code>co(function* () {
+  var values = [n1, n2, n3];
+  yield values.map(somethingAsync);
+});
+function* somethingAsync(x) {
+  // do something async
+  return y
+}</code></p>
+<h3 id="实例：处理Stream"><a href="#实例：处理Stream" class="headerlink" title="实例：处理Stream"></a>实例：处理Stream</h3><p>Node 提供 Stream 模式读写数据，特点是一次只处理数据的一部分，数据分成一块块依次处理，就好像“数据流”一样。这对于处理大规模数据非常有利。Stream 模式使用 EventEmitter API，会释放三个事件。</p>
+<p>data事件：下一块数据块已经准备好了。<br>end事件：整个“数据流”处理“完了。<br>error事件：发生错误。<br>使用Promise.race()函数，可以判断这三个事件之中哪一个最先发生，只有当data事件最先发生时，才进入下一个数据块的处理。从而，我们可以通过一个while循环，完成所有数据的读取。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/27/Generator函数的语法/" rel="next" title="Generator函数的语法">
+                <i class="fa fa-chevron-left"></i> Generator函数的语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/27/async函数/" rel="prev" title="async函数">
+                async函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xue Ling" />
+          <p class="site-author-name" itemprop="name">Xue Ling</p>
+           
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-传统方法"><span class="nav-number">1.</span> <span class="nav-text">一. 传统方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-基本概念"><span class="nav-number">2.</span> <span class="nav-text">二. 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步"><span class="nav-number">2.0.1.</span> <span class="nav-text">异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回调函数"><span class="nav-number">2.0.2.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise"><span class="nav-number">2.0.3.</span> <span class="nav-text">Promise</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-Generator函数"><span class="nav-number">3.</span> <span class="nav-text">三. Generator函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#协程"><span class="nav-number">3.0.1.</span> <span class="nav-text">协程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协程的Generator函数实现"><span class="nav-number">3.0.2.</span> <span class="nav-text">协程的Generator函数实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator函数的数据交换和错误处理"><span class="nav-number">3.0.3.</span> <span class="nav-text">Generator函数的数据交换和错误处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步任务的封装"><span class="nav-number">3.0.4.</span> <span class="nav-text">异步任务的封装</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四-Thunk函数"><span class="nav-number">4.</span> <span class="nav-text">四. Thunk函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数的求值策略"><span class="nav-number">4.0.1.</span> <span class="nav-text">参数的求值策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thunk函数的定义"><span class="nav-number">4.0.2.</span> <span class="nav-text">Thunk函数的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript语言的-Thunk-函数"><span class="nav-number">4.0.3.</span> <span class="nav-text">JavaScript语言的 Thunk 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thunkify模块"><span class="nav-number">4.0.4.</span> <span class="nav-text">Thunkify模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator函数的流程管理"><span class="nav-number">4.0.5.</span> <span class="nav-text">Generator函数的流程管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thunk函数的自动流程管理"><span class="nav-number">4.0.6.</span> <span class="nav-text">Thunk函数的自动流程管理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#co模块"><span class="nav-number">5.</span> <span class="nav-text">co模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本用法"><span class="nav-number">5.0.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#co模块的原理"><span class="nav-number">5.0.2.</span> <span class="nav-text">co模块的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于Promise对象的自动执行"><span class="nav-number">5.0.3.</span> <span class="nav-text">基于Promise对象的自动执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#co模块的源码"><span class="nav-number">5.0.4.</span> <span class="nav-text">co模块的源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理并发的异步操作"><span class="nav-number">5.0.5.</span> <span class="nav-text">处理并发的异步操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例：处理Stream"><span class="nav-number">5.0.6.</span> <span class="nav-text">实例：处理Stream</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/27/Generator函数的异步应用/';
+          this.page.identifier = '2017/05/27/Generator函数的异步应用/';
+          this.page.title = 'Generator函数的异步应用';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

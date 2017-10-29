@@ -1,0 +1,753 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="项目总结," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="项目内容：豆瓣电影本项目地址：github地址 Muse-UI库本项目使用了基于 Vue 2.0 和 Material Desigin 的 UI 组件库 Muse-UI。 安装npm install muse-ui -save 全部加载1234import Vue from &amp;apos;vue&amp;apos;import MuseUI from &amp;apos;muse-ui&amp;apos;import &amp;a">
+<meta name="keywords" content="项目总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Douban]项目总结">
+<meta property="og:url" content="http://yoursite.com/2017/09/16/Douban-项目总结/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="项目内容：豆瓣电影本项目地址：github地址 Muse-UI库本项目使用了基于 Vue 2.0 和 Material Desigin 的 UI 组件库 Muse-UI。 安装npm install muse-ui -save 全部加载1234import Vue from &amp;apos;vue&amp;apos;import MuseUI from &amp;apos;muse-ui&amp;apos;import &amp;a">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-10a7739b20300939.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-c3f0ade91f029abf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-8529a1bdcdb92ce4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-2bb4f38692777398.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-09-18T13:30:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Douban]项目总结">
+<meta name="twitter:description" content="项目内容：豆瓣电影本项目地址：github地址 Muse-UI库本项目使用了基于 Vue 2.0 和 Material Desigin 的 UI 组件库 Muse-UI。 安装npm install muse-ui -save 全部加载1234import Vue from &amp;apos;vue&amp;apos;import MuseUI from &amp;apos;muse-ui&amp;apos;import &amp;a">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1393082-10a7739b20300939.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/16/Douban-项目总结/"/>
+
+
+
+
+
+  <title>[Douban]项目总结 | Vue</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/16/Douban-项目总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[Douban]项目总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-16T20:42:49+08:00">
+                2017-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/16/Douban-项目总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/16/Douban-项目总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>项目内容：豆瓣电影<br>本项目地址：<a href="https://github.com/xuelinglong/vue_gh/tree/master/Douban" target="_blank" rel="external">github地址</a></p>
+<h1 id="Muse-UI库"><a href="#Muse-UI库" class="headerlink" title="Muse-UI库"></a>Muse-UI库</h1><p>本项目使用了基于 Vue 2.0 和 Material Desigin 的 UI 组件库 <a href="https://museui.github.io/" target="_blank" rel="external">Muse-UI</a>。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>npm install muse-ui -save</code></p>
+<h2 id="全部加载"><a href="#全部加载" class="headerlink" title="全部加载"></a>全部加载</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import Vue from &apos;vue&apos;</div><div class="line">import MuseUI from &apos;muse-ui&apos;</div><div class="line">import &apos;muse-ui/dist/muse-ui.css&apos;</div><div class="line">Vue.use(MuseUI)</div></pre></td></tr></table></figure>
+<h2 id="引入-material-design-的字体和图标"><a href="#引入-material-design-的字体和图标" class="headerlink" title="引入 material design 的字体和图标"></a>引入 material design 的字体和图标</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic&quot;&gt;</div><div class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot;&gt;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>html 中标签必须闭合；<br><code>&lt;mu-flat-button&gt;&lt;/mu-flat-button&gt;</code></li>
+<li>html 不支持大小写所有的驼峰属性(或者事件)需要用 - 分隔；<br><code>&lt;mu-flat-button background-color=&quot;red&quot; @hover-exit=&quot;hoverExit&quot;&gt;&lt;/mu-flat-button&gt;</code></li>
+</ol>
+<h2 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import &apos;muse-ui/dist/muse-ui.css&apos;</div><div class="line">import &apos;muse-ui/dist/theme-carbon.css&apos; // 使用 carbon 主题</div></pre></td></tr></table></figure>
+<h2 id="基础组件的使用"><a href="#基础组件的使用" class="headerlink" title="基础组件的使用"></a>基础组件的使用</h2><p>以 App Bar 为例：<br>App Bar相当于安卓应用中的 action bar, 是一种特殊的工具栏，用于放置 logo，导航菜单， 搜索以及一些按钮。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;mu-appbar title=&quot;&quot;&gt;</div><div class="line">        &lt;mu-flat-button label=&quot;郑州&quot; slot=&quot;left&quot;/&gt;</div><div class="line">        &lt;mu-icon-menu icon=&quot;expand_more&quot; :maxHeight=&quot;200&quot; slot=&quot;left&quot;&gt;</div><div class="line">            &lt;mu-menu-item v-for=&quot;city in cities&quot; :title=&quot;city&quot;/&gt;</div><div class="line">        &lt;/mu-icon-menu&gt;</div><div class="line">        &lt;mu-icon-button icon=&quot;search&quot; slot=&quot;right&quot;/&gt;</div><div class="line">        &lt;input type=&quot;text&quot; name=&quot;search&quot; value=&quot;&quot; style=&quot;background: #f5f5f5&quot;&gt;</div><div class="line">  &lt;/mu-appbar&gt;</div><div class="line">&lt;/template&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;style lang=&quot;less&quot;&gt;</div><div class="line">// 需要安装 less 与 less-loader</div><div class="line">.tab&#123;</div><div class="line">  margin: -60px 0;</div><div class="line">&#125;</div><div class="line">  input&#123;</div><div class="line">    height: 40px;</div><div class="line">    border-radius: 9px;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1393082-10a7739b20300939.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><ol>
+<li>title<br>类型：String ；<br>描述： 标题，显示在中间。</li>
+<li>Slots<br>left：  用于分发 appbar 左边的内容；<br>right： 用于分发 appbar 右边的内容；<br>default： 用于分发 appbar 中间的内容，设置此 slot，title参数将没有作用。</li>
+</ol>
+<h1 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h1><p>本次只制作了两个页面：<strong>首页</strong> 和 <strong>电影详情</strong> 页面。<br>可分为三步：</p>
+<ol>
+<li>布局、tab、下方listview使用 Muse-UI编写；</li>
+<li>axios 获取API的数据；</li>
+<li>vuex 控制状态。</li>
+</ol>
+<h1 id="项目过程"><a href="#项目过程" class="headerlink" title="项目过程"></a>项目过程</h1><h2 id="API的请求转发配置"><a href="#API的请求转发配置" class="headerlink" title="API的请求转发配置"></a>API的请求转发配置</h2><p>在<code>./config/index.js</code>中的<code>proxyTable</code> 配置代理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">proxyTable: &#123;</div><div class="line">    &apos;/api&apos;: &#123;</div><div class="line">        target: &apos;http://api.douban.com/v2&apos;,</div><div class="line">        changeOrigin: true,</div><div class="line">        pathRewrite: &#123;</div><div class="line">            &apos;^/api&apos;: &apos;&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在应用中调用<code>/api/movie/in_theaters</code>来访问 <code>http://api.douban.com/v2/movie/in_theaters</code>，从而解决跨域的问题。</p>
+<h2 id="使用axios"><a href="#使用axios" class="headerlink" title="使用axios"></a>使用axios</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p><code>npm install axios --save</code></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="执行-GET-请求"><a href="#执行-GET-请求" class="headerlink" title="执行 GET 请求"></a>执行 GET 请求</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// 向具有指定ID的用户发出请求</div><div class="line">axios.get(&apos;/user?ID=12345&apos;)</div><div class="line">  .then(function (response) &#123;</div><div class="line">    console.log(response);</div><div class="line">  &#125;)</div><div class="line">  .catch(function (error) &#123;</div><div class="line">    console.log(error);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">// 也可以通过 params 对象传递参数</div><div class="line">axios.get(&apos;/user&apos;, &#123;</div><div class="line">    params: &#123;</div><div class="line">      ID: 12345</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">  .then(function (response) &#123;</div><div class="line">    console.log(response);</div><div class="line">  &#125;)</div><div class="line">  .catch(function (error) &#123;</div><div class="line">    console.log(error);</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<h4 id="axios-API"><a href="#axios-API" class="headerlink" title="axios API"></a>axios API</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 发送一个 GET 请求 (GET请求是默认请求模式)</div><div class="line">axios(&apos;/user/12345&apos;);</div></pre></td></tr></table></figure>
+<p>axios为所有支持的请求方法提供了别名：<br><code>axios.get（url [，config]）</code><br>使用别名方法时，不需要在config中指定url，method和data属性。<br>本项目中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// http://api.douban.com/v2/</div><div class="line">const HOST = &apos;/api/&apos;;</div><div class="line"></div><div class="line">export default function(url, params = &#123;&#125;) &#123;</div><div class="line">    return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">        axios.get(HOST + url, &#123; params &#125;)</div><div class="line">            .then((res) =&gt; &#123;</div><div class="line">                resolve(res.data);</div><div class="line">            &#125;).catch(err =&gt; reject(err));</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><p>将<strong>store</strong>分割成模块（module）；<br>每个模块拥有自己的 <strong>state、mutation、action、getter、</strong>甚至是嵌套子模块。<br>本次只做电影部分的内容，因此只需要<strong>movies模块</strong>：</p>
+<ol>
+<li>将<code>store.js</code>作为入口文件，去挂载各个模块；</li>
+<li><code>/movies/module.js</code>为电影模块的主要 Vuex 文件。</li>
+</ol>
+<p>movies模块的初始状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">state: &#123;</div><div class="line">        movies: &#123;</div><div class="line">            [api.MOVIESTYPE.inTheaters]: &#123;</div><div class="line">                total: 0,</div><div class="line">                subjects: []</div><div class="line">            &#125;,</div><div class="line">            [api.MOVIESTYPE.comingSoon]: &#123;</div><div class="line">                total: 0,</div><div class="line">                subjects: []</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        tab: &apos;in_theaters&apos;</div><div class="line">            // menu: &apos;全部&apos;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>更改 Vuex 的 store 中的状态的唯一方法是提交 mutation。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">const mutations = &#123;</div><div class="line">    // 提交载荷(Payload)  传入额外的参数，即 mutation 的载荷(payload)</div><div class="line">    //  事件类型为type.CHANGE_MOVIES_TAB</div><div class="line">    [type.CHANGE_MOVIES_TAB](state, tab) &#123;</div><div class="line">        //  变更状态</div><div class="line">        state.tab = tab;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>使用常量替代 Mutation 事件类型：<br>把这些常量放在单独的文件中可以我们对整个 app 包含的 mutation 一目了然：~/src/axios/movies/type.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 事件类型 (type)</div><div class="line">// 使用常量替代 Mutation 事件类型</div><div class="line">export const CHANGE_MOVIES_TAB = &apos;CHANGE_MOVIES_TAB&apos;;</div><div class="line">export const CHANGE_MOVIES_MENU = &apos;CHANGE_MOVIES_MENU&apos;;</div><div class="line">......</div></pre></td></tr></table></figure></p>
+<p>Action 提交 mutation：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// Action 提交的是 mutation，而不是直接变更状态;</div><div class="line">// Action 可以包含任意异步操作;</div><div class="line">const actions = &#123;</div><div class="line">    [type.CHANGE_MOVIES_TAB](context, tab) &#123;</div><div class="line">        context.commit(type.CHANGE_MOVIES_TAB, tab);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>整合初始状态和变更函数，我们就得到了我们所需的 movies模块：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">export default &#123;</div><div class="line">    state: &#123;</div><div class="line">        ......</div><div class="line">    &#125;,</div><div class="line">    mutations,</div><div class="line">    actions</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>store.js 作为入口文件来挂载movies模块：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">export default new Vuex.Store(&#123;</div><div class="line">    modules: &#123;</div><div class="line">        movie</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h1 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h1><h2 id="命名路由"><a href="#命名路由" class="headerlink" title="命名路由"></a>命名路由</h2><p>通过一个名称来标识一个路由会显得更方便一些，特别是在链接一个路由，或者是执行一些跳转的时候。可以在创建 Router 实例的时候，在 routes 配置中给某个路由设置名称：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">export default new Router(&#123;</div><div class="line">    routes: [</div><div class="line">        &#123; path: &apos;/&apos;, name: &apos;tab&apos;, component: tab &#125;,</div><div class="line">        &#123; path: &apos;/subject/:id&apos;, name: &apos;subject&apos;, component: subject &#125;</div><div class="line">    ]</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>要链接到一个命名路由，可以给 router-link 的 to 属性传一个对象：<br>listview.vue<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;router-link :to=&quot;&#123;name: &apos;subject&apos;, params:&#123;id: 245576&#125;&#125;&quot;&gt;</div><div class="line">......</div><div class="line">&lt;/router-link&gt;</div></pre></td></tr></table></figure></p>
+<p>以上方式会把路由导航到 /subject/245576 路径。</p>
+<h1 id="编写程序过程中的难点"><a href="#编写程序过程中的难点" class="headerlink" title="编写程序过程中的难点"></a>编写程序过程中的难点</h1><h2 id="自动获取本机时间未解决"><a href="#自动获取本机时间未解决" class="headerlink" title="自动获取本机时间未解决"></a>自动获取本机时间未解决</h2><p><img src="http://upload-images.jianshu.io/upload_images/1393082-c3f0ade91f029abf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>此处需要自动获取<strong>第一个月份</strong>为<strong>当前月份</strong>。</p>
+<h2 id="电影详情页面布局不稳定。"><a href="#电影详情页面布局不稳定。" class="headerlink" title="电影详情页面布局不稳定。"></a>电影详情页面布局不稳定。</h2><p>第一次打开：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1393082-8529a1bdcdb92ce4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>刷新过后：<br><img src="http://upload-images.jianshu.io/upload_images/1393082-2bb4f38692777398.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>布局不合理。</p>
+<h2 id="Muse-UI库没研究透彻，刚开始没理解如何改变组件的颜色。"><a href="#Muse-UI库没研究透彻，刚开始没理解如何改变组件的颜色。" class="headerlink" title="Muse-UI库没研究透彻，刚开始没理解如何改变组件的颜色。"></a>Muse-UI库没研究透彻，刚开始没理解如何改变组件的颜色。</h2><h2 id="获取API数据花费时间很长，且代码不是原创，第二遍一定要自己好好理解JS-ES6，自主把代码写出来。"><a href="#获取API数据花费时间很长，且代码不是原创，第二遍一定要自己好好理解JS-ES6，自主把代码写出来。" class="headerlink" title="获取API数据花费时间很长，且代码不是原创，第二遍一定要自己好好理解JS,ES6，自主把代码写出来。"></a>获取API数据花费时间很长，且代码不是原创，第二遍一定要自己好好理解JS,ES6，自主把代码写出来。</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/项目总结/" rel="tag"># 项目总结</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/05/gank-wxl-Vue项目总结/" rel="next" title="[gank-wxl]Vue项目总结">
+                <i class="fa fa-chevron-left"></i> [gank-wxl]Vue项目总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/18/Promise-Vuex-Axios/" rel="prev" title="Promise+Vuex+Axios">
+                Promise+Vuex+Axios <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xue Ling" />
+          <p class="site-author-name" itemprop="name">Xue Ling</p>
+           
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Muse-UI库"><span class="nav-number">1.</span> <span class="nav-text">Muse-UI库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全部加载"><span class="nav-number">1.2.</span> <span class="nav-text">全部加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入-material-design-的字体和图标"><span class="nav-number">1.3.</span> <span class="nav-text">引入 material design 的字体和图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">1.4.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改主题"><span class="nav-number">1.5.</span> <span class="nav-text">更改主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础组件的使用"><span class="nav-number">1.6.</span> <span class="nav-text">基础组件的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">1.6.1.</span> <span class="nav-text">API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计思路"><span class="nav-number">2.</span> <span class="nav-text">设计思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目过程"><span class="nav-number">3.</span> <span class="nav-text">项目过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#API的请求转发配置"><span class="nav-number">3.1.</span> <span class="nav-text">API的请求转发配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用axios"><span class="nav-number">3.2.</span> <span class="nav-text">使用axios</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">3.2.2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#执行-GET-请求"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">执行 GET 请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#axios-API"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">axios API</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vuex"><span class="nav-number">4.</span> <span class="nav-text">vuex</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-router"><span class="nav-number">5.</span> <span class="nav-text">vue-router</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命名路由"><span class="nav-number">5.1.</span> <span class="nav-text">命名路由</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写程序过程中的难点"><span class="nav-number">6.</span> <span class="nav-text">编写程序过程中的难点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动获取本机时间未解决"><span class="nav-number">6.1.</span> <span class="nav-text">自动获取本机时间未解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电影详情页面布局不稳定。"><span class="nav-number">6.2.</span> <span class="nav-text">电影详情页面布局不稳定。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Muse-UI库没研究透彻，刚开始没理解如何改变组件的颜色。"><span class="nav-number">6.3.</span> <span class="nav-text">Muse-UI库没研究透彻，刚开始没理解如何改变组件的颜色。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取API数据花费时间很长，且代码不是原创，第二遍一定要自己好好理解JS-ES6，自主把代码写出来。"><span class="nav-number">6.4.</span> <span class="nav-text">获取API数据花费时间很长，且代码不是原创，第二遍一定要自己好好理解JS,ES6，自主把代码写出来。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/09/16/Douban-项目总结/';
+          this.page.identifier = '2017/09/16/Douban-项目总结/';
+          this.page.title = '[Douban]项目总结';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
