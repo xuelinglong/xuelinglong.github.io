@@ -254,6 +254,128 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/05/Vue介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/05/Vue介绍/" itemprop="url">Vue介绍</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-05T20:54:38+08:00">
+                2017-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/05/Vue介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/05/Vue介绍/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div></pre></td><td class="code"><pre><div class="line">  &lt;!DOCTYPE html&gt;</div><div class="line">  &lt;html lang=&quot;en&quot;&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">      &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">      &lt;title&gt;Hello World&lt;/title&gt;</div><div class="line">      &lt;script src=&quot;https://unpkg.com/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">  &lt;body&gt;</div><div class="line">        </div><div class="line">      &lt;div id=&quot;app&quot;&gt;</div><div class="line">          &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">      &lt;/div&gt;          </div><div class="line">      &lt;script&gt;</div><div class="line">        var app=new Vue(&#123;</div><div class="line">            el:&apos;#app&apos;,</div><div class="line">            data: &#123;</div><div class="line">                message:&apos;Hello World!&apos;</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">      &lt;/script&gt;</div><div class="line"></div><div class="line">    &lt;div id=&quot;app-2&quot;&gt;</div><div class="line">        &lt;!--</div><div class="line">            v-bind被称为指令，有前缀 v-的指令是Vue 提供的特殊属性</div><div class="line">            作用：它们会在渲染的 DOM 上应用特殊的响应式行为    </div><div class="line">        --&gt;</div><div class="line">        &lt;!--该指令的作用是将这个元素节点的 title 属性和 Vue 实例的 message 属性保持一致--&gt;</div><div class="line">        &lt;span v-bind:title=&quot;message&quot;&gt;</div><div class="line">        鼠标悬停几秒钟查看此处动态绑定的提示信息！</div><div class="line">        &lt;/span&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;script&gt;       </div><div class="line">        var app2 = new Vue(&#123;</div><div class="line">            el: &apos;#app-2&apos;,</div><div class="line">            data: &#123;</div><div class="line">                message: &apos;页面加载于 &apos; + new Date()</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div><div class="line"> </div><div class="line"></div><div class="line">      </div><div class="line">    &lt;div id=&quot;app-3&quot;&gt;</div><div class="line">        &lt;!--  条件与循环，控制切换一个元素的显示用v-if  --&gt;</div><div class="line">        &lt;p v-if=&quot;seen&quot;&gt;现在你看到我了&lt;/p&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        var app3 = new Vue(&#123;</div><div class="line">            el: &apos;#app-3&apos;,       //vue实例属性与方法el    app3.$el === document.getElementById(&apos;app-3&apos;) // -&gt; true</div><div class="line">            data: &#123;</div><div class="line">            seen: true    //app3.seen=false   //字体消失</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    &lt;div id=&quot;app-4&quot;&gt;</div><div class="line">        &lt;ol&gt;            &lt;!--有序列表--&gt;</div><div class="line">        &lt;!--  v-for 指令可以绑定数组的数据来渲染一个项目列表  --&gt;</div><div class="line">            &lt;li v-for=&quot;todo in todos&quot;&gt;</div><div class="line">                &#123;&#123; todo.text &#125;&#125;</div><div class="line">            &lt;/li&gt;</div><div class="line">        &lt;/ol&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        var app4 = new Vue(&#123;</div><div class="line">            el: &apos;#app-4&apos;,</div><div class="line">            data: &#123;</div><div class="line">                todos: [</div><div class="line">                &#123; text: &apos;学习 JavaScript&apos; &#125;,</div><div class="line">                &#123; text: &apos;学习 Vue&apos; &#125;,</div><div class="line">                &#123; text: &apos;整个牛项目&apos; &#125;          </div><div class="line">                ]         </div><div class="line">            &#125;       //app4.todos.push(&#123;text:&apos;111&apos;&#125;) 列表中添加一行显示信息</div><div class="line">        &#125;)</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">    &lt;div id=&quot;app-5&quot;&gt;</div><div class="line">        &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">        &lt;!--  v-on 指令绑定一个事件监听器，通过它调用我们 Vue 实例中定义的方法  --&gt;</div><div class="line">        &lt;button v-on:click=&quot;reverseMessage&quot;&gt;逆转消息&lt;/button&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        var app5 = new Vue(&#123;   //生成一个vue实例</div><div class="line">            el: &apos;#app-5&apos;,    </div><div class="line">            data: &#123;</div><div class="line">                message: &apos;Hello Vue.js!&apos;</div><div class="line">            &#125;,</div><div class="line">            methods: &#123;     //vue实例的方法</div><div class="line">                reverseMessage: function () &#123;</div><div class="line">                    this.message = this.message.split(&apos;&apos;).reverse().join(&apos;&apos;)</div><div class="line">                    //String对象的split() 方法用于把一个字符串分割成字符串数组。</div><div class="line">                    //Array对象的reverse() 方法用于颠倒数组中元素的顺序。</div><div class="line">                    //Array对象的join() 方法用于把数组中的所有元素放入一个字符串。</div><div class="line">                    //例：join(&apos;*&apos;)括号中可以指定元素通过指定的分隔符进行分隔。</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div><div class="line"></div><div class="line"></div><div class="line">    &lt;div id=&quot;app-6&quot;&gt;</div><div class="line">        &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">        &lt;!-- v-model指令能轻松实现表单输入和应用状态之间的双向绑定 --&gt;</div><div class="line">        &lt;input v-model=&quot;message&quot;&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        var app6 = new Vue(&#123;</div><div class="line">            el: &apos;#app-6&apos;,</div><div class="line">            data: &#123;</div><div class="line">                message: &apos;Hello Vue!&apos;</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div><div class="line">    </div><div class="line">    &lt;div id=&quot;app-7&quot;&gt;</div><div class="line">        &lt;ol&gt;</div><div class="line">            &lt;!-- 现在我们为每个todo-item提供待办项对象    --&gt;</div><div class="line">            &lt;!-- 待办项对象是变量，即其内容可以是动态的 --&gt;</div><div class="line">            &lt;todo-item v-for=&quot;item in groceryList&quot; v-bind:todo=&quot;item&quot;&gt;&lt;/todo-item&gt;</div><div class="line">            &lt;!--v-for指令绑定groceryList数组的数据来渲染项目列表</div><div class="line">            v-bind指令将元素节点的todo属性和vue实例的item属性保持一致--&gt;</div><div class="line">        &lt;/ol&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        // 定义名为 todo-item 的新组件</div><div class="line">        Vue.component(&apos;todo-item&apos;, &#123;</div><div class="line">            // todo-item 组件现在接受一个</div><div class="line">            // &quot;prop&quot;，类似于一个自定义属性</div><div class="line">            // 这个属性名为 todo。</div><div class="line">            props: [&apos;todo&apos;],</div><div class="line">            template: &apos;&lt;li&gt;&#123;&#123; todo.text &#125;&#125;&lt;/li&gt;&apos;</div><div class="line">            //选项对象的template属性用于定义组件要渲染的HTML</div><div class="line"></div><div class="line">        &#125;)</div><div class="line">        var app7 = new Vue(&#123;</div><div class="line">            el: &apos;#app-7&apos;,</div><div class="line">            data: &#123;</div><div class="line">                 groceryList: [             //数组</div><div class="line">                    &#123; text: &apos;蔬菜&apos; &#125;,</div><div class="line">                    &#123; text: &apos;奶酪&apos; &#125;,</div><div class="line">                    &#123; text: &apos;随便其他什么人吃的东西&apos; &#125;</div><div class="line">                ]</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div><div class="line"></div><div class="line">  &lt;/body&gt;</div><div class="line">  &lt;/html&gt;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/03/Async-and-Class/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -513,140 +635,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/30/SIMD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xue Ling">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vue">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/30/SIMD/" itemprop="url">SIMD</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-30T22:18:54+08:00">
-                2017-05-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/30/SIMD/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/30/SIMD/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>SIMD：<br>意为“单指令，多数据”；<br>含义是使用一个指令，完成多个数据的运算；<br>它是 JavaScript 操作 CPU 对应指令的接口；<br>可以看做这是一种不同的运算执行模式；</p>
-<p>SISD：<br>意为“单指令，单数据”；<br>含义是使用一个指令，完成单个数据的运算；<br>是 JavaScript 的默认运算模式。</p>
-<p>SIMD 的执行效率要高于 SISD，所以被广泛用于3D图形运算、物理模拟等运算量超大的项目之中。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/30/SIMD/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -691,7 +684,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -704,7 +697,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
