@@ -254,6 +254,152 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/23/2017-12-23/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/23/2017-12-23/" itemprop="url">2017-12-23</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-23T22:00:53+08:00">
+                2017-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/23/2017-12-23/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/23/2017-12-23/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="本周做的事"><a href="#本周做的事" class="headerlink" title="本周做的事"></a>本周做的事</h1><p>发布，评论，消息模块。</p>
+<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h2 id="登录以后获取到已收藏的话题，如何把他们与未收藏的话题做区分；"><a href="#登录以后获取到已收藏的话题，如何把他们与未收藏的话题做区分；" class="headerlink" title="登录以后获取到已收藏的话题，如何把他们与未收藏的话题做区分；"></a>登录以后获取到已收藏的话题，如何把他们与未收藏的话题做区分；</h2><p>可以写一个isCollected属性来控制话题是否被收藏，但是我现在还搞不明白这个属性应该在什么时候以什么方式赋给topicSubject。</p>
+<h2 id="发布新主题时输入content内容时如何使用markdown语法；"><a href="#发布新主题时输入content内容时如何使用markdown语法；" class="headerlink" title="发布新主题时输入content内容时如何使用markdown语法；"></a>发布新主题时输入content内容时如何使用markdown语法；</h2><p>现在的情况是可以成功发布新主题，但是content内容不能识别markdown语法.</p>
+<h2 id="axios-post"><a href="#axios-post" class="headerlink" title="axios.post();"></a>axios.post();</h2><p>url需要使用参数拼接时，怎么不让拼接错为get方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">const HOST = &apos;https://www.vue-js.com/api/v1/&apos;;</div><div class="line">[type.PUSH_REPLIES](context, payload) &#123;</div><div class="line">    axios.post(HOST + &apos;topic/&apos; + payload.topicid + &apos;/replies&apos;, &#123;</div><div class="line">        accesstoken: payload.accesstoken,</div><div class="line">        content: payload.content,</div><div class="line">        reply_id: payload.replyid</div><div class="line">    &#125;).then(res =&gt; &#123;</div><div class="line">        context.commit(type.PUSH_REPLIES, &#123;</div><div class="line">            data: res.data.data</div><div class="line">        &#125;);</div><div class="line">    &#125;).catch(err =&gt; console.log(err));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="提示用户登录时的自动跳转到登录页面；"><a href="#提示用户登录时的自动跳转到登录页面；" class="headerlink" title="提示用户登录时的自动跳转到登录页面；"></a>提示用户登录时的自动跳转到登录页面；</h2><p>未登录时msg,push显示有提示登录的按钮，点击之后应该自动跳转到 my页面登录.</p>
+<h2 id="滑动加载；"><a href="#滑动加载；" class="headerlink" title="滑动加载；"></a>滑动加载；</h2><p>错误表现：此时会在未滑动时执行一次loadmore。<br>因为获取数据是在topics页面 —&gt; container包含list —&gt; list包含card，滑动加载写在container外面，此时只要进入首页就会自动执行一次 loadMore ，距离阙值设的50px.</p>
+<h2 id="header应该是固定在顶部的；"><a href="#header应该是固定在顶部的；" class="headerlink" title="header应该是固定在顶部的；"></a>header应该是固定在顶部的；</h2><p>未登录时首页header固定在顶部，登录账号以后，header位置就不固定了，向下滑动时header会向上隐藏。<br>header组件设置的是fixed，不知道为什么会出现这种情况，要仔细找找问题出在哪里。</p>
+<h1 id="下周目标；"><a href="#下周目标；" class="headerlink" title="下周目标；"></a>下周目标；</h1><ol>
+<li>解决上面的问题；</li>
+<li>完善未读消息的ui样式；</li>
+<li>下拉刷新，滑动加载；</li>
+<li>区分收藏与未收藏的话题；</li>
+<li>cookie记录登录过的accesstoken;</li>
+<li>发表评论功能；</li>
+<li>文件格式化;</li>
+<li>下周结束本项目，学习发布流程。</li>
+</ol>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><p>经过本周的学习，发现了很多不足之处：</p>
+<ol>
+<li>不注意使用npm run lint，代码格式不规范；</li>
+<li>vuex各模块之间关系弄得比较乱；</li>
+<li>四个选项卡，只需要四个page,里面添加子页面就好，页面逻辑也整体很乱；</li>
+<li>缺少对vue插件的使用学习。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/17/周报一/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -501,134 +647,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/29/windows迁移到Mac遇到的问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xue Ling">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vue">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/29/windows迁移到Mac遇到的问题/" itemprop="url">windows迁移到Mac遇到的问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T22:04:19+08:00">
-                2017-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/29/windows迁移到Mac遇到的问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/29/windows迁移到Mac遇到的问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo</div><div class="line">hexo: command not found</div></pre></td></tr></table></figure>
-<p>解决方案：安装Xcode –&gt; 安装homebrew<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo -g</div><div class="line">npm WARN checkPermissions Missing write access to /usr/local/lib/node_modules</div><div class="line">npm ERR! path /usr/local/lib/node_modules</div><div class="line">npm ERR! code EACCES</div><div class="line">npm ERR! errno -13</div><div class="line">npm ERR! syscall access</div><div class="line">npm ERR! Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;</div><div class="line">npm ERR!  &#123; Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;</div><div class="line">npm ERR!   stack: &apos;Error: EACCES: permission denied, access \&apos;/usr/local/lib/node_modules\&apos;&apos;,</div><div class="line">npm ERR!   errno: -13,</div><div class="line">npm ERR!   code: &apos;EACCES&apos;,</div><div class="line">npm ERR!   syscall: &apos;access&apos;,</div><div class="line">npm ERR!   path: &apos;/usr/local/lib/node_modules&apos; &#125;</div><div class="line">npm ERR!</div><div class="line">npm ERR! Please try running this command again as root/Administrator.</div><div class="line">npm ERR! A complete log of this run can be found in:</div><div class="line">npm ERR!     /Users/xxx/.npm/_logs/2017-10-27T01_21_01_871Z-debug.log</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/29/windows迁移到Mac遇到的问题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -678,7 +696,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
