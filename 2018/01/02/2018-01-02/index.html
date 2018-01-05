@@ -97,7 +97,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/02/2018-01-02/index.html">
 <meta property="og:site_name" content="Vue">
 <meta property="og:description" content="本周做的事下拉刷新、收藏、修复小细节的问题。 解决的问题登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；写一个isCollected属性来控制话题是否被收藏，判断是否被收藏的标志是：把当前topic_id与获取到的用户数据中collect_topics中每一项的id做对比，有一致的就触发让isCollected=true的action，若没有一致的就触发让isCollected=false">
-<meta property="og:updated_time" content="2018-01-02T06:51:30.232Z">
+<meta property="og:updated_time" content="2018-01-04T12:39:31.238Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018-01-02">
 <meta name="twitter:description" content="本周做的事下拉刷新、收藏、修复小细节的问题。 解决的问题登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；写一个isCollected属性来控制话题是否被收藏，判断是否被收藏的标志是：把当前topic_id与获取到的用户数据中collect_topics中每一项的id做对比，有一致的就触发让isCollected=true的action，若没有一致的就触发让isCollected=false">
@@ -331,7 +331,7 @@
       
         <h1 id="本周做的事"><a href="#本周做的事" class="headerlink" title="本周做的事"></a>本周做的事</h1><p>下拉刷新、收藏、修复小细节的问题。</p>
 <h1 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h1><h2 id="登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；"><a href="#登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；" class="headerlink" title="登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；"></a>登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；</h2><p>写一个isCollected属性来控制话题是否被收藏，判断是否被收藏的标志是：把当前topic_id与获取到的用户数据中collect_topics中每一项的id做对比，有一致的就触发让isCollected=true的action，若没有一致的就触发让isCollected=false的action。</p>
-<h2 id="发布新主题时输入content内容时如何使用markdown语法；"><a href="#发布新主题时输入content内容时如何使用markdown语法；" class="headerlink" title="发布新主题时输入content内容时如何使用markdown语法；"></a>发布新主题时输入content内容时如何使用markdown语法；</h2><p>不需要关心是否能显示markdown语法，上传数据时网站会自动把content中的内容转换，因此项目中只要能正确发布新主题即可。</p>
+<h2 id="发布新主题时输入content内容时如何使用markdown语法；"><a href="#发布新主题时输入content内容时如何使用markdown语法；" class="headerlink" title="发布新主题时输入content内容时如何使用markdown语法；"></a>发布新主题时输入content内容时如何使用markdown语法；</h2><p>不需要关心是否能显示markdown语法，上传数据时网站会自动把content中的内容转换，因此项目中只要能正确发布新主题即可。<br><a id="more"></a></p>
 <h2 id="axios-post"><a href="#axios-post" class="headerlink" title="axios.post();"></a>axios.post();</h2><p>url需要使用参数拼接时，怎么不让拼接错为get方法：<br>跨域：只要协议、域名、端口有任何一个不同，都被当作是不同的域，此时才是跨域访问。<br>上个项目的时候要配置跨域，我没有研究跨域的真正含义，在本次项目开始时就配置了config/index.js中的proxytable,所以在项目过程中每次使用axios.post(),只要传参数而不是写死网址，那么就一定会拼接为get方法，一直到后来没办法写死网址之时才意识到这个问题真的很严重。</p>
 <h2 id="滑动加载；"><a href="#滑动加载；" class="headerlink" title="滑动加载；"></a>滑动加载；</h2><p>错误表现：此时会在未滑动时执行一次loadmore。<br>可以在函数中加入一个判断，最初数据数组长度为0，此时不执行loadmore，只有在数据的数组长度不为0时才能执行loadmore。</p>
 <h2 id="header应该是固定在顶部的；"><a href="#header应该是固定在顶部的；" class="headerlink" title="header应该是固定在顶部的；"></a>header应该是固定在顶部的；</h2><p>未登录时首页header固定在顶部，登录账号以后，header位置就不固定了，向下滑动时header会向上隐藏。<br>把header和tab全部写为fixed，固定值。</p>
