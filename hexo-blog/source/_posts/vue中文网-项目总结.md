@@ -48,19 +48,21 @@ axios.post后面的URL写死，可以获取正确使用post方法，但是一旦
 
 *协议、端口、域名*只要有一个不同就确定了要跨域，若全部相同则不需要跨域。<br>
 以本次API为例：
+
 | describe | url | 同源情况 |
 | -------- | --- | ------- |
-| 数据网址 | ` https://www.vue-js.com/api/ ` |  |
-| baseURL | ` https://www.vue-js.com/api/v1/ ` |  |
-| 主题首页 |` baseURL/topics ` | 同源 |
+| 数据网址 | `https://www.vue-js.com/api/` | null |
+| baseURL | `https://www.vue-js.com/api/v1/` | null |
+| 主题首页 | `baseURL/topics` | 同源 |
 
 
 以豆瓣API为例：
+
 | describe | url | 同源情况 |
 | -------- | --- | ------- |
-| 数据网址 | ` https://api.douban.com/api/v2/movie/in_theaters ` |  |
-| 正在热映 |` localhost:8080/api/v2/movie/in_theaters ` | 域名不同 |
-| 配置api/后 | ` https://api.douban.com/api/v2/ ` | 同源 |
+| 数据网址 | `https://api.douban.com/api/v2/movie/in_theaters` | null |
+| 正在热映 | `localhost:8080/api/v2/movie/in_theaters` | 域名不同 |
+| 配置api/后 | `https://api.douban.com/api/v2/` | 同源 |
 
 最初使用axios的时候要区分好本次项目是否跨域，只有确定跨域的话才能配置config/index中的proxyTable解决跨域
 ```
