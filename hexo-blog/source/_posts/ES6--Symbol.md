@@ -1,5 +1,7 @@
 ---
 title: ES6--Symbol
+date: 2017-06-25 20:42:49
+tags: ES6
 ---
 
 
