@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="月度总结," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="10月总结（redux、vue-slot、js-navigator）近期终于把困扰许久的redux成功实现了一个，本次总结就梳理一下近期用react、react-redux做练手项目的过程与心得。 redux我现在理解redux是与vuex类似的状态管理的库，它有一个完整的特定的更改全局状态的流程。下面来梳理一下我的store注册到全局的过程。 因本次练手项目是使用react全家桶重构手机端CNo">
+<meta name="keywords" content="月度总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10月总结[redux为主]">
+<meta property="og:url" content="http://yoursite.com/2018/10/29/10月总结/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="10月总结（redux、vue-slot、js-navigator）近期终于把困扰许久的redux成功实现了一个，本次总结就梳理一下近期用react、react-redux做练手项目的过程与心得。 redux我现在理解redux是与vuex类似的状态管理的库，它有一个完整的特定的更改全局状态的流程。下面来梳理一下我的store注册到全局的过程。 因本次练手项目是使用react全家桶重构手机端CNo">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.862Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="10月总结[redux为主]">
+<meta name="twitter:description" content="10月总结（redux、vue-slot、js-navigator）近期终于把困扰许久的redux成功实现了一个，本次总结就梳理一下近期用react、react-redux做练手项目的过程与心得。 redux我现在理解redux是与vuex类似的状态管理的库，它有一个完整的特定的更改全局状态的流程。下面来梳理一下我的store注册到全局的过程。 因本次练手项目是使用react全家桶重构手机端CNo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/29/10月总结/"/>
+
+
+
+
+
+  <title>10月总结[redux为主] | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/10月总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">10月总结[redux为主]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-29T20:45:39+08:00">
+                2018-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/29/10月总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/29/10月总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="10月总结（redux、vue-slot、js-navigator）"><a href="#10月总结（redux、vue-slot、js-navigator）" class="headerlink" title="10月总结（redux、vue-slot、js-navigator）"></a>10月总结（redux、vue-slot、js-navigator）</h1><p>近期终于把困扰许久的redux成功实现了一个，本次总结就梳理一下近期用react、react-redux做练手项目的过程与心得。</p>
+<h2 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h2><p>我现在理解redux是与vuex类似的状态管理的库，它有一个完整的特定的更改全局状态的流程。下面来梳理一下我的store注册到全局的过程。</p>
+<p>因本次练手项目是使用react全家桶重构手机端CNode中文网，所需要的公共状态有：用户是否登录(用来判断页面显示内容)、用户的登录信息(登录成功后获取，用于登录成功后跳转消息页面可以直接显示用户已读与未读消息)、topic的菜单切换与获取topic数据(用于保存菜单当前选中哪个，跳转到其他tabbar之后再跳转回来时有记录效果、或者进入详情页并回退之后有记录效果)。</p>
+<a id="more"></a>
+<p>store就相当于redux中的根部仓库，用于把所有的子reducer整合起来，最后把store注册到全局。现在项目进行到一半，暂时可把store中的子reducer分为3个：user(用户登录、用户info)、topic(获取topic列表、topic详情、收藏、评论、回复)、common(menu切换、tabbar切换)。</p>
+<p>一个完整的store由三大部分构成：1.action(dispatch触发action来改变数据状态)；2.reducer(存储全局初始状态、并根据action的类型与参数来改变某些全局数据状态)；3.store(整合所有的子reducer，并把store注册到项目根部index，store中的action与reducer就成功注册到项目全局)。</p>
+<p>common(reducer)示例：</p>
+<ul>
+<li>把项目根组件嵌套到Provider中，那么在组件中都可以使用connect()方法获得redux的store</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">import ReactDOM from &apos;react-dom&apos;;</div><div class="line">import &#123;Provider&#125; from &quot;react-redux&quot;;</div><div class="line">import store from &apos;./redux/store.js&apos;;</div><div class="line">import &apos;./index.css&apos;;</div><div class="line">import App from &apos;./App&apos;;</div><div class="line">import registerServiceWorker from &apos;./registerServiceWorker&apos;;</div><div class="line"></div><div class="line">ReactDOM.render((</div><div class="line">  &lt;Provider store=&#123;store&#125;&gt;</div><div class="line">    &lt;App /&gt;</div><div class="line">  &lt;/Provider&gt;</div><div class="line">  ),</div><div class="line">  document.getElementById(&apos;root&apos;)</div><div class="line">);</div><div class="line">registerServiceWorker();</div></pre></td></tr></table></figure>
+<ul>
+<li>tabbar组件中使用connect()方法获得redux的store</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">class PublicTabbar extends Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">    this.state = &#123;</div><div class="line">      selected: &apos;topics&apos;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  changeSelected(tab, title) &#123;</div><div class="line">    // 调用的是common中的action</div><div class="line">    this.props.changeTab(tab,title);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  render() &#123;</div><div class="line">    return(</div><div class="line">      &lt;footer className=&quot;PublicTabbar&quot;&gt;</div><div class="line">        &lt;NavLink className=&quot;TabbarItem&quot; to=&quot;/&quot;&gt;</div><div class="line">          &lt;div className=&#123;&quot;TabbarItem &quot; + (this.props.selected === &apos;topics&apos; ? &apos;selected&apos; : &apos;&apos;)&#125; onClick=&#123;this.changeSelected.bind(this, &apos;topics&apos;,&apos;首页&apos;)&#125; &gt;主题&lt;/div&gt;</div><div class="line">        &lt;/NavLink&gt;</div><div class="line">        &lt;NavLink className=&quot;TabbarItem&quot; to=&quot;/message&quot;&gt;</div><div class="line">          &lt;div className=&#123;&quot;TabbarItem &quot; + (this.props.selected === &apos;message&apos; ? &apos;selected&apos; : &apos;&apos;)&#125; onClick=&#123;this.changeSelected.bind(this, &apos;message&apos;,&apos;消息&apos;)&#125;&gt;消息&lt;/div&gt;</div><div class="line">        &lt;/NavLink&gt;</div><div class="line">      &lt;/footer&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const mapStateToProps = state =&gt; (&#123;</div><div class="line">  selected: state.common.tab</div><div class="line">&#125;)</div><div class="line"></div><div class="line">export default connect(mapStateToProps, &#123; changeTab &#125;)(PublicTabbar);</div></pre></td></tr></table></figure>
+<ul>
+<li>common(action)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">import * as type from &apos;./type&apos;</div><div class="line"></div><div class="line">export const changeTab = (tab, title) =&gt; dispatch =&gt; &#123;</div><div class="line">  dispatch (&#123;</div><div class="line">    type: type.CHANGE_TAB,</div><div class="line">    tab: tab,</div><div class="line">    title: title</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">export const changeMenu = (menu,cb) =&gt; dispatch =&gt; &#123;</div><div class="line">  dispatch (&#123;</div><div class="line">    type: type.CHANGE_MENU,</div><div class="line">    menu: menu</div><div class="line">  &#125;)</div><div class="line">  cb &amp;&amp; cb(menu)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>common(reducer)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">import * as type from &apos;../actions/type&apos;</div><div class="line">// 初始状态</div><div class="line">const initialState = &#123;</div><div class="line">  title: &apos;首页&apos;,</div><div class="line">  tab: &apos;topics&apos;,</div><div class="line">  menu: &apos;all&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const common = (state = initialState, action)=&gt; &#123;</div><div class="line">  switch(action.type) &#123;</div><div class="line">    case type.CHANGE_TAB:</div><div class="line">      // &#123;&#125;是保证不直接修改state,新建一个副本并把源对象复制到state中。</div><div class="line">      return Object.assign(&#123;&#125;, state, &#123;</div><div class="line">        tab: action.tab,</div><div class="line">        title: action.title</div><div class="line">      &#125;)</div><div class="line">    case type.CHANGE_MENU:</div><div class="line">      return Object.assign(&#123;&#125;, state, &#123;</div><div class="line">        menu: action.menu</div><div class="line">      &#125;)</div><div class="line">    // default的情况下返回旧的state</div><div class="line">    default:</div><div class="line">      return state;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default common;</div></pre></td></tr></table></figure>
+<ul>
+<li>(index Reducer)把所有的reducer整合起来</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">import &#123; combineReducers &#125; from &apos;redux&apos;</div><div class="line">import common from &apos;./common&apos;</div><div class="line">import user from &apos;./user&apos;</div><div class="line">import topics from &apos;./topics&apos;</div><div class="line"></div><div class="line">const rootReducers = combineReducers(&#123;</div><div class="line">  common,</div><div class="line">  user,</div><div class="line">  topics</div><div class="line">&#125;);</div><div class="line"></div><div class="line">export default rootReducers;</div></pre></td></tr></table></figure>
+<ul>
+<li>创建store</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">import &#123; createStore, applyMiddleware, compose &#125; from &apos;redux&apos;;</div><div class="line">import thunk from &apos;redux-thunk&apos;;</div><div class="line">import rootReducer from &apos;./reducers/index.js&apos;;</div><div class="line"></div><div class="line">const initialState = &#123;&#125;;</div><div class="line"></div><div class="line">const middleWear = [thunk];</div><div class="line"></div><div class="line">const store = createStore(</div><div class="line">  rootReducer,</div><div class="line">  initialState,</div><div class="line">  compose(</div><div class="line">    applyMiddleware(...middleWear),</div><div class="line">    // redux-devtools可以预览必须加上下面的代码</div><div class="line">    window.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; window.__REDUX_DEVTOOLS_EXTENSION__()</div><div class="line">  )</div><div class="line">);</div><div class="line"></div><div class="line">export default store;</div></pre></td></tr></table></figure>
+<h2 id="vue-slot、ref"><a href="#vue-slot、ref" class="headerlink" title="vue(slot、ref)"></a>vue(slot、ref)</h2><p>近期封装vue公共组件，接触到slot与ref，现在梳理一下自己对slot与ref的理解和使用。</p>
+<p>slot我理解为占位符，如果父组件为这个插槽提供了内容，那么插槽的默认值会被替换掉。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div class=&quot;Demo&quot;&gt;</div><div class="line">    &lt;div class=&quot;example-case&quot;&gt;</div><div class="line">        &lt;slot name=&quot;demo&quot;&gt;&lt;/slot&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;example-desc&quot;&gt;</div><div class="line">        &lt;slot name=&quot;desc&quot;&gt;&lt;/slot&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;template calss=&quot;textCopy&quot;&gt;</div><div class="line">  &lt;Demo title=&quot;文本复制&quot;&gt;</div><div class="line">    &lt;div slot=&quot;demo&quot;&gt;</div><div class="line">      // 以下部分会覆盖在demo.vue中的demo具名插槽中</div><div class="line">      &lt;span&gt;要被复制的文字：&#123;&#123;copyContent&#125;&#125;&lt;/span&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div slot=&quot;desc&quot;&gt;</div><div class="line">      // 以下部分会覆盖在demo.vue中的desc具名插槽中</div><div class="line">      &lt;p&gt;文本复制&lt;/p&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/Demo&gt;</div><div class="line">&lt;/template&gt;</div></pre></td></tr></table></figure>
+<p>ref属性：我们可以在vue组件中的任意html元素上面添加ref属性，然后在组件中可以通过this.$ref.xxx来访问这个DOM元素，示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div class=&quot;TextCopy&quot;&gt;</div><div class="line">    &lt;Tooltip v-if=&quot;!copied&quot; content=&quot;复制文本&quot; placement=&quot;top&quot;&gt;</div><div class="line">      &lt;Icon v-if=&quot;!copied&quot; type=&quot;ios-copy-outline&quot; @click=&quot;copy&quot; :color=&quot;this.color&quot; :size=&quot;this.size&quot; /&gt;</div><div class="line">    &lt;/Tooltip&gt;</div><div class="line">    &lt;Tooltip v-if=&quot;copied&quot; content=&quot;复制成功&quot; placement=&quot;top&quot;&gt;</div><div class="line">      &lt;Icon v-if=&quot;copied&quot; type=&quot;checkmark-round&quot; color=&quot;#42b983&quot; :size=&quot;this.size&quot; /&gt;</div><div class="line">    &lt;/Tooltip&gt;</div><div class="line">    &lt;textarea class=&quot;textarea&quot; ref=&quot;textarea&quot; cols=&quot;3&quot; rows=&quot;2&quot; readonly=&quot;&quot;&gt;&lt;/textarea&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;</div><div class="line">export default &#123;</div><div class="line">  name: &apos;TextCopy&apos;,</div><div class="line">  data() &#123;</div><div class="line">    return &#123;</div><div class="line">      copied: false</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  // ...</div><div class="line">  methods: &#123;</div><div class="line">    copy() &#123;</div><div class="line">      // 通过$ref访问textarea DOM元素</div><div class="line">      const faker = this.$refs.textarea</div><div class="line">      faker.value = this.copyContent</div><div class="line">      faker.focus()</div><div class="line">      // 选中这个被focused的input元素的特定范围</div><div class="line">      faker.setSelectionRange(0, this.copyContent.length)</div><div class="line"></div><div class="line">      try &#123;</div><div class="line">        document.execCommand(&apos;copy&apos;)</div><div class="line">        this.copied = true</div><div class="line">        setTimeout(() =&gt; &#123; </div><div class="line">          this.copied = false</div><div class="line">          this.copiedFun ? this.copiedFun() : null</div><div class="line">        &#125;, 500)</div><div class="line">      &#125; catch (err) &#123;</div><div class="line">        alert(&apos;Oops, 看起来您的浏览器不支持自动拷贝, 请选中以上文字复制吧&apos;)</div><div class="line">      &#125; finally &#123;</div><div class="line">        // document.body.removeChild(faker)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h2 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h2><p>本次做项目调用客户端的方法时，遇到要区分安卓和iOS的情况，经过查找才认识了navigator.userAgent（返回当前浏览器的用户代理字符串），<code>isAndroid = u.indexOf(&#39;Android&#39;) &gt; -1 || u.indexOf(&#39;Adr&#39;) &gt; -1;</code>可用来区分是否是android。</p>
+<h2 id="疑难点"><a href="#疑难点" class="headerlink" title="疑难点"></a>疑难点</h2><ol>
+<li><p>异步action的实现方式（本次项目中使用的是成功时执行回调函数，目前已知thunk库可以实现异步action，但是还未真正实现过，待摸索）。</p>
+</li>
+<li><p>router更好的使用方式（本次是把router作为一个Main组件引入到App组件中）。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/月度总结/" rel="tag"># 月度总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/29/8月总结/" rel="next" title="8月总结[react为主]">
+                <i class="fa fa-chevron-left"></i> 8月总结[react为主]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/30/11月总结-ES6考核复习/" rel="prev" title="11月总结[ES6考核复习]">
+                11月总结[ES6考核复习] <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#10月总结（redux、vue-slot、js-navigator）"><span class="nav-number">1.</span> <span class="nav-text">10月总结（redux、vue-slot、js-navigator）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#redux"><span class="nav-number">1.1.</span> <span class="nav-text">redux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-slot、ref"><span class="nav-number">1.2.</span> <span class="nav-text">vue(slot、ref)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#navigator"><span class="nav-number">1.3.</span> <span class="nav-text">navigator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#疑难点"><span class="nav-number">1.4.</span> <span class="nav-text">疑难点</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/10/29/10月总结/';
+          this.page.identifier = '2018/10/29/10月总结/';
+          this.page.title = '10月总结[redux为主]';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

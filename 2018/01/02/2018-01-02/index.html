@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="周报," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本周做的事下拉刷新、收藏、修复小细节的问题。 解决的问题登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；写一个isCollected属性来控制话题是否被收藏，判断是否被收藏的标志是：把当前topic_id与获取到的用户数据中collect_topics中每一项的id做对比，有一致的就触发让isCollected=true的action，若没有一致的就触发让isCollected=false">
+<meta name="keywords" content="周报">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-01-02">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/2018-01-02/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="本周做的事下拉刷新、收藏、修复小细节的问题。 解决的问题登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；写一个isCollected属性来控制话题是否被收藏，判断是否被收藏的标志是：把当前topic_id与获取到的用户数据中collect_topics中每一项的id做对比，有一致的就触发让isCollected=true的action，若没有一致的就触发让isCollected=false">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.863Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-01-02">
+<meta name="twitter:description" content="本周做的事下拉刷新、收藏、修复小细节的问题。 解决的问题登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；写一个isCollected属性来控制话题是否被收藏，判断是否被收藏的标志是：把当前topic_id与获取到的用户数据中collect_topics中每一项的id做对比，有一致的就触发让isCollected=true的action，若没有一致的就触发让isCollected=false">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/2018-01-02/"/>
+
+
+
+
+
+  <title>2018-01-02 | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/2018-01-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2018-01-02</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T14:49:34+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/02/2018-01-02/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/01/02/2018-01-02/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="本周做的事"><a href="#本周做的事" class="headerlink" title="本周做的事"></a>本周做的事</h1><p>下拉刷新、收藏、修复小细节的问题。</p>
+<h1 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h1><h2 id="登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；"><a href="#登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；" class="headerlink" title="登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；"></a>登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；</h2><p>写一个isCollected属性来控制话题是否被收藏，判断是否被收藏的标志是：把当前topic_id与获取到的用户数据中collect_topics中每一项的id做对比，有一致的就触发让isCollected=true的action，若没有一致的就触发让isCollected=false的action。</p>
+<h2 id="发布新主题时输入content内容时如何使用markdown语法；"><a href="#发布新主题时输入content内容时如何使用markdown语法；" class="headerlink" title="发布新主题时输入content内容时如何使用markdown语法；"></a>发布新主题时输入content内容时如何使用markdown语法；</h2><p>不需要关心是否能显示markdown语法，上传数据时网站会自动把content中的内容转换，因此项目中只要能正确发布新主题即可。<br><a id="more"></a></p>
+<h2 id="axios-post"><a href="#axios-post" class="headerlink" title="axios.post();"></a>axios.post();</h2><p>url需要使用参数拼接时，怎么不让拼接错为get方法：<br>跨域：只要协议、域名、端口有任何一个不同，都被当作是不同的域，此时才是跨域访问。<br>上个项目的时候要配置跨域，我没有研究跨域的真正含义，在本次项目开始时就配置了config/index.js中的proxytable,所以在项目过程中每次使用axios.post(),只要传参数而不是写死网址，那么就一定会拼接为get方法，一直到后来没办法写死网址之时才意识到这个问题真的很严重。</p>
+<h2 id="滑动加载；"><a href="#滑动加载；" class="headerlink" title="滑动加载；"></a>滑动加载；</h2><p>错误表现：此时会在未滑动时执行一次loadmore。<br>可以在函数中加入一个判断，最初数据数组长度为0，此时不执行loadmore，只有在数据的数组长度不为0时才能执行loadmore。</p>
+<h2 id="header应该是固定在顶部的；"><a href="#header应该是固定在顶部的；" class="headerlink" title="header应该是固定在顶部的；"></a>header应该是固定在顶部的；</h2><p>未登录时首页header固定在顶部，登录账号以后，header位置就不固定了，向下滑动时header会向上隐藏。<br>把header和tab全部写为fixed，固定值。</p>
+<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h2 id="跳转到主题详情页时不能保存跳转之前的状态"><a href="#跳转到主题详情页时不能保存跳转之前的状态" class="headerlink" title="跳转到主题详情页时不能保存跳转之前的状态;"></a>跳转到主题详情页时不能保存跳转之前的状态;</h2><p>错误表现一：若首页向下滑动一部分再点击主题进入详情页，那么在详情页点击返回按钮之后会跳转到首页最上方。<br>错误表现尔：若先切换菜单至xx(“全部” 之外的5个之一)，然后选中一个主题进入详情页，那么在详情页点击返回按钮之后仍会跳转到首页（topics—全部）最上方。</p>
+<h2 id="提示用户登录时的自动跳转到登录页面；"><a href="#提示用户登录时的自动跳转到登录页面；" class="headerlink" title="提示用户登录时的自动跳转到登录页面；"></a>提示用户登录时的自动跳转到登录页面；</h2><p>未登录时msg,push显示有提示登录的按钮，点击之后应该自动跳转到 my页面登录.</p>
+<h2 id="滑动加载到数据库中没有数据后滑动就混乱了；"><a href="#滑动加载到数据库中没有数据后滑动就混乱了；" class="headerlink" title="滑动加载到数据库中没有数据后滑动就混乱了；"></a>滑动加载到数据库中没有数据后滑动就混乱了；</h2><p>想法是判断本次是否加载到数据，如果没有加载到数据的话就扔掉loadmore函数，可是要怎么删去这个函数呢，没想到方法。</p>
+<h2 id="单步调试；"><a href="#单步调试；" class="headerlink" title="单步调试；"></a>单步调试；</h2><p>selected的值对应着当前显示哪个界面，登录之后 -&gt; 点击收藏的话题（或者参与、最近的话题） -&gt; 然后点击左上角返回，此时应该返回到 “登录后的my页面”，但目前的情况是返回到首页。<br>这个问题需要单步调试看是过程中怎么改变了selected的值，目前单步调试仍然没有学会。</p>
+<h2 id="文件格式化；"><a href="#文件格式化；" class="headerlink" title="文件格式化；"></a>文件格式化；</h2><p>安装了Beautify、ESLint、vetur等几个插件后：option+shift+f格式化以后代码成一堆了，不是以前那种大括号包着层级分明的了。</p>
+<h2 id="控制台报错；"><a href="#控制台报错；" class="headerlink" title="控制台报错；"></a>控制台报错；</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TypeError: Cannot read property &apos;avatar_url&apos; of undefined</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">export default &#123;</div><div class="line">    state: &#123;</div><div class="line">        topics: &#123;</div><div class="line">            data: [],</div><div class="line">            topicsubject: &#123;</div><div class="line">                sub: &#123;</div><div class="line">                    author: &#123;</div><div class="line">                        avatar_url: &apos;&apos;,</div><div class="line">                        loginname: &apos;&apos;</div><div class="line">                    &#125;,</div><div class="line">                    author_id: &apos;&apos;,</div><div class="line">                    content: &apos;&apos;,</div><div class="line">                    create_at: &apos;&apos;,</div><div class="line">                    id: &apos;&apos;,</div><div class="line">                    last_reply_at: &apos;&apos;,</div><div class="line">                    replies: [],</div><div class="line">                    reply_count: 0,</div><div class="line">                    tab: &apos;&apos;,</div><div class="line">                    title: &apos;&apos;,</div><div class="line">                    top: false,</div><div class="line">                    visit_count: 0</div><div class="line">                &#125;,</div><div class="line">                isCollected: false</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        page: 0,</div><div class="line">        loading: false</div><div class="line">    &#125;,</div><div class="line">    mutations,</div><div class="line">    actions</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>vuex中定义了这个属性，组件中直接获取sub使用，src匹配为sub.authou.avatar_url,然后控制台报错。</p>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><p>经过本周的学习，发现了很多不足之处：</p>
+<ol>
+<li>应该多思考，出现问题就应该发散思维想想，有些问题可以有很多方法解决，哪怕是最笨的方法只要把问题解决了都可以，可以在以后的过程中摸索更好的解决办法；</li>
+<li>vuex各模块之间命名弄得比较乱；</li>
+<li>同样的页面只要用一个就行了，代码维护性要考虑到；</li>
+<li>缺少对vue插件的使用学习。</li>
+<li>代码不规范，以后学习三方库要多研究人家给的介绍和demo，养成好的代码习惯。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/周报/" rel="tag"># 周报</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/23/2017-12-23/" rel="next" title="2017-12-23">
+                <i class="fa fa-chevron-left"></i> 2017-12-23
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/05/2017年度总结/" rel="prev" title="2017年度总结">
+                2017年度总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本周做的事"><span class="nav-number">1.</span> <span class="nav-text">本周做的事</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决的问题"><span class="nav-number">2.</span> <span class="nav-text">解决的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；"><span class="nav-number">2.1.</span> <span class="nav-text">登录以后获取到已收藏的话题，把他们与未收藏的话题做区分；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布新主题时输入content内容时如何使用markdown语法；"><span class="nav-number">2.2.</span> <span class="nav-text">发布新主题时输入content内容时如何使用markdown语法；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#axios-post"><span class="nav-number">2.3.</span> <span class="nav-text">axios.post();</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滑动加载；"><span class="nav-number">2.4.</span> <span class="nav-text">滑动加载；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#header应该是固定在顶部的；"><span class="nav-number">2.5.</span> <span class="nav-text">header应该是固定在顶部的；</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#跳转到主题详情页时不能保存跳转之前的状态"><span class="nav-number">3.1.</span> <span class="nav-text">跳转到主题详情页时不能保存跳转之前的状态;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示用户登录时的自动跳转到登录页面；"><span class="nav-number">3.2.</span> <span class="nav-text">提示用户登录时的自动跳转到登录页面；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滑动加载到数据库中没有数据后滑动就混乱了；"><span class="nav-number">3.3.</span> <span class="nav-text">滑动加载到数据库中没有数据后滑动就混乱了；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单步调试；"><span class="nav-number">3.4.</span> <span class="nav-text">单步调试；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件格式化；"><span class="nav-number">3.5.</span> <span class="nav-text">文件格式化；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制台报错；"><span class="nav-number">3.6.</span> <span class="nav-text">控制台报错；</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收获"><span class="nav-number">4.</span> <span class="nav-text">收获</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/01/02/2018-01-02/';
+          this.page.identifier = '2018/01/02/2018-01-02/';
+          this.page.title = '2018-01-02';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="原生JavaScript知识弥补confirm确认框 confirm(str) str：消息对话框中要显示的文本，返回值为Boolean 返回值：点击确定返回true，点击取消返回false  prompt消息对话框 prompt(str1, str2) str1：要显示在消息对话框中的文本，不可修改 str2：文本框的内容，可以修改 返回值：点击确定-把文本框中的内容作为函数返回值，点击取消-返">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原生JavaScript知识弥补">
+<meta property="og:url" content="http://yoursite.com/2018/06/06/原生JavaScript知识弥补/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="原生JavaScript知识弥补confirm确认框 confirm(str) str：消息对话框中要显示的文本，返回值为Boolean 返回值：点击确定返回true，点击取消返回false  prompt消息对话框 prompt(str1, str2) str1：要显示在消息对话框中的文本，不可修改 str2：文本框的内容，可以修改 返回值：点击确定-把文本框中的内容作为函数返回值，点击取消-返">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.878Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="原生JavaScript知识弥补">
+<meta name="twitter:description" content="原生JavaScript知识弥补confirm确认框 confirm(str) str：消息对话框中要显示的文本，返回值为Boolean 返回值：点击确定返回true，点击取消返回false  prompt消息对话框 prompt(str1, str2) str1：要显示在消息对话框中的文本，不可修改 str2：文本框的内容，可以修改 返回值：点击确定-把文本框中的内容作为函数返回值，点击取消-返">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/06/原生JavaScript知识弥补/"/>
+
+
+
+
+
+  <title>原生JavaScript知识弥补 | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/原生JavaScript知识弥补/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">原生JavaScript知识弥补</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T20:45:39+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/06/原生JavaScript知识弥补/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/06/原生JavaScript知识弥补/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="原生JavaScript知识弥补"><a href="#原生JavaScript知识弥补" class="headerlink" title="原生JavaScript知识弥补"></a>原生JavaScript知识弥补</h1><h2 id="confirm确认框"><a href="#confirm确认框" class="headerlink" title="confirm确认框"></a>confirm确认框</h2><ul>
+<li>confirm(str)</li>
+<li>str：消息对话框中要显示的文本，返回值为Boolean</li>
+<li>返回值：点击确定返回true，点击取消返回false</li>
+</ul>
+<h2 id="prompt消息对话框"><a href="#prompt消息对话框" class="headerlink" title="prompt消息对话框"></a>prompt消息对话框</h2><ul>
+<li>prompt(str1, str2)</li>
+<li>str1：要显示在消息对话框中的文本，不可修改</li>
+<li>str2：文本框的内容，可以修改</li>
+<li>返回值：点击确定-把文本框中的内容作为函数返回值，点击取消-返回null</li>
+</ul>
+<a id="more"></a>
+<h2 id="打开新窗口"><a href="#打开新窗口" class="headerlink" title="打开新窗口"></a>打开新窗口</h2><ul>
+<li>window.open(‘URL’, ‘窗口名称’, ‘参数字符串’)</li>
+<li>窗口名称：_blank新窗口打开，_self当前窗口显示，_top</li>
+<li>参数字符串：设置窗口的参数，参数之间用逗号分隔</li>
+</ul>
+<h2 id="关闭窗口"><a href="#关闭窗口" class="headerlink" title="关闭窗口"></a>关闭窗口</h2><ul>
+<li>window.close() 关闭本窗口</li>
+<li>&lt;窗口对象&gt;.close() 关闭指定窗口</li>
+</ul>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><ul>
+<li>文档对象模型，DOM 将HTML文档呈现为带有元素、属性和文本的树结构（节点树）</li>
+</ul>
+<h2 id="通过id获取元素"><a href="#通过id获取元素" class="headerlink" title="通过id获取元素"></a>通过id获取元素</h2><ul>
+<li>通过ID找到标签然后操作</li>
+<li>document.getElementById(“id”)</li>
+</ul>
+<h2 id="innerHTML属性"><a href="#innerHTML属性" class="headerlink" title="innerHTML属性"></a>innerHTML属性</h2><ul>
+<li>用于获取或替换 HTML 元素的内容</li>
+<li>Object.innerHTML</li>
+<li>Object：获取的元素对象，如通过document.getElementById(“ID”)获取的元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;h2 id=&quot;con&quot;&gt;javascript&lt;/H2&gt;</div><div class="line">&lt;p&gt; JavaScript是一种基于对象、事件驱动的简单脚本语言，嵌入在HTML文档中，由浏览器负责解释和执行，在网页上产生动态的显示效果并实现与用户交互功能。&lt;/p&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">  var mychar=document.getElementById(&quot;con&quot;);</div><div class="line">  document.write(&quot;原标题:&quot;+mychar.innerHTML+&quot;&lt;br&gt;&quot;); //输出原h2标签内容</div><div class="line">  mychar.innerHTML=&quot;Hello world!&quot;</div><div class="line">  document.write(&quot;修改后的标题:&quot;+mychar.innerHTML); //输出修改后h2标签内容</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function getOption() &#123;</div><div class="line">  var ele = document.getElementById(&quot;ele&quot;);</div><div class="line">  let lists = [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;];</div><div class="line">  var frag = document.createDocumentFragment(); // 创建文档片段，为了避免多次操作DOM</div><div class="line">  for(let d of lists) &#123;</div><div class="line">    var opt = document.createElement(&quot;option&quot;);</div><div class="line">    opt.value = d;</div><div class="line">    opt.text = d;</div><div class="line">    frag.appendChild(opt);  // 将设置好的option插入文档片段</div><div class="line">  &#125;</div><div class="line">  ele.appendChild(frag);  // 循环结束后将文档片段插入指定Dom中</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">el.innerHTML;</div><div class="line">el.innerHTML = &apos;&lt;p&gt;新的html内容&lt;/p&gt;&apos;;</div></pre></td></tr></table></figure>
+<h3 id="options数组的属性"><a href="#options数组的属性" class="headerlink" title="options数组的属性"></a>options数组的属性</h3><ul>
+<li>selectedIndex：select选中项option的index</li>
+<li>length：长度属性</li>
+</ul>
+<h3 id="option的方法"><a href="#option的方法" class="headerlink" title="option的方法"></a>option的方法</h3><ul>
+<li>增加一个option：add(new(“文本”, “值”))</li>
+<li>删除一个option：remove(obj.selectedIndex)</li>
+<li>获取一个option：obj.options[obj.selectedIndex].text</li>
+<li>修改一个option：obj.options[obj.selectedIndex] = new Option(“新文本”, “值”)</li>
+<li>删除所有option：obj.options.length = 0</li>
+<li>获取一个option的值：obj.options[obj.selectedIndex].value</li>
+</ul>
+<h3 id="单个option的属性"><a href="#单个option的属性" class="headerlink" title="单个option的属性"></a>单个option的属性</h3><ul>
+<li>text：文本</li>
+<li>value：value属性值</li>
+<li>index：下标</li>
+<li>selected：是否被选中</li>
+<li>defaultSelected：默认是否被选中</li>
+</ul>
+<h2 id="改变HTML样式"><a href="#改变HTML样式" class="headerlink" title="改变HTML样式"></a>改变HTML样式</h2><ul>
+<li>Object.style.property=new style</li>
+<li>Object是获取的元素对象，如通过document.getElementById(“id”)获取的元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var mychar= document.getElementById(&quot;con&quot;);</div><div class="line">mychar.style.color=&quot;#4caf50&quot;;</div><div class="line">mychar.style.width=&quot;400px&quot;;</div></pre></td></tr></table></figure>
+<h2 id="显示和隐藏display属性"><a href="#显示和隐藏display属性" class="headerlink" title="显示和隐藏display属性"></a>显示和隐藏display属性</h2><ul>
+<li>Object.style.display = value // (“none” 或 “block”)</li>
+<li>Object是获取的元素对象，如通过document.getElementById(“id”)获取的元素</li>
+<li>value是none(隐藏)，block(显示为块级元素)</li>
+</ul>
+<h2 id="原生js方法"><a href="#原生js方法" class="headerlink" title="原生js方法"></a>原生js方法</h2><ul>
+<li>el.getAttribute(“class”) // 获取属性值</li>
+<li>el.setAttribute(“foo”, “node”) // 设置属性值</li>
+<li>el.removeAttribute(“foo”) // 删除属性</li>
+<li>document.documentElement.scrollHeight // Document高度</li>
+</ul>
+<h2 id="控制类名ClassName属性"><a href="#控制类名ClassName属性" class="headerlink" title="控制类名ClassName属性"></a>控制类名ClassName属性</h2><ul>
+<li>设置或返回元素的class属性</li>
+<li>object.className = classname // (“className”)</li>
+<li>可用来为网页内的某个元素指定一个css样式来更改该元素的外观</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.one&#123;</div><div class="line">  color: red</div><div class="line">&#125;</div><div class="line">p1.className=&quot;one&quot;;</div></pre></td></tr></table></figure>
+<h2 id="自增减运算符"><a href="#自增减运算符" class="headerlink" title="自增减运算符"></a>自增减运算符</h2><p>++a、a++、–a、a–<br>区别：前自增减（++a、–a）是先用后加，后自增减（a++、a–）是先加后用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var a=6;</div><div class="line">var i;</div><div class="line">* i=a++; // i=6</div><div class="line">* i=++a; // i=7</div><div class="line">* i=a--; // i=6</div><div class="line">* i=--a; // i=5</div></pre></td></tr></table></figure>
+<h2 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h2><ul>
+<li>算数运算符 &gt; 比较运算符 &gt; 逻辑运算符 &gt; “=”赋值运算符</li>
+<li>算术运算符：*、/ &gt; +、-</li>
+<li>改变优先级的方法：加括号</li>
+</ul>
+<h2 id="监听input输入事件"><a href="#监听input输入事件" class="headerlink" title="监听input输入事件"></a>监听input输入事件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">document.getElementById(&quot;myInput&quot;).oninput(function () &#123;checkInput();&#125;);</div><div class="line">function checkInput() &#123;</div><div class="line">  // to do something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(&quot;[name=&apos;myInput&apos;]&quot;).on(&quot;input&quot;, function () &#123;checkInput();&#125;);</div><div class="line">function checkInput() &#123;</div><div class="line">  // to do something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="javascript数据类型转换"><a href="#javascript数据类型转换" class="headerlink" title="javascript数据类型转换"></a>javascript数据类型转换</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var num = 123;</div><div class="line">// Number转为String</div><div class="line">num.toString();</div><div class="line">/*</div><div class="line">  123转为&apos;123&apos;、&apos;123&apos;转为&apos;123&apos;、true转为&apos;true&apos;、false转为&apos;false&apos;、undefined转为&apos;undefined&apos;、null转为&apos;null&apos;、对象（&#123;a:1&#125;）转为&apos;[object Object]&apos;、数组([2,3,1])转为&apos;2,3,1&apos;</div><div class="line">*/</div><div class="line">var str = &apos;23352&apos;;</div><div class="line">// String转为Number</div><div class="line">Number(str);</div><div class="line">/*</div><div class="line">  &apos;&apos;转为0、&apos;2324abc&apos;转为NaN、true转为1、false转为0、对象（&#123;a:1&#125;、[1,2,3]）转为NaN、单个数值的数组([2])转为2</div><div class="line">*/</div><div class="line">// 转为Boolean</div><div class="line">Boolean(null);</div><div class="line">/*</div><div class="line">undefined、null、-0、+0、NaN、&apos;&apos;转为false，其余全部转为true</div></pre></td></tr></table></figure>
+<h2 id="判断一个String中是否只存在数字和‘、’"><a href="#判断一个String中是否只存在数字和‘、’" class="headerlink" title="判断一个String中是否只存在数字和‘、’"></a>判断一个String中是否只存在数字和‘、’</h2><p>今天公司项目中有一个场景，定义一个class为js-addFaultInput的input，type是text，但是此处限制仅能输入单个number或者12、13形式的‘、’分隔的号码。</p>
+<p>我的实现方式是使用jquery:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var ele = $(&quot;.js-addFaultInput&quot;).val(); // 获取输入的值</div><div class="line">var list = ele.split(&quot;、&quot;);   // 分割为数组</div><div class="line">var pramList = [];  // ajax请求时参数数组，int类型的数据才可以，且因为是仓库编号所以不能为小数</div><div class="line">for(let i=0; i&lt;list.length; i++) &#123;</div><div class="line">  var check = $.isNumeric(list[j]);  // jquery判断指定参数是否能转换为数字值的API</div><div class="line">  if(check === true) &#123;</div><div class="line">    if(paramList.indexOf(Number(list[i])) === -1) &#123;</div><div class="line">      paramList.push(Number(list[i]));</div><div class="line">    &#125;</div><div class="line">    /* 此后发现12.3等浮点数也可使check=true</div><div class="line">    因此也能把Number(&apos;12.3&apos;)=12.3添加到参数数组中</div><div class="line">    这是一个bug，之后就查找学习到了js的parseInt方法，</div><div class="line">    此方法可用来转换为整数，默认10进制，因此把上面代码</div><div class="line">    中的Number换为parseInt就可以满足要求了。</div><div class="line">    */</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&quot;.sel&quot;).change(function() &#123;</div><div class="line">  // to do something</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>但是有时select中的option需要从后端获取数据，然后通过数据来动态生成option(用js代码生成DOM)，此时监听select还是用以上方法的话就不可以，我猜测可能是监听与DOM插入的顺序问题吧（不清楚具体原因，待深入学习），但是此时可以通过：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&quot;.sel&quot;).on(&apos;click&apos;, function() &#123;</div><div class="line">  // to do something</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="给定一个数组对象，查找对象中有给定的属性值的对象"><a href="#给定一个数组对象，查找对象中有给定的属性值的对象" class="headerlink" title="给定一个数组对象，查找对象中有给定的属性值的对象"></a>给定一个数组对象，查找对象中有给定的属性值的对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">var placeId = 3;</div><div class="line">var list = [&#123;</div><div class="line">  id: 123,</div><div class="line">  name: &apos;测试库&apos;</div><div class="line">&#125;, &#123;</div><div class="line">  id: 148,</div><div class="line">  name: &apos;公司仓库&apos;</div><div class="line">&#125;, &#123;</div><div class="line">  id: 123,</div><div class="line">  name: &apos;资方仓库&apos;</div><div class="line">&#125;];</div><div class="line">var idx = -1;</div><div class="line">for(let i=0; i&lt;list.length; i++) &#123;</div><div class="line">  if(list[i].id === placaId) &#123;</div><div class="line">    idx = i;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 使用for...of</div><div class="line">var idx = -1;</div><div class="line">for(let i of list) &#123;</div><div class="line">  if(i.id === placeId) &#123;</div><div class="line">    var self = i;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">idx = list.indexOf(self)</div><div class="line">console.log(idx);</div><div class="line"></div><div class="line">// 使用for...in</div><div class="line">for(let i in list) &#123;</div><div class="line">  if(list[i].id === placeId) &#123;</div><div class="line">    var idx = i;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 使用find+indexOf，问题是find的函数中如何传入变量placeId？</div><div class="line">var self = list.find(v =&gt; &#123;</div><div class="line">  return v.id === 123</div><div class="line">&#125;)</div><div class="line">idx = list.indexOf(self);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/26/多个ssh-key配置/" rel="next" title="多个ssh-key配置">
+                <i class="fa fa-chevron-left"></i> 多个ssh-key配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/29/8月总结/" rel="prev" title="8月总结[react为主]">
+                8月总结[react为主] <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原生JavaScript知识弥补"><span class="nav-number">1.</span> <span class="nav-text">原生JavaScript知识弥补</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#confirm确认框"><span class="nav-number">1.1.</span> <span class="nav-text">confirm确认框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prompt消息对话框"><span class="nav-number">1.2.</span> <span class="nav-text">prompt消息对话框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开新窗口"><span class="nav-number">1.3.</span> <span class="nav-text">打开新窗口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关闭窗口"><span class="nav-number">1.4.</span> <span class="nav-text">关闭窗口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM"><span class="nav-number">1.5.</span> <span class="nav-text">DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过id获取元素"><span class="nav-number">1.6.</span> <span class="nav-text">通过id获取元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#innerHTML属性"><span class="nav-number">1.7.</span> <span class="nav-text">innerHTML属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#options数组的属性"><span class="nav-number">1.7.1.</span> <span class="nav-text">options数组的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#option的方法"><span class="nav-number">1.7.2.</span> <span class="nav-text">option的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单个option的属性"><span class="nav-number">1.7.3.</span> <span class="nav-text">单个option的属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改变HTML样式"><span class="nav-number">1.8.</span> <span class="nav-text">改变HTML样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示和隐藏display属性"><span class="nav-number">1.9.</span> <span class="nav-text">显示和隐藏display属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原生js方法"><span class="nav-number">1.10.</span> <span class="nav-text">原生js方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制类名ClassName属性"><span class="nav-number">1.11.</span> <span class="nav-text">控制类名ClassName属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自增减运算符"><span class="nav-number">1.12.</span> <span class="nav-text">自增减运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符优先级"><span class="nav-number">1.13.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监听input输入事件"><span class="nav-number">1.14.</span> <span class="nav-text">监听input输入事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript数据类型转换"><span class="nav-number">1.15.</span> <span class="nav-text">javascript数据类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断一个String中是否只存在数字和‘、’"><span class="nav-number">1.16.</span> <span class="nav-text">判断一个String中是否只存在数字和‘、’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件监听"><span class="nav-number">1.17.</span> <span class="nav-text">事件监听</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给定一个数组对象，查找对象中有给定的属性值的对象"><span class="nav-number">1.18.</span> <span class="nav-text">给定一个数组对象，查找对象中有给定的属性值的对象</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/06/06/原生JavaScript知识弥补/';
+          this.page.identifier = '2018/06/06/原生JavaScript知识弥补/';
+          this.page.title = '原生JavaScript知识弥补';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

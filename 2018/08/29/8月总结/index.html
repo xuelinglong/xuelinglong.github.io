@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="月度总结," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="8月总结自4月份入职以后花费时间适应公司的工作一直忽视了写总结，从本月起要至少每月一篇总结，对近期工作、学习、生活有个回顾。 reactstate state可以理解为组件的局部状态。 render中可以使用this.state.xxx使用state中到值。 使用类构造函数constructor初始化状态this.state。 state的改变需要使用this.setState()。  12345">
+<meta name="keywords" content="月度总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8月总结[react为主]">
+<meta property="og:url" content="http://yoursite.com/2018/08/29/8月总结/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="8月总结自4月份入职以后花费时间适应公司的工作一直忽视了写总结，从本月起要至少每月一篇总结，对近期工作、学习、生活有个回顾。 reactstate state可以理解为组件的局部状态。 render中可以使用this.state.xxx使用state中到值。 使用类构造函数constructor初始化状态this.state。 state的改变需要使用this.setState()。  12345">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.867Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8月总结[react为主]">
+<meta name="twitter:description" content="8月总结自4月份入职以后花费时间适应公司的工作一直忽视了写总结，从本月起要至少每月一篇总结，对近期工作、学习、生活有个回顾。 reactstate state可以理解为组件的局部状态。 render中可以使用this.state.xxx使用state中到值。 使用类构造函数constructor初始化状态this.state。 state的改变需要使用this.setState()。  12345">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/29/8月总结/"/>
+
+
+
+
+
+  <title>8月总结[react为主] | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/8月总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">8月总结[react为主]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T20:45:39+08:00">
+                2018-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/29/8月总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/08/29/8月总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="8月总结"><a href="#8月总结" class="headerlink" title="8月总结"></a>8月总结</h1><p>自4月份入职以后花费时间适应公司的工作一直忽视了写总结，从本月起要至少每月一篇总结，对近期工作、学习、生活有个回顾。</p>
+<h2 id="react"><a href="#react" class="headerlink" title="react"></a>react</h2><h3 id="state"><a href="#state" class="headerlink" title="state"></a>state</h3><ul>
+<li>state可以理解为组件的局部状态。</li>
+<li>render中可以使用this.state.xxx使用state中到值。</li>
+<li>使用类构造函数constructor初始化状态this.state。</li>
+<li>state的改变需要使用this.setState()。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">export default class PublicTabbar extends Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">    this.state = &#123;</div><div class="line">      selected: &apos;topics&apos;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  changeSelected(val) &#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      selected: val</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="props"><a href="#props" class="headerlink" title="props"></a>props</h3><ul>
+<li>props可以理解为组件接收的参数，props可以用来显示在dom元素中。</li>
+<li>props一般情况下是父组件向子组件传递。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class App extends Component &#123;</div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;BrowserRouter&gt;</div><div class="line">      &lt;div className=&quot;App&quot;&gt;</div><div class="line">        // 父组件中传递props</div><div class="line">        &lt;PublicHeader name=&#123;this.state.title&#125;/&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;/BrowserRouter&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">export default class PublicHeader extends Component &#123;</div><div class="line">  render() &#123;</div><div class="line">    return(</div><div class="line">      // 子组件中通过this.props.name获取值</div><div class="line">      &lt;header className=&quot;PublicHeader&quot;&gt;&#123;this.props.name&#125;&lt;/header&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>props中传递事件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">  changeChild(data)&#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      selected: data</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;BrowserRouter&gt;</div><div class="line">      &lt;div className=&quot;App&quot;&gt;</div><div class="line">        // 父组件中获取子组件传递的callBack事件</div><div class="line">        &lt;PublicTabbar callBack=&#123;this.changeChild.bind(this)&#125; /&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;/BrowserRouter&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line"></div><div class="line">export default class PublicTabbar extends Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">    this.state = &#123;</div><div class="line">      selected: &apos;topics&apos;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  changeSelected(val) &#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      selected: val</div><div class="line">    &#125;,()=&gt;&#123;</div><div class="line">      // 子组件中向父组件传递props事件</div><div class="line">      this.props.callBack(this.state.selected)</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ul>
+<li>总的来说react的生命周期分为三个阶段：挂载、更新、卸载。</li>
+</ul>
+<p>挂载(Mounting)：从组件创建到插入真实的 DOM 中。<br>更新(Updating)：修改组件重新进行渲染。<br>卸载(Unmounting)：把组件从 DOM 中删除。</p>
+<h4 id="挂载阶段"><a href="#挂载阶段" class="headerlink" title="挂载阶段"></a>挂载阶段</h4><ul>
+<li>constructor()在组件创建阶段调用，且从父组件接收props：constructor(props)。</li>
+<li>componentWillMount() 在组件即将挂载时调用。</li>
+<li>render() 组件渲染至 DOM。</li>
+<li>componentDidMount() 在组件挂载完成时调用。</li>
+</ul>
+<h4 id="更新阶段"><a href="#更新阶段" class="headerlink" title="更新阶段"></a>更新阶段</h4><ul>
+<li>componentWillReceiveProps(nextPorps) 父组件更新时引起子组件的更新。<blockquote>
+<p>nextPorps 父组件更新后，传入的新props</p>
+</blockquote>
+</li>
+<li>shouldComponentUpdate(nextProps,nextState) 组件的 state 或者 props 发生更新时调用，判断是否更新组件：<blockquote>
+<p>nextProps 要更新的新props<br>nextState 要更新的新state<br>shouldComponentUpdate中必须定义返回值：return false，则中断更新过程,避免组件重新渲染；return true 则继续执行componentWillUpdate() 和 render()</p>
+</blockquote>
+</li>
+<li>componentWillUpdate(nextProps,nextState) 组件即将更新。</li>
+<li>render() 更新组件，重新渲染 DOM。</li>
+<li>componentDidUpdate(prevProps,PrevState) 组件完成更新。</li>
+</ul>
+<p>父组件更新引起子组件更新经历的生命周期：父组件componentDidMount -&gt; 子组件componentWillReceiveProps(nextPorps) -&gt; shouldComponentUpdate(nextProps,nextState) -&gt; componentWillUpdate(nextProps,nextState) -&gt; render() -&gt; componentDidUpdate(prevProps,PrevState)</p>
+<p>组件自身更新的生命周期：shouldComponentUpdate(nextProps,nextState) -&gt; componentWillUpdate(nextProps,nextState) -&gt; render() -&gt; componentDidUpdate(prevProps,PrevState)</p>
+<h4 id="卸载阶段"><a href="#卸载阶段" class="headerlink" title="卸载阶段"></a>卸载阶段</h4><ul>
+<li>compontentWillUnmount() 组件即将被卸载。</li>
+</ul>
+<h3 id="绑定点击事件"><a href="#绑定点击事件" class="headerlink" title="绑定点击事件"></a>绑定点击事件</h3><p>react通过在DOM元素上面使用onClick={funName}绑定事件。特殊的是funName()不会默认绑定this，但我们可以通过bind为方法绑定this和传入参数，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">export default class PublicMenu extends Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">    this.state = &#123;</div><div class="line">      selected: &quot;all&quot;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  changeSelected(val) &#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      selected: val</div><div class="line">    &#125;,()=&gt;&#123;</div><div class="line">      this.props.menuChange(this.state.selected)</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    return(</div><div class="line">      &lt;div onClick=&#123;this.changeSelected.bind(this, &quot;all&quot;)&#125;&gt;全部&lt;/div&gt;</div><div class="line">      &lt;div onClick=&#123;this.changeSelected.bind(this, &quot;good&quot;)&#125;&gt;精华&lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h3><p>react使用if或者条件运算符达到条件渲染。</p>
+<ul>
+<li>if</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  const isShow = false</div><div class="line">  let tabbar = null</div><div class="line">  if(isShow) &#123;</div><div class="line">    tabbar = &lt;PublicHeader name=&#123;this.state.title&#125;/&gt;</div><div class="line">  &#125; else &#123;</div><div class="line">    tabbar = console.log(111)</div><div class="line">  &#125;</div><div class="line">  return (</div><div class="line">    &lt;BrowserRouter&gt;</div><div class="line">    &lt;div className=&quot;App&quot;&gt;</div><div class="line">      &#123;tabbar&#125;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;/BrowserRouter&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>&amp;&amp;运算符</li>
+</ul>
+<p>原理： true &amp;&amp; expression返回expression，false &amp;&amp; expression返回false。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  const isShow = false</div><div class="line">  return (</div><div class="line">    &lt;BrowserRouter&gt;</div><div class="line">    &lt;div className=&quot;App&quot;&gt;</div><div class="line">      &#123;isShow &amp;&amp; &lt;PublicHeader name=&#123;this.state.title&#125;/&gt;&#125;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;/BrowserRouter&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>三目运算符</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  const isShow = false</div><div class="line">  return (</div><div class="line">    &lt;BrowserRouter&gt;</div><div class="line">    &lt;div className=&quot;App&quot;&gt;</div><div class="line">      &#123;isShow ? (&lt;PublicHeader name=&#123;this.state.title&#125;/&gt;) : (console.log(111))&#125;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;/BrowserRouter&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h3><ul>
+<li>使用map</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  const list = [1,2,3,4]</div><div class="line">  return (</div><div class="line">    &lt;BrowserRouter&gt;</div><div class="line">    &lt;div className=&quot;App&quot;&gt;</div><div class="line">      &#123;list.map((number,index) =&gt; &lt;span key=&#123;index&#125;&gt;&#123;number&#125;&lt;/span&gt;)&#125;</div><div class="line">      &lt;Main tab=&#123;this.state.tab&#125; /&gt;</div><div class="line">      &lt;PublicTabbar callBack=&#123;this.changeChild.bind(this)&#125; /&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;/BrowserRouter&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="状态提升"><a href="#状态提升" class="headerlink" title="状态提升"></a>状态提升</h3><p>有时一个状态需要在多个兄弟组件中使用，并且需要保持同步，这种情况下的解决方案：把数据源放在最近的公共父组件中，以props传递给子组件，就会保持同步。</p>
+<p>场景：</p>
+<ul>
+<li>子组件tabbar中有selected来控制选中的样式，点击不同的item切换selected；</li>
+<li>子组件header需要根据selected的值显示不同的title文字；</li>
+</ul>
+<p>错误示例：</p>
+<ul>
+<li>tabbar中定义组件内部状态selected，点击事件中传递props事件到app中，回调函数中改变app的局部状态selected，并把app中的局部状态selected通过props传递给header。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">// tabbar</div><div class="line">export default class PublicTabbar extends Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">    this.state = &#123;</div><div class="line">      selected: &apos;topics&apos;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  changeSelected(val) &#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      selected: val</div><div class="line">    &#125;,()=&gt;&#123;</div><div class="line">      this.props.callBack(this.state.selected)</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  render() &#123;</div><div class="line">    return(</div><div class="line">      &lt;footer className=&quot;PublicTabbar&quot;&gt;</div><div class="line">        &lt;NavLink className=&quot;TabbarItem&quot; to=&quot;/&quot;&gt;</div><div class="line">          &lt;div className=&#123;&quot;TabbarItem &quot; + (this.props.selected === &apos;topics&apos; ? &apos;selected&apos; : &apos;&apos;)&#125; onClick=&#123;this.changeSelected.bind(this, &apos;topics&apos;)&#125; &gt;主题&lt;/div&gt;</div><div class="line">        &lt;/NavLink&gt;</div><div class="line">        &lt;NavLink className=&quot;TabbarItem&quot; to=&quot;/message&quot;&gt;</div><div class="line">          &lt;div className=&#123;&quot;TabbarItem &quot; + (this.props.selected === &apos;message&apos; ? &apos;selected&apos; : &apos;&apos;)&#125; onClick=&#123;this.changeSelected.bind(this, &apos;message&apos;)&#125;&gt;消息&lt;/div&gt;</div><div class="line">        &lt;/NavLink&gt;</div><div class="line">      &lt;/footer&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">// app</div><div class="line">class App extends Component &#123;</div><div class="line">  constructor(props)&#123;</div><div class="line">    super(props);</div><div class="line">    this.state = &#123;</div><div class="line">      selected: &apos;topics&apos;,</div><div class="line">      title: &quot;首页&quot;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  changeChild(data)&#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      selected: data</div><div class="line">    &#125;, () =&gt; &#123;</div><div class="line">      if(this.state.selected === &apos;topics&apos;) &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">          title: &quot;首页&quot;</div><div class="line">        &#125;)</div><div class="line">      &#125; else if(this.state.selected === &apos;message&apos;) &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">          title: &quot;消息&quot;</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;BrowserRouter&gt;</div><div class="line">      &lt;div className=&quot;App&quot;&gt;</div><div class="line">        &lt;PublicHeader name=&#123;this.state.title&#125;/&gt;</div><div class="line">        &lt;PublicTabbar callBack=&#123;this.changeChild.bind(this)&#125; /&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;/BrowserRouter&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">// header</div><div class="line">export default class PublicHeader extends Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    return(</div><div class="line">      &lt;header className=&quot;PublicHeader&quot;&gt;&#123;this.props.name&#125;&lt;/header&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>正确示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">// app</div><div class="line">class App extends Component &#123;</div><div class="line">  constructor(props)&#123;</div><div class="line">    super(props);</div><div class="line">    this.state = &#123;</div><div class="line">      selected: &apos;topics&apos;,</div><div class="line">      title: &quot;首页&quot;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  changeChild(data)&#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      selected: data</div><div class="line">    &#125;, () =&gt; &#123;</div><div class="line">      if(this.state.selected === &apos;topics&apos;) &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">          title: &quot;首页&quot;</div><div class="line">        &#125;)</div><div class="line">      &#125; else if(this.state.selected === &apos;message&apos;) &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">          title: &quot;消息&quot;</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;BrowserRouter&gt;</div><div class="line">      &lt;div className=&quot;App&quot;&gt;</div><div class="line">        &lt;PublicHeader name=&#123;this.state.title&#125;/&gt;</div><div class="line">        &lt;PublicTabbar callBack=&#123;this.changeChild.bind(this)&#125; selected=&#123;this.state.selected&#125; /&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;/BrowserRouter&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">// tabbar</div><div class="line">export default class PublicTabbar extends Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">  &#125;</div><div class="line">  changeSelected(val) &#123;</div><div class="line">    this.props.callBack(val)</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    return(</div><div class="line">      &lt;footer className=&quot;PublicTabbar&quot;&gt;</div><div class="line">        &lt;NavLink className=&quot;TabbarItem&quot; to=&quot;/&quot;&gt;</div><div class="line">          &lt;div className=&#123;&quot;TabbarItem &quot; + (this.props.selected === &apos;topics&apos; ? &apos;selected&apos; : &apos;&apos;)&#125; onClick=&#123;this.changeSelected.bind(this, &apos;topics&apos;)&#125; &gt;主题&lt;/div&gt;</div><div class="line">        &lt;/NavLink&gt;</div><div class="line">        &lt;NavLink className=&quot;TabbarItem&quot; to=&quot;/message&quot;&gt;</div><div class="line">          &lt;div className=&#123;&quot;TabbarItem &quot; + (this.props.selected === &apos;message&apos; ? &apos;selected&apos; : &apos;&apos;)&#125; onClick=&#123;this.changeSelected.bind(this, &apos;message&apos;)&#125;&gt;消息&lt;/div&gt;</div><div class="line">        &lt;/NavLink&gt;</div><div class="line">      &lt;/footer&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">// header</div><div class="line">export default class PublicHeader extends Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    return(</div><div class="line">      &lt;header className=&quot;PublicHeader&quot;&gt;&#123;this.props.name&#125;&lt;/header&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="router"><a href="#router" class="headerlink" title="router"></a>router</h2><ul>
+<li>BrowserRouter - hostory路由：/calendar/today</li>
+<li>HashRouter - hash路由：#/calendar/today</li>
+<li>link - 可访问的路由链接：<code>&lt;Link to=&quot;/about&quot;&gt;About&lt;/Link&gt;</code></li>
+<li>NavLink - 一个特殊版本的Link，它会在与当前 URL 匹配时为其呈现元素添加样式属性：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;NavLink to=&quot;/faq&quot; activeClassName=&quot;selected&quot;&gt;FAQs&lt;/NavLink&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>Prompt - 位置跳转之前绑定事件：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;Prompt message=&#123;location =&gt; &#123;</div><div class="line">  const isApp = location.pathname.startsWith(&apos;/app&apos;);</div><div class="line">  return isApp ? `你确定要跳转到$&#123;location.pathname&#125;吗？` : true;</div><div class="line">&#125;&#125; /&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>Route - 定义路由对应关系：<code>&lt;Route exact path=&#39;/&#39; component={Home}/&gt;</code></li>
+<li>Router - 所有 Router 组件的通用低阶接口，全局应只有一个：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Router history=&#123;history&#125;&gt;&lt;App /&gt;&lt;/Router&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>Switch - 用于渲染与路径匹配的第一个子Route或Redirect：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;Switch&gt;</div><div class="line">  &lt;Route exact path=&quot;/&quot; component=&#123;Home&#125; /&gt;</div><div class="line">  &lt;Route path=&quot;/about&quot; component=&#123;About&#125; /&gt;</div><div class="line">  &lt;Route path=&quot;/:user&quot; component=&#123;User&#125; /&gt;</div><div class="line">  &lt;Route component=&#123;NoMatch&#125; /&gt;</div><div class="line">&lt;/Switch&gt;</div></pre></td></tr></table></figure>
+<h2 id="redux-目前学习进度不多"><a href="#redux-目前学习进度不多" class="headerlink" title="redux(目前学习进度不多)"></a>redux(目前学习进度不多)</h2><p>我的理解是redux是为了管理项目中的公共状态，并且定义了一系列改变公共状态的方法。</p>
+<p>发起action -&gt; reducer接收action与state,并返回新的state</p>
+<ul>
+<li>action：是一个JavaScript对象，用于描述变化。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; type: &apos;ADD_TODO&apos;, text: &apos;Go to swimming pool&apos; &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>reducer：接收action与state，并返回新的state，达到更改state的目的。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">const changeTitle = (state = &#123;&#125;, action)=&gt; &#123;</div><div class="line">  switch(action.type) &#123;</div><div class="line">    case type.CHANGE_TITLE:</div><div class="line">      // &#123;&#125;是保证不直接修改state,新建一个副本并把源对象复制到state中。</div><div class="line">      return Object.assign(&#123;&#125;, state, &#123;</div><div class="line">        title: action.title</div><div class="line">      &#125;)</div><div class="line">    // default的情况下返回旧的state</div><div class="line">    default:</div><div class="line">      return state;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="工作状态"><a href="#工作状态" class="headerlink" title="工作状态"></a>工作状态</h2><p>近期工作中主要开发的是jquery有关的项目，从进公司之后接到的主流项目基本都是jquery的，react的至今只能在别人的项目基础上进行小的需求更改之类的，Vue的可以编写新项目和项目中大的改动，随着公司规定之后新项目的启动只能使用react，我现在才真正意识到react的学习变得很迫切。</p>
+<p>近期分配好了KPI任务：Vue公共组件的封装，在进行KPI任务的过程中发现自己的Vue还有很多地方不清楚，所以也在边写边弥补。前两周开发任务不多，但个人效率太低，基本所有时间都花费在Vue组件之上了，但是目前仅仅封装了2个基础组件。</p>
+<p>今日总结发现自身问题在于效率太低，时间利用率太低，在公司闲暇时间不能尽可能多的学习或者进行个人任务，下班之后的学习时间又不能有意识的控制，9月要主动控制自己、改掉这些坏习惯。</p>
+<h2 id="生活状态"><a href="#生活状态" class="headerlink" title="生活状态"></a>生活状态</h2><p>近期生活中有点懒散，锻炼也不积极了，晚上回家之后玩的时间太久，只有kpi要过会汇报任务或者工作任务很重的时候才会在家里自主学习或者加班赶进度，其余时间没有利用起来。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/月度总结/" rel="tag"># 月度总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/06/原生JavaScript知识弥补/" rel="next" title="原生JavaScript知识弥补">
+                <i class="fa fa-chevron-left"></i> 原生JavaScript知识弥补
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/29/10月总结/" rel="prev" title="10月总结[redux为主]">
+                10月总结[redux为主] <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#8月总结"><span class="nav-number">1.</span> <span class="nav-text">8月总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#react"><span class="nav-number">1.1.</span> <span class="nav-text">react</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#state"><span class="nav-number">1.1.1.</span> <span class="nav-text">state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#props"><span class="nav-number">1.1.2.</span> <span class="nav-text">props</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">1.1.3.</span> <span class="nav-text">生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#挂载阶段"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">挂载阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新阶段"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">更新阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#卸载阶段"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">卸载阶段</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定点击事件"><span class="nav-number">1.1.4.</span> <span class="nav-text">绑定点击事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件渲染"><span class="nav-number">1.1.5.</span> <span class="nav-text">条件渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表渲染"><span class="nav-number">1.1.6.</span> <span class="nav-text">列表渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态提升"><span class="nav-number">1.1.7.</span> <span class="nav-text">状态提升</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router"><span class="nav-number">1.2.</span> <span class="nav-text">router</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redux-目前学习进度不多"><span class="nav-number">1.3.</span> <span class="nav-text">redux(目前学习进度不多)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作状态"><span class="nav-number">1.4.</span> <span class="nav-text">工作状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生活状态"><span class="nav-number">1.5.</span> <span class="nav-text">生活状态</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/08/29/8月总结/';
+          this.page.identifier = '2018/08/29/8月总结/';
+          this.page.title = '8月总结[react为主]';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

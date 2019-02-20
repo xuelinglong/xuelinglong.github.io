@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="项目总结," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="项目内容：vue中文网项目地址：github地址预览地址：demo 实现功能 滚动加载 下拉刷新 登录、登出 收藏、取消收藏 发布新topic 评论、评论点赞">
+<meta name="keywords" content="项目总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[vue中文网]项目总结">
+<meta property="og:url" content="http://yoursite.com/2018/01/23/vue中文网-项目总结/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="项目内容：vue中文网项目地址：github地址预览地址：demo 实现功能 滚动加载 下拉刷新 登录、登出 收藏、取消收藏 发布新topic 评论、评论点赞">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.877Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[vue中文网]项目总结">
+<meta name="twitter:description" content="项目内容：vue中文网项目地址：github地址预览地址：demo 实现功能 滚动加载 下拉刷新 登录、登出 收藏、取消收藏 发布新topic 评论、评论点赞">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/23/vue中文网-项目总结/"/>
+
+
+
+
+
+  <title>[vue中文网]项目总结 | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/23/vue中文网-项目总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[vue中文网]项目总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T13:45:44+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/23/vue中文网-项目总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/01/23/vue中文网-项目总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>项目内容：vue中文网<br><br>项目地址：<a href="https://github.com/xuelinglong/Chinese-community" target="_blank" rel="external">github地址</a><br><br>预览地址：<a href="https://xuelinglong.github.io/Chinese-community/#/" target="_blank" rel="external">demo</a></p>
+<h1 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h1><ul>
+<li>滚动加载</li>
+<li>下拉刷新</li>
+<li>登录、登出</li>
+<li>收藏、取消收藏</li>
+<li>发布新topic</li>
+<li>评论、评论点赞<a id="more"></a>
+</li>
+</ul>
+<h1 id="项目过程"><a href="#项目过程" class="headerlink" title="项目过程"></a>项目过程</h1><h2 id="主题页模块"><a href="#主题页模块" class="headerlink" title="主题页模块"></a>主题页模块</h2><p>包含一个菜单和一个content列表，contentlist里面每个元素都是同样的样式，因此写一个公共的list组件，以菜单选中的值作为区分，元素为card组件，以每个主题不同的id作为区分。</p>
+<h2 id="消息页模块"><a href="#消息页模块" class="headerlink" title="消息页模块"></a>消息页模块</h2><p>登录前显示提示登录，确定后跳转到登录页面登录，登录后显示已读与未读消息。</p>
+<h2 id="用户页模块"><a href="#用户页模块" class="headerlink" title="用户页模块"></a>用户页模块</h2><p>登录前显示登录页面，确定后跳转到登录页面登录，登录后显示用户信息，包含收藏、参与、最近的话题、并可跳转到usertopics。</p>
+<h2 id="详情页模块"><a href="#详情页模块" class="headerlink" title="详情页模块"></a>详情页模块</h2><p>显示某个主题的详细信息，以id为参数获取到数据，可从多处跳转到详情页，如：主题页的某个主题、usertopics列表中的主题、消息列表中的某个消息。未登录时点击收藏按钮提示用户自主登录，登录之后判断用户是否收藏，然后判断进行<em>收藏</em>或者<em>取消收藏</em>中的哪个操作。</p>
+<h2 id="发布模块"><a href="#发布模块" class="headerlink" title="发布模块"></a>发布模块</h2><p>登录前显示提示登录页面，确定后跳转到登录页面登录，登录后可以发布主题，选择类别，写上标题，书写正文，<em>标题长度大于10</em>且<em>正文不为空</em>，则可发布。</p>
+<h2 id="评论页模块"><a href="#评论页模块" class="headerlink" title="评论页模块"></a>评论页模块</h2><p>主体为评论列表，显示目前所有的评论信息，登录前点击上方评论框或者点赞按钮提示用户自主登录，登录之后才可进行<em>发表评论</em>和<em>为他人的评论点赞</em>功能。</p>
+<h2 id="usertopics模块"><a href="#usertopics模块" class="headerlink" title="usertopics模块"></a>usertopics模块</h2><p>主体为topics列表，以跳转时的title参数来区分，此区域的topics列表与首页（即主题页模块）的contentlist列表<em>样式不同</em>且没有带<em>下拉刷新</em>，其实也可以写的一样。</p>
+<h1 id="遇到的重难点"><a href="#遇到的重难点" class="headerlink" title="遇到的重难点"></a>遇到的重难点</h1><h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>出现 “axios.get传参数时拼接为post方法” 错误时耗费了很多时间找解决方案：<br>axios.post后面的URL写死，可以获取正确使用post方法，但是一旦URL中间需要参数自己匹配，那么就继续报错。</p>
+<p>在这个时候猛然想到我最初开始项目时配置了 config/index中的proxyTable，也就是解决跨域，这是因为再上一个项目的时候因为跨域问题所以配置了，本次项目开始时没有确认是否跨域就配置了，找了好久的bug就在这里。</p>
+<p><em>协议、端口、域名</em>只要有一个不同就确定了要跨域，若全部相同则不需要跨域。<br><br>以本次API为例：</p>
+<table>
+<thead>
+<tr>
+<th>describe</th>
+<th>url</th>
+<th>同源情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据网址</td>
+<td><code>https://www.vue-js.com/api/</code></td>
+<td>null</td>
+</tr>
+<tr>
+<td>baseURL</td>
+<td><code>https://www.vue-js.com/api/v1/</code></td>
+<td>null</td>
+</tr>
+<tr>
+<td>主题首页</td>
+<td><code>baseURL/topics</code></td>
+<td>同源</td>
+</tr>
+</tbody>
+</table>
+<p>以豆瓣API为例：</p>
+<table>
+<thead>
+<tr>
+<th>describe</th>
+<th>url</th>
+<th>同源情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据网址</td>
+<td><code>https://api.douban.com/api/v2/movie/in_theaters</code></td>
+<td>null</td>
+</tr>
+<tr>
+<td>正在热映</td>
+<td><code>localhost:8080/api/v2/movie/in_theaters</code></td>
+<td>域名不同</td>
+</tr>
+<tr>
+<td>配置api/后</td>
+<td><code>https://api.douban.com/api/v2/</code></td>
+<td>同源</td>
+</tr>
+</tbody>
+</table>
+<p>最初使用axios的时候要区分好本次项目是否跨域，只有确定跨域的话才能配置config/index中的proxyTable解决跨域<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">proxyTable: &#123;</div><div class="line">  &apos;/api&apos;: &#123;</div><div class="line">    target: &apos;http://xxxxx/xx&apos;,</div><div class="line">    changeOrigin: true,</div><div class="line">    pathRewrite: &#123;</div><div class="line">      &apos;^/api&apos;: &apos;&apos;,</div><div class="line">    &#125;,</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="自由组合的设计思想"><a href="#自由组合的设计思想" class="headerlink" title="自由组合的设计思想"></a>自由组合的设计思想</h2><p>每个组件是一个单独的模块，应该具有自己特定的功能，不管页面如何组合，所有的功能都应该可以正确使用。<br><br>项目中的例子：<br>list区域包含许多card，此区域应具有 <em>下拉刷新</em> 和 <em>滑动加载</em> ，这应该是list区域特有的功能，无论list区域放到哪个页面，都不应该影响这2个功能的使用，最初我把这两个功能写在了list的父容器上面，如果把list区域放在别的页面那么这两个功能就不能使用了，这是不合逻辑的，经过改正我对这个问题有了更深的理解。</p>
+<h2 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h2><table>
+<thead>
+<tr>
+<th>cycle</th>
+<th>describe</th>
+<th>生命周期钩子的使用方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeCreate</td>
+<td>组件实例刚刚被创建，属性都没有</td>
+<td>可以在这加个loading事件，在加载实例时触发</td>
+</tr>
+<tr>
+<td>created</td>
+<td>实例已经创建完成，属性已经绑定，但是DOM还没有生成</td>
+<td>初始化完成时的事件写在这里，如在这结束loading事件，异步请求也适宜在这里调用</td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td>模板编译之前</td>
+<td></td>
+</tr>
+<tr>
+<td>mounted</td>
+<td>模板编译完成，之前的 ready 变成了现在的 mounted</td>
+<td>挂载元素，获取到DOM节点</td>
+</tr>
+<tr>
+<td>beforeUpdate</td>
+<td>组件更新之前</td>
+<td>如果对数据统一处理，在这里写上相应函数</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>组件更新完毕</td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td>组件销毁之前</td>
+<td>可以做一个确认停止事件的确认框</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td>组件销毁后</td>
+</tr>
+</tbody>
+</table>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><h2 id="vuex管理状态应该分清楚modules，避免混乱"><a href="#vuex管理状态应该分清楚modules，避免混乱" class="headerlink" title="vuex管理状态应该分清楚modules，避免混乱"></a>vuex管理状态应该分清楚modules，避免混乱</h2><ul>
+<li>topics：包含获取不同tab、page、limit的数据</li>
+<li>messages：用户的已读、未读消息、标记全部已读功能</li>
+<li>info：包含详情页、评论页、收藏功能、点赞功能</li>
+<li>push：发布新主题功能</li>
+<li>login：登录、登录后获取用户数据</li>
+</ul>
+<h2 id="学会在GitHub上记录issue"><a href="#学会在GitHub上记录issue" class="headerlink" title="学会在GitHub上记录issue"></a>学会在GitHub上记录issue</h2><p>出现问题可是open一个issue，记录一下自己的思考过程和解决方案，拉取一个分支解决这个问题，确保无误后再合并到master上，这样的话就会对问题有一个清晰的把控，并且记忆深刻。</p>
+<h2 id="学会使用Eslint"><a href="#学会使用Eslint" class="headerlink" title="学会使用Eslint"></a>学会使用Eslint</h2><p>ESLint 可以帮助我们在编码的过程中发现问题，使用了Eslint的代码逻辑也比较清晰，有一个良好的代码风格还是很重要的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/项目总结/" rel="tag"># 项目总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/20/2018-01-20/" rel="next" title="2018-01-20">
+                <i class="fa fa-chevron-left"></i> 2018-01-20
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/06/CNode-项目总结/" rel="prev" title="[CNode]项目总结">
+                [CNode]项目总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实现功能"><span class="nav-number">1.</span> <span class="nav-text">实现功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目过程"><span class="nav-number">2.</span> <span class="nav-text">项目过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主题页模块"><span class="nav-number">2.1.</span> <span class="nav-text">主题页模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息页模块"><span class="nav-number">2.2.</span> <span class="nav-text">消息页模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户页模块"><span class="nav-number">2.3.</span> <span class="nav-text">用户页模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详情页模块"><span class="nav-number">2.4.</span> <span class="nav-text">详情页模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布模块"><span class="nav-number">2.5.</span> <span class="nav-text">发布模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评论页模块"><span class="nav-number">2.6.</span> <span class="nav-text">评论页模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usertopics模块"><span class="nav-number">2.7.</span> <span class="nav-text">usertopics模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到的重难点"><span class="nav-number">3.</span> <span class="nav-text">遇到的重难点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域"><span class="nav-number">3.1.</span> <span class="nav-text">跨域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自由组合的设计思想"><span class="nav-number">3.2.</span> <span class="nav-text">自由组合的设计思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的生命周期"><span class="nav-number">3.3.</span> <span class="nav-text">组件的生命周期</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收获"><span class="nav-number">4.</span> <span class="nav-text">收获</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vuex管理状态应该分清楚modules，避免混乱"><span class="nav-number">4.1.</span> <span class="nav-text">vuex管理状态应该分清楚modules，避免混乱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学会在GitHub上记录issue"><span class="nav-number">4.2.</span> <span class="nav-text">学会在GitHub上记录issue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学会使用Eslint"><span class="nav-number">4.3.</span> <span class="nav-text">学会使用Eslint</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/01/23/vue中文网-项目总结/';
+          this.page.identifier = '2018/01/23/vue中文网-项目总结/';
+          this.page.title = '[vue中文网]项目总结';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

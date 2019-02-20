@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一. 类的修饰修饰器（Decorator）是一个函数，用来修改类的行为。 示例：@testable         //@testable就是一个修饰器 class MyTestableClass {    //它修改了MyTestableClass类的行为   // ... } function testable(target) {           //target就是所要修饰的目标类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Decorator">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/Decorator/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="一. 类的修饰修饰器（Decorator）是一个函数，用来修改类的行为。 示例：@testable         //@testable就是一个修饰器 class MyTestableClass {    //它修改了MyTestableClass类的行为   // ... } function testable(target) {           //target就是所要修饰的目标类">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Decorator">
+<meta name="twitter:description" content="一. 类的修饰修饰器（Decorator）是一个函数，用来修改类的行为。 示例：@testable         //@testable就是一个修饰器 class MyTestableClass {    //它修改了MyTestableClass类的行为   // ... } function testable(target) {           //target就是所要修饰的目标类">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/27/Decorator/"/>
+
+
+
+
+
+  <title>Decorator | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/Decorator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Decorator</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T23:24:09+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/27/Decorator/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/27/Decorator/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一-类的修饰"><a href="#一-类的修饰" class="headerlink" title="一. 类的修饰"></a>一. 类的修饰</h1><p>修饰器（Decorator）是一个函数，用来修改类的行为。</p>
+<p>示例：<br><code>@testable         //@testable就是一个修饰器
+class MyTestableClass {    //它修改了MyTestableClass类的行为
+  // ...
+}
+function testable(target) {           //target就是所要修饰的目标类
+  target.isTestable = true;        //为它加上了静态属性isTestable
+}
+MyTestableClass.isTestable // true</code><br><a id="more"></a></p>
+<p>基本上，修饰器的行为就是下面这样。<br><code>@decorator
+class A {}
+// 等同于
+class A {}
+A = decorator(A) || A;</code><br>注意，修饰器对类的行为的改变，是代码编译时发生的，而不是在运行时。这意味着，修饰器能在编译阶段运行代码。也就是说，修饰器本质就是编译时执行的函数。</p>
+<p>修饰器函数的第一个参数，就是所要修饰的目标类。<br><code>function testable(target) {   // 函数的参数target就是会被修饰的类
+  // ...
+}</code></p>
+<p>如果觉得一个参数不够用，可以在修饰器外面再封装一层函数。<br><code>function testable(isTestable) {
+  return function(target) {
+    target.isTestable = isTestable;
+  }
+}
+@testable(true)
+class MyTestableClass {}
+MyTestableClass.isTestable // true
+@testable(false)
+class MyClass {}
+MyClass.isTestable // false</code><br>上面代码中，修饰器testable可以接受参数，这就等于可以修改修饰器的行为。</p>
+<p>可以通过目标类的prototype对象操作，为类添加一个实例属性：<br><code>function testable(target) {
+  target.prototype.isTestable = true;   
+   //为类添加了一个实例属性isTestable
+}
+@testable
+class MyTestableClass {}
+let obj = new MyTestableClass();
+obj.isTestable // true</code><br>修饰器函数testable是在目标类的prototype对象上添加属性，因此就可以在实例上调用。</p>
+<p><code>// mixins.js
+export function mixins(...list) {
+  return function (target) {
+    Object.assign(target.prototype, ...list)
+  }
+}
+// main.js
+import { mixins } from &#39;./mixins&#39;
+const Foo = {
+  foo() { console.log(&#39;foo&#39;) }
+};
+@mixins(Foo)
+class MyClass {}
+let obj = new MyClass();
+obj.foo() // &#39;foo&#39;</code><br>上面代码通过修饰器mixins，把Foo类的方法添加到了MyClass的实例上面。可以用Object.assign()模拟这个功能。<br><code>const Foo = {
+  foo() { console.log(&#39;foo&#39;) }
+};
+class MyClass {}
+Object.assign(MyClass.prototype, Foo);
+let obj = new MyClass();
+obj.foo() // &#39;foo&#39;</code></p>
+<h1 id="二-方法的修饰"><a href="#二-方法的修饰" class="headerlink" title="二. 方法的修饰"></a>二. 方法的修饰</h1><p>修饰器不仅可以修饰类，还可以修饰类的属性。<br><code>class Person {
+  @readonly   //修饰器readonly用来修饰“类”的name方法
+  name() { return</code>${this.first} ${this.last}<code>}
+}</code><br><code>function readonly(target, name, descriptor){       //修饰器函数
+  // descriptor对象原来的值如下
+  // {
+  //   value: specifiedFunction,
+  //   enumerable: false,
+  //   configurable: true,
+  //   writable: true
+  // };
+  descriptor.writable = false;
+  return descriptor;
+}
+readonly(Person.prototype, &#39;name&#39;, descriptor);
+// 类似于
+Object.defineProperty(Person.prototype, &#39;name&#39;, descriptor);</code><br>修饰器（readonly）会修改属性的描述对象（descriptor），然后被修改的描述对象再用来定义属性。</p>
+<p>修饰器函数一共可以接受三个参数：<br>      第一个参数是所要修饰的目标对象;<br>      第二个参数是所要修饰的属性名;<br>      第三个参数是该属性的描述对象。</p>
+<p>下面是另一个例子，修改属性描述对象的enumerable属性，使得该属性不可遍历。<br><code>class Person {
+  @nonenumerable
+  get kidCount() { return this.children.length; }
+}
+function nonenumerable(target, name, descriptor) {
+  descriptor.enumerable = false;
+  return descriptor;
+}</code></p>
+<p>下面的@log修饰器，可以起到输出日志的作用。<br><code>class Math {
+  @log
+  add(a, b) {
+    return a + b;
+  }
+}
+function log(target, name, descriptor) {
+  var oldValue = descriptor.value;
+  descriptor.value = function() {
+    console.log(</code>Calling “${name}” with<code>, arguments);
+    return oldValue.apply(null, arguments);
+  };
+  return descriptor;
+}
+const math = new Math();
+// passed parameters should get logged now
+math.add(2, 4);</code><br>@log修饰器的作用就是在执行原始的操作之前，执行一次console.log，从而达到输出日志的目的。</p>
+<p>修饰器有注释的作用。<br><code>@testable
+class Person {      //可以看出Person类是可测试的
+  @readonly         //可以看出name方法是只读的
+  @nonenumerable        //可以看出name方法是不可枚举的
+  name() { return</code>${this.first} ${this.last}<code>}
+}</code></p>
+<p>如果同一个方法有多个修饰器，会先从外到内进入，然后由内向外执行。<br><code>function dec(id){
+    console.log(&#39;evaluated&#39;, id);
+    return (target, property, descriptor) =&gt; console.log(&#39;executed&#39;, id);
+}
+class Example {
+    @dec(1)      //外层修饰器@dec(1)先进入
+    @dec(2)      //但是内层修饰器@dec(2)先执行。
+    method(){}
+}
+// evaluated 1
+// evaluated 2
+// executed 2
+// executed 1</code></p>
+<p>除了注释，修饰器还能用来类型检查。所以，对于类来说，这项功能相当有用。从长期来看，它将是JavaScript代码静态分析的重要工具。</p>
+<h1 id="三-为什么修饰器不能用于函数？"><a href="#三-为什么修饰器不能用于函数？" class="headerlink" title="三. 为什么修饰器不能用于函数？"></a>三. 为什么修饰器不能用于函数？</h1><p>修饰器只能用于类和类的方法，不能用于函数，因为存在函数提升。<br><code>var readOnly = require(&quot;some-decorator&quot;);
+@readOnly
+function foo() {
+}</code><br>上面代码也有问题，因为实际执行是下面这样。<br><code>var readOnly;
+@readOnly
+function foo() {
+} 
+readOnly = require(&quot;some-decorator&quot;);</code><br>总之，由于存在函数提升，使得修饰器不能用于函数。类是不会提升的，所以就没有这方面的问题。</p>
+<h1 id="四-core-decorators-js"><a href="#四-core-decorators-js" class="headerlink" title="四. core-decorators.js"></a>四. core-decorators.js</h1><p>core-decorators.js是一个第三方模块，提供了几个常见的修饰器，通过它可以更好地理解修饰器。<br>第一行： <code>import { 修饰器名 } from &#39;core-decorators&#39;;</code></p>
+<h3 id="1-autobind"><a href="#1-autobind" class="headerlink" title="1. @autobind"></a>1. @autobind</h3><p>autobind修饰器使得方法中的this对象，绑定原始对象。<br><code>import { autobind } from &#39;core-decorators&#39;;
+class Person {
+  @autobind
+  getPerson() {
+    return this;
+  }
+}
+let person = new Person();
+let getPerson = person.getPerson;
+getPerson() === person;
+// true</code></p>
+<h3 id="2-readonly"><a href="#2-readonly" class="headerlink" title="2. @readonly"></a>2. @readonly</h3><p>readonly修饰器使得属性或方法不可写。<br><code>import { readonly } from &#39;core-decorators&#39;;
+class Meal {
+  @readonly
+  entree = &#39;steak&#39;;
+}
+var dinner = new Meal();
+dinner.entree = &#39;salmon&#39;;
+// Cannot assign to read only property &#39;entree&#39; of [object Object]</code></p>
+<h3 id="3-override"><a href="#3-override" class="headerlink" title="3. @override"></a>3. @override</h3><p>override修饰器检查子类的方法，是否正确覆盖了父类的同名方法，如果不正确会报错。<br><code>import { override } from &#39;core-decorators&#39;;
+class Parent {
+  speak(first, second) {}
+}
+class Child extends Parent {
+  @override
+  speak() {}
+  // SyntaxError: Child#speak() does not properly override Parent#speak(first, second)
+}
+// or
+class Child extends Parent {
+  @override
+  speaks() {}
+  // SyntaxError: No descriptor matching Child#speaks() was found on the prototype chain.
+  //
+  //   Did you mean &quot;speak&quot;?
+}</code></p>
+<h3 id="4-deprecate-别名-deprecated"><a href="#4-deprecate-别名-deprecated" class="headerlink" title="4. @deprecate (别名@deprecated)"></a>4. @deprecate (别名@deprecated)</h3><p>deprecate或deprecated修饰器在控制台显示一条警告，表示该方法将废除。<br><code>import { deprecate } from &#39;core-decorators&#39;;
+class Person {
+  @deprecate
+  facepalm() {}
+  @deprecate(&#39;We stopped facepalming&#39;)
+  facepalmHard() {}
+  @deprecate(&#39;We stopped facepalming&#39;, { url: &#39;http://knowyourmeme.com/memes/facepalm&#39; })
+  facepalmHarder() {}
+}
+let person = new Person();
+person.facepalm();         //无参数
+// DEPRECATION Person#facepalm: This function will be removed in future versions.
+person.facepalmHard();     //有一个参数
+// DEPRECATION Person#facepalmHard: We stopped facepalming
+person.facepalmHarder();     //有两个参数
+// DEPRECATION Person#facepalmHarder: We stopped facepalming
+//
+//     See http://knowyourmeme.com/memes/facepalm for more details.
+//</code></p>
+<h3 id="5-suppressWarnings"><a href="#5-suppressWarnings" class="headerlink" title="5. @suppressWarnings"></a>5. @suppressWarnings</h3><p>suppressWarnings修饰器抑制decorated修饰器导致的console.warn()调用。但是，异步代码发出的调用除外。<br><code>import { suppressWarnings } from &#39;core-decorators&#39;;
+class Person {
+  @deprecated
+  facepalm() {}
+  @suppressWarnings
+  facepalmWithoutWarning() {
+    this.facepalm();
+  }
+}
+let person = new Person();
+person.facepalmWithoutWarning();
+// no warning is logged</code></p>
+<h1 id="五-用修饰器实现自动发布事件"><a href="#五-用修饰器实现自动发布事件" class="headerlink" title="五. 用修饰器实现自动发布事件"></a>五. 用修饰器实现自动发布事件</h1><p>我们可以使用修饰器，使得对象的方法被调用时，自动发出一个事件。<br><code>import postal from &quot;postal/lib/postal.lodash&quot;;
+export default function publish(topic, channel) {
+  return function(target, name, descriptor) {
+    const fn = descriptor.value;
+    descriptor.value = function() {
+      let value = fn.apply(this, arguments);
+      postal.channel(channel || target.channel || &quot;/&quot;).publish(topic, value);
+    };
+  };
+}</code><br>上面代码定义了一个名为publish的修饰器，它通过改写descriptor.value，使得原方法被调用时，会自动发出一个事件。它使用的事件“发布/订阅”库是Postal.js。<br>它的用法如下。<br><code>import publish from &quot;path/to/decorators/publish&quot;;
+class FooComponent {
+  @publish(&quot;foo.some.message&quot;, &quot;component&quot;)
+  someMethod() {
+    return {
+      my: &quot;data&quot;
+    };
+  }
+  @publish(&quot;foo.some.other&quot;)
+  anotherMethod() {
+    // ...
+  }
+}</code><br>以后，只要调用someMethod或者anotherMethod，就会自动发出一个事件。<br><code>let foo = new FooComponent();
+foo.someMethod() 
+// 在&quot;component&quot;频道发布&quot;foo.some.message&quot;事件，
+// (接上句)附带的数据是{ my: &quot;data&quot; }
+foo.anotherMethod()
+ // 在&quot;/&quot;频道发布&quot;foo.some.other&quot;事件，不附带数据</code></p>
+<h1 id="六-Mixin模式"><a href="#六-Mixin模式" class="headerlink" title="六. Mixin模式"></a>六. Mixin模式</h1><p>在修饰器的基础上，可以实现Mixin模式。所谓Mixin模式，就是对象继承的一种替代方案，中文译为“混入”（mix in），意为在一个对象之中混入另外一个对象的方法。</p>
+<p>这就是“混入”模式的一个简单实现：<br><code>const Foo = {   //对象Foo有一个foo方法
+  foo() { console.log(&#39;foo&#39;) }
+};
+class MyClass {}
+Object.assign(MyClass.prototype, Foo);        
+//通过Object.assign方法可以将foo方法“混入”MyClass类，
+//导致MyClass的实例obj对象都具有foo方法
+let obj = new MyClass();
+obj.foo() // &#39;foo&#39;</code></p>
+<p>下面，我们部署一个通用脚本mixins.js，将mixin写成一个修饰器。<br><code>export function mixins(...list) {
+  return function (target) {
+    Object.assign(target.prototype, ...list);
+  };
+}</code><br>然后，就可以使用上面这个修饰器，为类“混入”各种方法。<br><code>import { mixins } from &#39;./mixins&#39;;        //引入mixins.js脚本
+const Foo = {        
+  foo() { console.log(&#39;foo&#39;) }
+};
+@mixins(Foo)  
+class MyClass {}       //mixins修饰器会修改MyClass类的行为
+let obj = new MyClass();
+obj.foo() // &quot;foo&quot;</code><br>通过mixins这个修饰器，实现了在MyClass类上面“混入”Foo对象的foo方法。</p>
+<p>不过，上面的方法会改写MyClass类的prototype对象，如果不喜欢这一点，也可以通过类的继承实现mixin。<br><code>class MyClass extends MyBaseClass {
+  /* ... */
+}</code><br>上面代码中，MyClass继承了MyBaseClass。<br>如果我们想在MyClass里面“混入”一个foo方法：</p>
+<ol>
+<li>是在MyClass和MyBaseClass之间插入一个混入类；</li>
+<li>这个类要具有foo方法，并且继承了MyBaseClass的所有方法；</li>
+<li>然后MyClass再继承这个类。</li>
+</ol>
+<p>实现过程：<br><code>let MyMixin = (superclass) =&gt; class extends superclass {
+  foo() {
+    console.log(&#39;foo from MyMixin&#39;);
+  }
+};</code><br>上面代码中，MyMixin是一个混入类生成器，接受superclass作为参数，然后返回一个继承superclass的子类，该子类包含一个foo方法。</p>
+<p>接着目标类再去继承这个混入类，就达到了“混入”foo方法的目的。<br><code>class MyClass extends MyMixin(MyBaseClass) {
+  /* ... */
+}
+let c = new MyClass();
+c.foo(); // &quot;foo from MyMixin&quot;</code></p>
+<p>如果需要“混入”多个方法，就生成多个混入类。<br><code>class MyClass extends Mixin1(Mixin2(MyBaseClass)) {
+  /* ... */
+}</code><br>这种写法的好处：<br>        是可以调用super，因此可以避免在“混入”过程中覆盖父类的同名方法。</p>
+<p><code>let Mixin1 = (superclass) =&gt; class extends superclass {
+  foo() {
+    console.log(&#39;foo from Mixin1&#39;);
+    if (super.foo) super.foo();
+  }
+};
+let Mixin2 = (superclass) =&gt; class extends superclass {
+  foo() {
+    console.log(&#39;foo from Mixin2&#39;);
+    if (super.foo) super.foo();
+  }
+};
+class S {
+  foo() {
+    console.log(&#39;foo from S&#39;);
+  }
+}
+class C extends Mixin1(Mixin2(S)) {
+  foo() {
+    console.log(&#39;foo from C&#39;);
+    super.foo();
+  }
+}</code><br>上面代码中，每一次混入发生时，都调用了父类的super.foo方法，导致父类的同名方法没有被覆盖，行为被保留了下来。<br><code>new C().foo()
+// foo from C
+// foo from Mixin1
+// foo from Mixin2
+// foo from S</code></p>
+<h1 id="七-Trait"><a href="#七-Trait" class="headerlink" title="七. Trait"></a>七. Trait</h1><p>Trait也是一种修饰器，效果与Mixin类似，但是提供更多功能比如：</p>
+<ol>
+<li>防止同名方法的冲突；</li>
+<li>排除混入某些方法；<br>类名::excludes(‘方法名’) //在类上排除此方法</li>
+<li>为混入的方法起别名；<br>类名::alias({原方法名: ‘新方法名’})</li>
+<li>等等。</li>
+</ol>
+<p>下面采用traits-decorator这个第三方模块作为例子。这个模块提供的traits修饰器，不仅可以接受对象，还可以接受ES6类作为参数。<br><code>import { traits } from &#39;traits-decorator&#39;;
+class TFoo {
+  foo() { console.log(&#39;foo&#39;) }
+}
+const TBar = {
+  bar() { console.log(&#39;bar&#39;) }
+};
+@traits(TFoo, TBar)
+class MyClass { }
+let obj = new MyClass();
+obj.foo() // foo
+obj.bar() // bar</code><br>上面代码中，通过traits修饰器，在MyClass类上面“混入”了TFoo类的foo方法和TBar对象的bar方法。</p>
+<p>Trait不允许“混入”同名方法：<br><code>import { traits } from &#39;traits-decorator&#39;;
+class TFoo {
+  foo() { console.log(&#39;foo&#39;) }
+}
+const TBar = {
+  bar() { console.log(&#39;bar&#39;) },
+  foo() { console.log(&#39;foo&#39;) }
+};
+@traits(TFoo, TBar)
+class MyClass { }
+// 报错
+// throw new Error(&#39;Method named: &#39; + methodName + &#39; is defined twice.&#39;);
+//        ^
+// Error: Method named: foo is defined twice.</code><br>TFoo和TBar都有foo方法，结果traits修饰器报错。</p>
+<p>一种解决方法是排除TBar的foo方法：<br><code>@traits(TFoo, TBar::excludes(&#39;foo&#39;))
+class MyClass { }
+let obj = new MyClass();
+obj.foo() // foo
+obj.bar() // bar</code><br>使用绑定运算符（::）在TBar上排除foo方法，混入时就不会报错了。</p>
+<p>另一种方法是为TBar的foo方法起一个别名：<br><code>@traits(TFoo, TBar::alias({foo: &#39;aliasFoo&#39;}))
+class MyClass { }
+let obj = new MyClass();
+obj.foo() // foo
+obj.aliasFoo() // foo
+obj.bar() // bar</code><br>为TBar的foo方法起了别名aliasFoo，于是MyClass也可以混入TBar的foo方法了。</p>
+<p>alias和excludes方法，可以结合起来使用：<br>@traits(TExample::excludes(‘foo’,’bar’)::alias({baz:’exampleBaz’}))<br>class MyClass {}<br>排除了TExample的foo方法和bar方法，为baz方法起了别名exampleBaz。</p>
+<p>as方法则为上面的代码提供了另一种写法：<br>@traits(TExample::as({excludes:[‘foo’, ‘bar’], alias: {baz: ‘exampleBaz’}}))<br>class MyClass {}</p>
+<h1 id="八-Babel转码器的支持"><a href="#八-Babel转码器的支持" class="headerlink" title="八. Babel转码器的支持"></a>八. Babel转码器的支持</h1><p>目前，Babel转码器已经支持Decorator。<br>首先，安装babel-core和babel-plugin-transform-decorators。<br>由于后者包括在babel-preset-stage-0之中，所以改为安装babel-preset-stage-0亦可。<br><code>$ npm install babel-core babel-plugin-transform-decorators</code></p>
+<p>然后，设置配置文件.babelrc。<br><code>{ &quot;plugins&quot;: [&quot;transform-decorators&quot;]}</code><br>这时，Babel就可以对Decorator转码了。</p>
+<p>脚本中打开的命令如下。<br><code>babel.transform(&quot;code&quot;, {plugins: [&quot;transform-decorators&quot;]})</code></p>
+<p>Babel的官方网站提供一个在线转码器，只要勾选Experimental，就能支持Decorator的在线转码。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/27/Class/" rel="next" title="Class">
+                <i class="fa fa-chevron-left"></i> Class
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/27/Module的语法/" rel="prev" title="Module的语法">
+                Module的语法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-类的修饰"><span class="nav-number">1.</span> <span class="nav-text">一. 类的修饰</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-方法的修饰"><span class="nav-number">2.</span> <span class="nav-text">二. 方法的修饰</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-为什么修饰器不能用于函数？"><span class="nav-number">3.</span> <span class="nav-text">三. 为什么修饰器不能用于函数？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四-core-decorators-js"><span class="nav-number">4.</span> <span class="nav-text">四. core-decorators.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-autobind"><span class="nav-number">4.0.1.</span> <span class="nav-text">1. @autobind</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-readonly"><span class="nav-number">4.0.2.</span> <span class="nav-text">2. @readonly</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-override"><span class="nav-number">4.0.3.</span> <span class="nav-text">3. @override</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-deprecate-别名-deprecated"><span class="nav-number">4.0.4.</span> <span class="nav-text">4. @deprecate (别名@deprecated)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-suppressWarnings"><span class="nav-number">4.0.5.</span> <span class="nav-text">5. @suppressWarnings</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五-用修饰器实现自动发布事件"><span class="nav-number">5.</span> <span class="nav-text">五. 用修饰器实现自动发布事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六-Mixin模式"><span class="nav-number">6.</span> <span class="nav-text">六. Mixin模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七-Trait"><span class="nav-number">7.</span> <span class="nav-text">七. Trait</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八-Babel转码器的支持"><span class="nav-number">8.</span> <span class="nav-text">八. Babel转码器的支持</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/27/Decorator/';
+          this.page.identifier = '2017/05/27/Decorator/';
+          this.page.title = 'Decorator';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

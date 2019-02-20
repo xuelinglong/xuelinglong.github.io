@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Proxy一. 概述Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种“元编程”（meta programming），即对编程语言进行编程。 Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Proxy">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/Proxy/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="Proxy一. 概述Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种“元编程”（meta programming），即对编程语言进行编程。 Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.872Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Proxy">
+<meta name="twitter:description" content="Proxy一. 概述Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种“元编程”（meta programming），即对编程语言进行编程。 Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/27/Proxy/"/>
+
+
+
+
+
+  <title>Proxy | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/Proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Proxy</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T23:06:18+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/27/Proxy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/27/Proxy/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h1><h2 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a>一. 概述</h2><p>Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种“元编程”（meta programming），即对编程语言进行编程。</p>
+<p>Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。<br><a id="more"></a><br><code>var obj = new Proxy({}, {
+  get: function (target, key, receiver) {
+    console.log(</code>getting ${key}!<code>);
+    return Reflect.get(target, key, receiver);
+  },
+  set: function (target, key, value, receiver) {
+    console.log(</code>setting ${key}!<code>);
+    return Reflect.set(target, key, value, receiver);
+  }
+});                                                               
+obj.count = 1
+obj.count
+//setting count!                 
+//getting count!
+// 1</code><br>注解：目标对象为空对象（即对空对象架设了一层拦截），重定义了属性的读取（get）和设置（set）行为：<br><code>obj.count = 1           // 设置（set）行为
+//  setting count!
+obj.count             // 读写（get）行为
+//  getting count!
+//  1</code><br>Proxy 实际上重载（overload）了点运算符，即用自己的定义覆盖了语言的原始定义。</p>
+<p>ES6 原生提供 Proxy 构造函数，用来生成 Proxy 实例。<br>格式：<code>var proxy = new Proxy(target, handler);</code><br>Proxy 对象的所有用法，都是这种格式，不同的只是handler参数的写法。</p>
+<p>注解：<br>new Proxy()表示生成一个Proxy实例。<br>第一个参数：target参数表示所要拦截的目标对象（即如果没有Proxy的介入，操作原来要访问的就是这个对象），可以是任意类型的对象，比如数组，函数，甚至是另外一个代理对象。<br>第二个参数：handler参数是一个配置对象，用来定制拦截行为，对于每一个被代理的操作，需要提供一个对应的处理函数，该函数将拦截对应的操作。</p>
+<p><code>var proxy = new Proxy({}, {
+  get: function(target, property) {
+    return 35;
+  }
+});
+proxy.time // 35
+proxy.name // 35
+proxy.title // 35</code><br>配置对象有一个get方法，用来拦截对目标对象属性的访问请求。get方法的两个参数分别是目标对象和所要访问的属性。</p>
+<p>注意：要使得Proxy起作用，必须针对Proxy实例（上例是proxy对象）进行操作，而不是针对目标对象（上例是空对象）进行操作。如果handler没有设置任何拦截，那就等同于直接通向原对象。<br>将 Proxy 对象，设置到object.proxy属性，从而可以在object对象上调用：<br><code>var object = { proxy: new Proxy(target, handler) };</code></p>
+<p>Proxy 实例也可以作为其他对象的原型对象。<br><code>var proxy = new Proxy({}, {
+  get: function(target, property) {
+    return 35;
+  }
+});
+let obj = Object.create(proxy);
+obj.time // 35</code><br>proxy对象是obj对象的原型，obj对象本身并没有time属性，所以根据原型链，会在proxy对象上读取该属性，导致被拦截。</p>
+<p>同一个拦截器函数，可以设置拦截多个操作。<br>Proxy 支持的拦截操作：<br>对于可以设置、但没有设置拦截的操作，则直接落在目标对象上，按照原先的方式产生结果。</p>
+<ol>
+<li><p>get(target, propKey, receiver)<br>拦截对象属性的读取，比如proxy.foo和proxy[‘foo’]。<br>最后一个参数receiver是一个对象，可选，参见下面Reflect.get的部分。</p>
+</li>
+<li><p>set(target, propKey, value, receiver)<br>拦截对象属性的设置，比如proxy.foo = v或proxy[‘foo’] = v，返回一个布尔值。</p>
+</li>
+<li><p>has(target, propKey)<br>拦截propKey in proxy的操作，返回一个布尔值。</p>
+</li>
+<li><p>deleteProperty(target, propKey)<br>拦截delete proxy[propKey]的操作，返回一个布尔值。</p>
+</li>
+<li><p>ownKeys(target)<br>拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)，返回一个数组。该方法返回目标对象所有自身的属性的属性名，而Object.keys()的返回结果仅包括目标对象自身的可遍历属性。</p>
+</li>
+<li><p>getOwnPropertyDescriptor(target, propKey)<br>拦截Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象。</p>
+</li>
+<li><p>defineProperty(target, propKey, propDesc)<br>拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)，返回一个布尔值</p>
+</li>
+<li><p>preventExtensions(target)<br>拦截Object.preventExtensions(proxy)，返回一个布尔值。</p>
+</li>
+<li><p>getPrototypeOf(target)<br>拦截Object.getPrototypeOf(proxy)，返回一个对象。</p>
+</li>
+<li><p>isExtensible(target)<br>拦截Object.isExtensible(proxy)，返回一个布尔值。</p>
+</li>
+<li><p>setPrototypeOf(target, proto)<br>拦截Object.setPrototypeOf(proxy, proto)，返回一个布尔值。<br>如果目标对象是函数，那么还有两种额外操作可以拦截。</p>
+</li>
+<li><p>apply(target, object, args)<br>拦截 Proxy 实例作为函数调用的操作，比如proxy(…args)、proxy.call(object, …args)、proxy.apply(…)。</p>
+</li>
+<li><p>construct(target, args)<br>拦截 Proxy 实例作为构造函数调用的操作，比如new proxy(…args)。</p>
+</li>
+</ol>
+<h2 id="二-Proxy实例的方法"><a href="#二-Proxy实例的方法" class="headerlink" title="二. Proxy实例的方法"></a>二. Proxy实例的方法</h2><h3 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h3><p>用于拦截某个属性的读取操作，如果访问目标对象不存在的属性，会抛出一个错误。如果没有这个拦截函数，访问不存在的属性，只会返回undefined。</p>
+<p>get方法可以继承：<br><code>let proto = new Proxy({}, {
+  get(target, propertyKey, receiver) {
+    console.log(&#39;GET &#39;+propertyKey);
+    return target[propertyKey];
+  }
+}); 
+let obj = Object.create(proto);
+obj.xxx // &quot;GET xxx&quot;</code><br>拦截操作定义在Prototype对象上面，所以如果读取obj对象继承的属性时，拦截会生效。</p>
+<p>使用get拦截，可以实现数组读取负数的索引。<br>利用 Proxy，可以将读取属性的操作（get），转变为执行某个函数，从而实现属性的链式操作。<br>利用get拦截，实现一个生成各种DOM节点的通用函数dom。<br>如果一个属性不可配置（configurable）和不可写（writable），则该属性不能被代理，通过 Proxy 对象访问该属性会报错。</p>
+<h3 id="set"><a href="#set" class="headerlink" title="set()"></a>set()</h3><p>set方法用来拦截某个属性的赋值操作。<br>set方法可以当做数据验证的一种实现方法，还可以数据绑定，即每当对象发生变化时，会自动更新 DOM。</p>
+<p>有时，我们会在对象上面设置内部属性，属性名的第一个字符使用下划线开头，表示这些属性不应该被外部使用。结合get和set方法，就可以做到防止这些内部属性被外部读写。</p>
+<p>注意，如果目标对象自身的某个属性，不可写也不可配置，那么set不得改变这个属性的值，只能返回同样的值，否则报错。</p>
+<h3 id="apply"><a href="#apply" class="headerlink" title="apply()"></a>apply()</h3><p>apply方法拦截函数的调用、call和apply操作。<br>apply方法可以接受三个参数，分别是目标对象、目标对象的上下文对象（this）和目标对象的参数数组。<br><code>var handler = {
+  apply (target, ctx, args) {
+    return Reflect.apply(...arguments);
+  }
+};</code></p>
+<h3 id="has"><a href="#has" class="headerlink" title="has()"></a>has()</h3><p>has方法用来拦截HasProperty操作，即判断对象是否具有某个属性时，这个方法会生效。典型的操作就是in运算符。</p>
+<p>设置如果原对象的属性名的第一个字符是下划线，proxy.has就会返回false，从而隐藏某些属性不会被in运算符发现。<br><code>var handler = {
+  has (target, key) {
+    if (key[0] === &#39;_&#39;) {
+      return false;
+    }
+    return key in target;
+  }
+};
+var target = { _prop: &#39;foo&#39;, prop: &#39;foo&#39; };
+var proxy = new Proxy(target, handler);
+&#39;_prop&#39; in proxy // false</code></p>
+<p>如果原对象不可配置或者禁止扩展，这时has拦截会报错，即如果某个属性不可配置（或者目标对象不可扩展），则has方法就不得“隐藏”（即返回false）目标对象的该属性。</p>
+<p>has方法拦截的是HasProperty操作，而不是HasOwnProperty操作，即has方法不判断一个属性是对象自身的属性，还是继承的属性。</p>
+<p>has拦截只对in循环生效，对for…in循环不生效！</p>
+<h3 id="construct"><a href="#construct" class="headerlink" title="construct()"></a>construct()</h3><p>construct方法用于拦截new命令，下面是拦截对象的写法：<br><code>var handler = {
+  construct (target, args, newTarget) {
+    return new target(...args);
+  }
+};</code><br>construct方法可以接受两个参数：target（目标对象）  、args（构建函数的参数对象）<br>construct方法返回的必须是一个对象，否则会报错。</p>
+<h3 id="deleProperty"><a href="#deleProperty" class="headerlink" title="deleProperty()"></a>deleProperty()</h3><p>deleteProperty方法用于拦截delete操作，如果这个方法抛出错误或者返回false，当前属性就无法被delete命令删除。</p>
+<p>注意，目标对象自身的不可配置（configurable）的属性，不能被deleteProperty方法删除，否则报错。</p>
+<h3 id="defineProperty"><a href="#defineProperty" class="headerlink" title="defineProperty()"></a>defineProperty()</h3><p>defineProperty方法拦截了Object.defineProperty操作。<br>注意，如果目标对象不可扩展（extensible），则defineProperty不能增加目标对象上不存在的属性，否则会报错。另外，如果目标对象的某个属性不可写（writable）或不可配置（configurable），则defineProperty方法不得改变这两个设置。</p>
+<h3 id="getOwnPropertyDescriptor"><a href="#getOwnPropertyDescriptor" class="headerlink" title="getOwnPropertyDescriptor()"></a>getOwnPropertyDescriptor()</h3><p>getOwnPropertyDescriptor方法拦截Object.getOwnPropertyDescriptor()，返回一个属性描述对象或者undefined。<br><code>var handler = {
+  getOwnPropertyDescriptor (target, key) {
+    if (key[0] === &#39;_&#39;) {
+      return;          
+    }
+    return Object.getOwnPropertyDescriptor(target, key);   
+  }
+};
+var target = { _foo: &#39;bar&#39;, baz: &#39;tar&#39; };
+var proxy = new Proxy(target, handler);
+Object.getOwnPropertyDescriptor(proxy, &#39;wat&#39;)
+// undefined
+Object.getOwnPropertyDescriptor(proxy, &#39;_foo&#39;)
+// undefined
+Object.getOwnPropertyDescriptor(proxy, &#39;baz&#39;)   //返回一个属性描述对象
+// { value: &#39;tar&#39;, writable: true, enumerable: true, configurable: true }</code></p>
+<h3 id="getPrototypeOf"><a href="#getPrototypeOf" class="headerlink" title="getPrototypeOf()"></a>getPrototypeOf()</h3><p>getPrototypeOf方法主要用来拦截获取对象原型。具体来说，拦截下面这些操作：</p>
+<ol>
+<li>Object.prototype.<strong>proto</strong></li>
+<li>Object.prototype.isPrototypeOf()</li>
+<li>Object.getPrototypeOf()</li>
+<li>Reflect.getPrototypeOf()</li>
+<li>instanceof</li>
+</ol>
+<p>getPrototypeOf方法方法拦截Object.getPrototypeOf()，返回proto对象。<br><code>var proto = {};
+var p = new Proxy({}, {
+  getPrototypeOf(target) {
+    return proto;
+  }
+});
+Object.getPrototypeOf(p) === proto // true</code><br>getPrototypeOf方法的返回值必须是对象或者null，否则报错。另外，如果目标对象不可扩展（extensible）， getPrototypeOf方法必须返回目标对象的原型对象。</p>
+<h3 id="isExtensible"><a href="#isExtensible" class="headerlink" title="isExtensible()"></a>isExtensible()</h3><p>isExtensible方法拦截Object.isExtensible操作。<br>该方法只能返回布尔值，否则返回值会被自动转为布尔值。<br>这个方法有一个强限制，它的返回值必须与目标对象的isExtensible属性保持一致，否则就会抛出错误。<br><code>Object.isExtensible(proxy) === Object.isExtensible(target)</code></p>
+<h3 id="ownKeys（）"><a href="#ownKeys（）" class="headerlink" title="ownKeys（）"></a>ownKeys（）</h3><p>ownKeys方法用来拦截对象自身属性的读取操作。具体来说，拦截以下操作：<br>Object.getOwnPropertyNames()  //返回的数组成员，只能是字符串或 Symbol 值<br>Object.getOwnPropertySymbols()<br>Object.keys()<br>使用Object.keys方法时有三类属性会被ownKeys方法自动过滤不会返回：<br>目标对象上不存在的属性<br>属性名为 Symbol 值<br>不可遍历（enumerable）的属性</p>
+<p>如果目标对象自身包含不可配置的属性，则该属性必须被ownKeys方法返回，否则报错。<br>如果目标对象是不可扩展的（non-extensition），这时ownKeys方法返回的数组之中，必须包含原对象的所有属性，且不能包含多余的属性，否则报错。</p>
+<h3 id="preventExtensions"><a href="#preventExtensions" class="headerlink" title="preventExtensions()"></a>preventExtensions()</h3><p>preventExtensions方法拦截Object.preventExtensions()。该方法必须返回一个布尔值，否则会被自动转为布尔值。</p>
+<p>这个方法有一个限制，只有目标对象不可扩展时（即Object.isExtensible(proxy)为false），proxy.preventExtensions才能返回true，否则会报错。为了防止出现这个问题，通常要在proxy.preventExtensions方法里面，调用一次Object.preventExtensions：<br><code>var p = new Proxy({}, {
+  preventExtensions: function(target) {
+    console.log(&#39;called&#39;);
+    Object.preventExtensions(target);
+    return true;
+  }
+});
+Object.preventExtensions(p)
+// &quot;called&quot;
+// true</code></p>
+<h3 id="setPrototypeOf"><a href="#setPrototypeOf" class="headerlink" title="setPrototypeOf()"></a>setPrototypeOf()</h3><p>setPrototypeOf方法主要用来拦截Object.setPrototypeOf方法。</p>
+<p>该方法只能返回布尔值，否则会被自动转为布尔值。另外，如果目标对象不可扩展（extensible），setPrototypeOf方法不得改变目标对象的原型。</p>
+<h2 id="3-Proxy-revocable"><a href="#3-Proxy-revocable" class="headerlink" title="3. Proxy.revocable()"></a>3. Proxy.revocable()</h2><p>Proxy.revocable方法返回一个可取消的 Proxy 实例。该方法返回一个对象，该对象的proxy属性是Proxy实例，revoke属性是一个函数，可以取消Proxy实例。<br>Proxy.revocable的一个使用场景是，目标对象不允许直接访问，必须通过代理访问，一旦访问结束，就收回代理权，不允许再次访问。</p>
+<h2 id="4-This问题"><a href="#4-This问题" class="headerlink" title="4. This问题"></a>4. This问题</h2><p>虽然 Proxy 可以代理针对目标对象的访问，但它不是目标对象的透明代理，即不做任何拦截的情况下，也无法保证与目标对象的行为一致。主要原因就是在 Proxy 代理的情况下，目标对象内部的this关键字会指向 Proxy 代理。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/27/Set和Map数据结构/" rel="next" title="Set和Map数据结构">
+                <i class="fa fa-chevron-left"></i> Set和Map数据结构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/27/Reflect/" rel="prev" title="Reflect">
+                Reflect <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Proxy"><span class="nav-number">1.</span> <span class="nav-text">Proxy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-概述"><span class="nav-number">1.1.</span> <span class="nav-text">一. 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-Proxy实例的方法"><span class="nav-number">1.2.</span> <span class="nav-text">二. Proxy实例的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#get"><span class="nav-number">1.2.1.</span> <span class="nav-text">get()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set"><span class="nav-number">1.2.2.</span> <span class="nav-text">set()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apply"><span class="nav-number">1.2.3.</span> <span class="nav-text">apply()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#has"><span class="nav-number">1.2.4.</span> <span class="nav-text">has()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#construct"><span class="nav-number">1.2.5.</span> <span class="nav-text">construct()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deleProperty"><span class="nav-number">1.2.6.</span> <span class="nav-text">deleProperty()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defineProperty"><span class="nav-number">1.2.7.</span> <span class="nav-text">defineProperty()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getOwnPropertyDescriptor"><span class="nav-number">1.2.8.</span> <span class="nav-text">getOwnPropertyDescriptor()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getPrototypeOf"><span class="nav-number">1.2.9.</span> <span class="nav-text">getPrototypeOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isExtensible"><span class="nav-number">1.2.10.</span> <span class="nav-text">isExtensible()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ownKeys（）"><span class="nav-number">1.2.11.</span> <span class="nav-text">ownKeys（）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#preventExtensions"><span class="nav-number">1.2.12.</span> <span class="nav-text">preventExtensions()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setPrototypeOf"><span class="nav-number">1.2.13.</span> <span class="nav-text">setPrototypeOf()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Proxy-revocable"><span class="nav-number">1.3.</span> <span class="nav-text">3. Proxy.revocable()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-This问题"><span class="nav-number">1.4.</span> <span class="nav-text">4. This问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/27/Proxy/';
+          this.page.identifier = '2017/05/27/Proxy/';
+          this.page.title = 'Proxy';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

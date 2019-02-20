@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一. 含义async 函数就是 Generator 函数的语法糖。async函数就是将 Generator 函数的星号（*）替换成async，将yield替换成await，仅此而已。async函数对 Generator 函数的改进，体现在以下四点：  内置执行器。Generator 函数的执行必须靠执行器，所以才有了co模块，而async函数自带执行器。也就是说，async函数的执行，与普通函数一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="async函数">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/async函数/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="一. 含义async 函数就是 Generator 函数的语法糖。async函数就是将 Generator 函数的星号（*）替换成async，将yield替换成await，仅此而已。async函数对 Generator 函数的改进，体现在以下四点：  内置执行器。Generator 函数的执行必须靠执行器，所以才有了co模块，而async函数自带执行器。也就是说，async函数的执行，与普通函数一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.877Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="async函数">
+<meta name="twitter:description" content="一. 含义async 函数就是 Generator 函数的语法糖。async函数就是将 Generator 函数的星号（*）替换成async，将yield替换成await，仅此而已。async函数对 Generator 函数的改进，体现在以下四点：  内置执行器。Generator 函数的执行必须靠执行器，所以才有了co模块，而async函数自带执行器。也就是说，async函数的执行，与普通函数一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/27/async函数/"/>
+
+
+
+
+
+  <title>async函数 | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/async函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">async函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T23:19:28+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/27/async函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/27/async函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一-含义"><a href="#一-含义" class="headerlink" title="一. 含义"></a>一. 含义</h1><p>async 函数就是 Generator 函数的语法糖。<br>async函数就是将 Generator 函数的星号（*）替换成async，将yield替换成await，仅此而已。<br>async函数对 Generator 函数的改进，体现在以下四点：</p>
+<ol>
+<li>内置执行器。<br>Generator 函数的执行必须靠执行器，所以才有了co模块，而async函数自带执行器。也就是说，async函数的执行，与普通函数一模一样，只要一行。<br><code>var result = asyncReadFile();</code><br>只要调用了asyncReadFile函数，然后它就会自动执行，输出最后结果。<br>而 Generator 函数，需要调用next方法，或者用co模块，才能真正执行，得到最后结果。</li>
+<li>更好的语义。<br>async和await，比起星号和yield，语义更清楚了。async表示函数里有异步操作，await表示紧跟在后面的表达式需要等待结果。</li>
+<li>更广的适用性。<br>co模块约定，yield命令后面只能是 Thunk 函数或 Promise 对象，而async函数的await命令后面，可以是Promise 对象和原始类型的值（数值、字符串和布尔值，但这时等同于同步操作）。</li>
+<li>返回值是 Promise。<br>async函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了。你可以用then方法指定下一步的操作。</li>
+</ol>
+<p>进一步说，async函数完全可以看作多个异步操作，包装成的一个 Promise 对象，而await命令就是内部then命令的语法糖。<br><a id="more"></a></p>
+<h1 id="二-用法"><a href="#二-用法" class="headerlink" title="二. 用法"></a>二. 用法</h1><h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>async函数返回一个 Promise 对象，可以使用then方法添加回调函数。当函数执行的时候，一旦遇到await就会先返回，等到异步操作完成，再接着执行函数体内后面的语句。<br><code>async function 函数名（参数） {...}</code><br>函数前面的async关键字，表明该函数内部有异步操作。调用该函数时，会立即返回一个Promise对象。</p>
+<p>async函数返回的是 Promise 对象，可以作为await命令的参数。</p>
+<p>async 函数有多种使用形式。<br><code>// 函数声明
+async function foo() {}
+// 函数表达式
+const foo = async function () {};
+// 对象的方法
+let obj = { async foo() {} };
+obj.foo().then(...)
+// Class 的方法
+class Storage {
+  constructor() {
+    this.cachePromise = caches.open(&#39;avatars&#39;);
+  }
+async getAvatar(name) {
+    const cache = await this.cachePromise;
+    return cache.match(</code>/avatars/${name}.jpg<code>);
+  }
+}
+const storage = new Storage();
+storage.getAvatar(&#39;jake&#39;).then(…);
+// 箭头函数
+const foo = async () =&gt; {};</code></p>
+<h1 id="三-语法"><a href="#三-语法" class="headerlink" title="三. 语法"></a>三. 语法</h1><p>async函数的语法规则总体上比较简单，难点是错误处理机制。</p>
+<h3 id="返回-Promise-对象"><a href="#返回-Promise-对象" class="headerlink" title="返回 Promise 对象"></a>返回 Promise 对象</h3><p>async函数返回一个 Promise 对象。<br>async函数内部return语句返回的值，会成为then方法回调函数的参数。<br><code>async function f() {
+  return &#39;hello world&#39;;
+}
+f().then(v =&gt; console.log(v))
+// &quot;hello world&quot;</code><br>函数f内部return命令返回的值，会被then方法回调函数接收到。</p>
+<p>async函数内部抛出错误，会导致返回的 Promise 对象变为reject状态。抛出的错误对象会被catch方法回调函数接收到。<br><code>async function f() {
+  throw new Error(&#39;出错了&#39;);
+}
+f().then(
+  v =&gt; console.log(v),
+  e =&gt; console.log(e)
+)
+// Error: 出错了</code></p>
+<h3 id="Promise对象的状态变化"><a href="#Promise对象的状态变化" class="headerlink" title="Promise对象的状态变化"></a>Promise对象的状态变化</h3><p>async函数返回的 Promise 对象，必须等到内部所有await命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到return语句或者抛出错误。也就是说，只有async函数内部的异步操作执行完，才会执行then方法指定的回调函数。</p>
+<p><code>async function getTitle(url) {
+  let response = await fetch(url);
+  let html = await response.text();
+  return html.match(/&lt;title&gt;([\s\S]+)&lt;\/title&gt;/i)[1];
+}
+getTitle(&#39;https://tc39.github.io/ecma262/&#39;).then(console.log)
+// &quot;ECMAScript 2017 Language Specification&quot;</code><br>函数getTitle内部有三个操作：抓取网页、取出文本、匹配页面标题。只有这三个操作全部完成，才会执行then方法里面的console.log。</p>
+<h3 id="await命令"><a href="#await命令" class="headerlink" title="await命令"></a>await命令</h3><p>正常情况下，await命令后面是一个 Promise 对象。如果不是，会被转成一个 Promise 对象，并立即resolve。</p>
+<p>await命令后面的 Promise 对象如果变为reject状态，则reject的参数会被catch方法的回调函数接收到。<br><code>async function f() {
+  await Promise.reject(&#39;出错了&#39;);
+}
+f()
+.then(v =&gt; console.log(v))
+.catch(e =&gt; console.log(e))
+// 出错了</code><br>只要一个await语句后面的 Promise 变为reject，那么整个async函数都会中断执行。<br><code>async function f() {
+  await Promise.reject(&#39;出错了&#39;);
+  await Promise.resolve(&#39;hello world&#39;); // 不会执行
+}</code></p>
+<p>有时，我们希望即使前一个异步操作失败，也不要中断后面的异步操作。这时可以将第一个await放在try…catch结构里面，这样不管这个异步操作是否成功，第二个await都会执行。<br><code>async function f() {
+  try {
+    await Promise.reject(&#39;出错了&#39;);
+  } catch(e) {
+  }
+  return await Promise.resolve(&#39;hello world&#39;);
+}
+f()
+.then(v =&gt; console.log(v))
+// hello world</code></p>
+<p>另一种方法是await后面的 Promise 对象再跟一个catch方法，处理前面可能出现的错误。<br><code>async function f() {
+  await Promise.reject(&#39;出错了&#39;)
+    .catch(e =&gt; console.log(e));
+  return await Promise.resolve(&#39;hello world&#39;);
+}
+f()
+.then(v =&gt; console.log(v))
+// 出错了
+// hello world</code></p>
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p>如果await后面的异步操作出错，那么等同于async函数返回的 Promise 对象被reject。</p>
+<p>防止出错的方法，也是将其放在try…catch代码块之中。<br>如果有多个await命令，可以统一放在try…catch结构中。<br><code>async function main() {
+  try {
+    var val1 = await firstStep();
+    var val2 = await secondStep(val1);
+    var val3 = await thirdStep(val1, val2);
+    console.log(&#39;Final: &#39;, val3);
+  }
+  catch (err) {
+    console.error(err);
+  }
+}</code></p>
+<p>下面的例子使用try…catch结构，实现多次重复尝试。<br><code>const superagent = require(&#39;superagent&#39;);
+const NUM_RETRIES = 3;
+async function test() {
+  let i;
+  for (i = 0; i &lt; NUM_RETRIES; ++i) {
+    try {
+      await superagent.get(&#39;http://google.com/this-throws-an-error&#39;);
+      break;
+    } catch(err) {}
+  }
+  console.log(i); // 3
+}
+test();</code><br>如果await操作成功，就会使用break语句退出循环；如果失败，会被catch语句捕捉，然后进入下一轮循环。</p>
+<h3 id="使用注意点"><a href="#使用注意点" class="headerlink" title="使用注意点"></a>使用注意点</h3><ol>
+<li>await命令后面的Promise对象，运行结果可能是rejected，所以最好把await命令放在try…catch代码块中。</li>
+<li><p>第二点，多个await命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。<br><code>let foo = await getFoo();
+let bar = await getBar();</code><br>让getFoo和getBar同时触发，这样就会缩短程序的执行时间。<br><code>// 写法一
+let [foo, bar] = await Promise.all([getFoo(), getBar()]);
+// 写法二
+let fooPromise = getFoo();
+let barPromise = getBar();
+let foo = await fooPromise;
+let bar = await barPromise;</code></p>
+</li>
+<li><p>await命令只能用在async函数之中，如果用在普通函数，就会报错。<br>如果确实希望多个请求并发执行，可以使用Promise.all方法。<br><code>async function dbFuc(db) {
+let docs = [{}, {}, {}];
+let promises = docs.map((doc) =&gt; db.post(doc));
+let results = await Promise.all(promises);
+console.log(results);
+}</code></p>
+</li>
+</ol>
+<p><code>// 或者使用下面的写法
+async function dbFuc(db) {
+  let docs = [{}, {}, {}];
+  let promises = docs.map((doc) =&gt; db.post(doc));
+  let results = [];
+  for (let promise of promises) {
+    results.push(await promise);
+  }
+  console.log(results);
+}</code></p>
+<h1 id="四-async-函数的实现原理"><a href="#四-async-函数的实现原理" class="headerlink" title="四. async 函数的实现原理"></a>四. async 函数的实现原理</h1><p>async 函数的实现原理，就是将 Generator 函数和自动执行器，包装在一个函数里。<br><code>async function fn(args) {
+  // ...
+}</code><br>// 等同于<br><code>function fn(args) {
+  return spawn(function* () {
+    // ...
+  });
+}</code><br>所有的async函数都可以写成上面的第二种形式，其中的spawn函数就是自动执行器。</p>
+<h1 id="五-与其它异步处理方法的比较"><a href="#五-与其它异步处理方法的比较" class="headerlink" title="五. 与其它异步处理方法的比较"></a>五. 与其它异步处理方法的比较</h1><p>假定某个 DOM 元素上面，部署了一系列的动画，前一个动画结束，才能开始后一个。如果当中有一个动画出错，就不再往下执行，返回上一个成功执行的动画的返回值。<br><code>function chainAnimationsPromise(elem, animations) {
+  // 变量ret用来保存上一个动画的返回值
+  var ret = null;
+  // 新建一个空的Promise
+  var p = Promise.resolve();
+  // 使用then方法，添加所有动画
+  for(var anim of animations) {
+    p = p.then(function(val) {
+      ret = val;
+      return anim(elem);
+    });
+  }
+  // 返回一个部署了错误捕捉机制的Promise
+  return p.catch(function(e) {
+    /* 忽略错误，继续执行 */
+  }).then(function() {
+    return ret;
+  });
+}</code><br>虽然 Promise 的写法比回调函数的写法大大改进，但是一眼看上去，代码完全都是 Promise 的 API（then、catch等等），操作本身的语义反而不容易看出来。</p>
+<p><code>function chainAnimationsGenerator(elem, animations) {
+  return spawn(function*() {
+    var ret = null;
+    try {
+      for(var anim of animations) {
+        ret = yield anim(elem);
+      }
+    } catch(e) {
+      /* 忽略错误，继续执行 */
+    }
+    return ret;
+  });
+}</code><br>Generator 函数遍历了每个动画，语义比 Promise 写法更清晰，用户定义的操作全部都出现在spawn函数的内部。这个写法的问题在于，必须有一个任务运行器，自动执行 Generator 函数，上面代码的spawn函数就是自动执行器，它返回一个 Promise 对象，而且必须保证yield语句后面的表达式，必须返回一个 Promise。</p>
+<p><code>async function chainAnimationsAsync(elem, animations) {
+  var ret = null;
+  try {
+    for(var anim of animations) {
+      ret = await anim(elem);
+    }
+  } catch(e) {
+    /* 忽略错误，继续执行 */
+  }
+  return ret;
+}</code><br>Async函数的实现最简洁，最符合语义，几乎没有语义不相关的代码。它将Generator写法中的自动执行器，改在语言层面提供，不暴露给用户，因此代码量最少。如果使用Generator写法，自动执行器需要用户自己提供。</p>
+<h1 id="六-按照顺序完成异步操作"><a href="#六-按照顺序完成异步操作" class="headerlink" title="六. 按照顺序完成异步操作"></a>六. 按照顺序完成异步操作</h1><p>依次远程读取一组 URL，然后按照读取的顺序输出结果。<br><code>async function logInOrder(urls) {
+  // 并发读取远程URL
+  const textPromises = urls.map(async url =&gt; {
+    const response = await fetch(url);
+    return response.text();
+  });
+  // 按次序输出
+  for (const textPromise of textPromises) {
+    console.log(await textPromise);
+  }
+}</code><br>虽然map方法的参数是async函数，但它是并发执行的，因为只有async函数内部是继发执行，外部不受影响。后面的for..of循环内部使用了await，因此实现了按顺序输出。</p>
+<h1 id="七-异步遍历器"><a href="#七-异步遍历器" class="headerlink" title="七. 异步遍历器"></a>七. 异步遍历器</h1><p>Iterator 接口是一种数据遍历的协议，只要调用遍历器对象的next方法，就会得到一个对象，表示当前遍历指针所在的那个位置的信息。next方法返回的对象的结构是{value, done}，其中value表示当前的数据的值，done是一个布尔值，表示遍历是否结束。</p>
+<p>这里隐含着一个规定，next方法必须是同步的，只要调用就必须立刻返回值。也就是说，一旦执行next方法，就必须同步地得到value和done这两个属性。如果遍历指针正好指向同步操作，当然没有问题，但对于异步操作，就不太合适了。目前的解决方法是，Generator 函数里面的异步操作，返回一个 Thunk 函数或者 Promise 对象，即value属性是一个 Thunk 函数或者 Promise 对象，等待以后返回真正的值，而done属性则还是同步产生的。<br>目前，有一个提案，为异步操作提供原生的遍历器接口，即value<br>和done<br>这两个属性都是异步产生，这称为”异步遍历器“（Async Iterator）。</p>
+<h3 id="异步遍历器的接口"><a href="#异步遍历器的接口" class="headerlink" title="异步遍历器的接口"></a>异步遍历器的接口</h3><p>异步遍历器的最大的语法特点，就是调用遍历器的next方法，返回的是一个 Promise 对象。<br><code>asyncIterator       //asyncIterator是一个异步遍历器
+  .next()    //调用next方法以后，返回一个 Promise 对象。
+  .then(     
+    ({ value, done }) =&gt; /* ... */
+  );</code><br>asyncIterator是一个异步遍历器，调用next方法以后，返回一个 Promise 对象。因此，可以使用then方法指定，这个 Promise 对象的状态变为resolve以后的回调函数。回调函数的参数，则是一个具有value和done两个属性的对象，这个跟同步遍历器是一样的。</p>
+<p>一个对象的同步遍历器的接口，部署在Symbol.iterator属性上面。同样地，对象的异步遍历器接口，部署在Symbol.asyncIterator属性上面。不管是什么样的对象，只要它的Symbol.asyncIterator属性有值，就表示应该对它进行异步遍历。</p>
+<p>异步遍历器与同步遍历器最终行为是一致的，只是会先返回 Promise 对象，作为中介。</p>
+<p>由于异步遍历器的next方法，返回的是一个 Promise 对象。因此，可以把它放在await命令后面。next方法用await处理以后，就不必使用then方法了。整个流程已经很接近同步处理了。</p>
+<p>注意，异步遍历器的next方法是可以连续调用的，不必等到上一步产生的Promise对象resolve以后再调用。这种情况下，next方法会累积起来，自动按照每一步的顺序运行下去。下面是一个例子，把所有的next方法放在Promise.all方法里面。<br><code>const asyncGenObj = createAsyncIterable([&#39;a&#39;, &#39;b&#39;]);
+const [{value: v1}, {value: v2}] = await Promise.all([
+  asyncGenObj.next(), asyncGenObj.next()
+]); 
+console.log(v1, v2); // a b</code><br>另一种用法是一次性调用所有的next方法，然后await最后一步操作。<br><code>const writer = openFile(&#39;someFile.txt&#39;);
+ writer.next(&#39;hello&#39;);
+ writer.next(&#39;world&#39;);
+ await writer.return();</code></p>
+<h3 id="for-await…of"><a href="#for-await…of" class="headerlink" title="for await…of"></a>for await…of</h3><p>for…of循环用于遍历同步的 Iterator 接口。新引入的for await…of循环，则是用于遍历异步的 Iterator 接口。<br><code>async function f() {
+  for await (const x of createAsyncIterable([&#39;a&#39;, &#39;b&#39;])) {
+    console.log(x);
+  }
+}
+// a
+// b</code><br>createAsyncIterable()返回一个异步遍历器，for…of循环自动调用这个遍历器的next方法，会得到一个Promise对象。await用来处理这个Promise对象，一旦resolve，就把得到的值（x）传入for…of的循环体。</p>
+<p>for await…of循环的一个用途，是部署了 asyncIterable 操作的异步接口，可以直接放入这个循环。<br><code>let body = &#39;&#39;;
+for await(const data of req) body += data;
+const parsed = JSON.parse(body);
+console.log(&#39;got&#39;, parsed);</code></p>
+<p>如果next方法返回的Promise对象被reject，那么就要用try…catch捕捉。<br><code>async function () {
+  try {
+    for await (const x of createRejectingIterable()) {
+      console.log(x);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}</code></p>
+<p>注意，for await…of循环也可以用于同步遍历器。<br><code>(async function () {
+   for await (const x of [&#39;a&#39;, &#39;b&#39;]) {
+    console.log(x);
+  }
+})();
+// a
+// b</code></p>
+<h3 id="异步-Generator-函数"><a href="#异步-Generator-函数" class="headerlink" title="异步 Generator 函数"></a>异步 Generator 函数</h3><p>就像 Generator 函数返回一个同步遍历器对象一样，异步 Generator 函数的作用，是返回一个异步遍历器对象。</p>
+<p>在语法上，异步 Generator 函数就是async函数与 Generator 函数的结合。<br><code>async function* readLines(path) {
+  let file = await fileOpen(path);
+  try {
+    while (!file.EOF) {
+      yield await file.readLine();
+    }
+  } finally {
+    await file.close();
+  }
+}</code><br>异步操作前面使用await关键字标明，即await后面的操作，应该返回Promise对象。凡是使用yield关键字的地方，就是next方法的停下来的地方，它后面的表达式的值（即await file.readLine()的值），会作为next()返回对象的value属性，这一点是于同步Generator函数一致的。</p>
+<p>可以像下面这样，使用上面代码定义的异步Generator函数。<br><code>for await (const line of readLines(filePath)) {
+  console.log(line);
+}</code></p>
+<p>异步 Generator 函数可以与for await…of循环结合起来使用。<br><code>async function* prefixLines(asyncIterable) {
+  for await (const line of asyncIterable) {
+    yield &#39;&gt; &#39; + line;
+  }
+}</code><br>yield命令依然是立刻返回的，但是返回的是一个Promise对象。<br><code>async function* asyncGenerator() {
+  console.log(&#39;Start&#39;);
+  const result = await doSomethingAsync(); // (A)
+  yield &#39;Result: &#39;+ result; // (B)
+  console.log(&#39;Done&#39;);
+}</code><br>调用next方法以后，会在B处暂停执行，yield命令立刻返回一个Promise对象。这个Promise对象不同于A处await命令后面的那个 Promise 对象。主要有三点不同，一是A处的Promise对象resolve以后产生的值，会放入result变量；二是B处的Promise对象resolve以后产生的值，是表达式’Result： ‘ + result的值；三是A处的 Promise 对象一定先于B处的 Promise 对象resolve。</p>
+<p>如果异步 Generator 函数抛出错误，会被 Promise 对象reject，然后抛出的错误被catch方法捕获。<br><code>async function* asyncGenerator() {
+  throw new Error(&#39;Problem!&#39;);
+}
+asyncGenerator()
+.next()
+.catch(err =&gt; console.log(err)); // Error: Problem!</code><br>注意，普通的 async 函数返回的是一个 Promise 对象，而异步 Generator 函数返回的是一个异步Iterator对象。基本上，可以这样理解，async函数和异步 Generator 函数，是封装异步操作的两种方法，都用来达到同一种目的。区别在于，前者自带执行器，后者通过for await…of执行，或者自己编写执行器。</p>
+<p>下面就是一个异步 Generator 函数的执行器。<br><code>async function takeAsync(asyncIterable, count=Infinity) {
+  const result = [];
+  const iterator = asyncIterable[Symbol.asyncIterator]();
+  while (result.length &lt; count) {
+    const {value,done} = await iterator.next();
+    if (done) break;
+    result.push(value);
+  }
+  return result;
+}</code><br>上面代码中，异步Generator函数产生的异步遍历器，会通过while循环自动执行，每当await iterator.next()完成，就会进入下一轮循环。</p>
+<p>下面是这个自动执行器的一个使用实例。<br><code>async function f() {
+  async function* gen() {
+    yield &#39;a&#39;;
+    yield &#39;b&#39;;
+    yield &#39;c&#39;;
+  }
+  return await takeAsync(gen());
+}
+f().then(function (result) {
+  console.log(result); // [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+})</code><br>异步 Generator 函数出现以后，JavaScript就有了四种函数形式：普通函数、async 函数、Generator 函数和异步 Generator 函数。请注意区分每种函数的不同之处。</p>
+<p>最后，同步的数据结构，也可以使用异步 Generator 函数。<br><code>async function* createAsyncIterable(syncIterable) {
+  for (const elem of syncIterable) {
+    yield elem;
+  }
+}</code><br>上面代码中，由于没有异步操作，所以也就没有使用await关键字。</p>
+<h3 id="yield-语句"><a href="#yield-语句" class="headerlink" title="yield* 语句"></a>yield* 语句</h3><p>yield<em>语句也可以跟一个异步遍历器。<br>` async function</em> gen1() {<br>  yield ‘a’;<br>  yield ‘b’;<br>  return 2;<br>}<br>async function<em> gen2() {<br>  const result = yield</em> gen1();<br>} `<br>上面代码中，gen2函数里面的result变量，最后的值是2。</p>
+<p>与同步Generator函数一样，for await…of循环会展开yield*。<br><code>(async function () {
+  for await (const x of gen2()) {
+    console.log(x);
+  }
+})();
+// a
+// b</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/27/Generator函数的异步应用/" rel="next" title="Generator函数的异步应用">
+                <i class="fa fa-chevron-left"></i> Generator函数的异步应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/27/Class/" rel="prev" title="Class">
+                Class <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-含义"><span class="nav-number">1.</span> <span class="nav-text">一. 含义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-用法"><span class="nav-number">2.</span> <span class="nav-text">二. 用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本用法"><span class="nav-number">2.1.</span> <span class="nav-text">基本用法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-语法"><span class="nav-number">3.</span> <span class="nav-text">三. 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#返回-Promise-对象"><span class="nav-number">3.0.1.</span> <span class="nav-text">返回 Promise 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise对象的状态变化"><span class="nav-number">3.0.2.</span> <span class="nav-text">Promise对象的状态变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#await命令"><span class="nav-number">3.0.3.</span> <span class="nav-text">await命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误处理"><span class="nav-number">3.0.4.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用注意点"><span class="nav-number">3.0.5.</span> <span class="nav-text">使用注意点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四-async-函数的实现原理"><span class="nav-number">4.</span> <span class="nav-text">四. async 函数的实现原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五-与其它异步处理方法的比较"><span class="nav-number">5.</span> <span class="nav-text">五. 与其它异步处理方法的比较</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六-按照顺序完成异步操作"><span class="nav-number">6.</span> <span class="nav-text">六. 按照顺序完成异步操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七-异步遍历器"><span class="nav-number">7.</span> <span class="nav-text">七. 异步遍历器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步遍历器的接口"><span class="nav-number">7.0.1.</span> <span class="nav-text">异步遍历器的接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-await…of"><span class="nav-number">7.0.2.</span> <span class="nav-text">for await…of</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步-Generator-函数"><span class="nav-number">7.0.3.</span> <span class="nav-text">异步 Generator 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yield-语句"><span class="nav-number">7.0.4.</span> <span class="nav-text">yield* 语句</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/27/async函数/';
+          this.page.identifier = '2017/05/27/async函数/';
+          this.page.title = 'async函数';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

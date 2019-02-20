@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习总结," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="知识总结vue react区别与联系两者都是javascript UI框架，并且都是只有框架的骨架，路由、状态管理等功能都是框架分离的组件，也都使用了虚拟DOM（它的诞生是为了解决改变真实的DOM状态比改变一个JavaScript对象的花销要大的多），都支持组件化应用。 虚拟DOM：是DOM树的虚拟表现，是一个映射真实DOM的JavaScript对象，要改变元素状态，先在虚拟DOM上面更改，创建一">
+<meta name="keywords" content="学习总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-04-02">
+<meta property="og:url" content="http://yoursite.com/2018/04/02/2018-04-02/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="知识总结vue react区别与联系两者都是javascript UI框架，并且都是只有框架的骨架，路由、状态管理等功能都是框架分离的组件，也都使用了虚拟DOM（它的诞生是为了解决改变真实的DOM状态比改变一个JavaScript对象的花销要大的多），都支持组件化应用。 虚拟DOM：是DOM树的虚拟表现，是一个映射真实DOM的JavaScript对象，要改变元素状态，先在虚拟DOM上面更改，创建一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.866Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-04-02">
+<meta name="twitter:description" content="知识总结vue react区别与联系两者都是javascript UI框架，并且都是只有框架的骨架，路由、状态管理等功能都是框架分离的组件，也都使用了虚拟DOM（它的诞生是为了解决改变真实的DOM状态比改变一个JavaScript对象的花销要大的多），都支持组件化应用。 虚拟DOM：是DOM树的虚拟表现，是一个映射真实DOM的JavaScript对象，要改变元素状态，先在虚拟DOM上面更改，创建一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/02/2018-04-02/"/>
+
+
+
+
+
+  <title>2018-04-02 | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/02/2018-04-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2018-04-02</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-02T14:15:04+08:00">
+                2018-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/02/2018-04-02/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/02/2018-04-02/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="知识总结"><a href="#知识总结" class="headerlink" title="知识总结"></a>知识总结</h1><h2 id="vue-react区别与联系"><a href="#vue-react区别与联系" class="headerlink" title="vue react区别与联系"></a>vue react区别与联系</h2><p>两者都是javascript UI框架，并且都是只有框架的骨架，路由、状态管理等功能都是框架分离的组件，也都使用了虚拟DOM（它的诞生是为了解决改变真实的DOM状态比改变一个JavaScript对象的花销要大的多），都支持组件化应用。</p>
+<p>虚拟DOM：是DOM树的虚拟表现，是一个映射真实DOM的JavaScript对象，要改变元素状态，先在虚拟DOM上面更改，创建一个新的虚拟DOM并且计算出新旧虚拟DOM的差别，之后再把这些差别应用在真实DOM上面。</p>
+<p>区别：react使用JSX（允许开发者在JavaScript里面写HTML代码），Vue使用模版系统（Vue的模版基于纯HTML，就是组件中的template）；<br><a id="more"></a></p>
+<h2 id="路由钩子"><a href="#路由钩子" class="headerlink" title="路由钩子"></a>路由钩子</h2><p>路由钩子是用来在路由跳转前、跳转后、进入/离开某个路由前后监听路由的变化以做操作的。<br>全局的路由钩子有两个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">router.beforeEach((to, from, next) =&gt; &#123;</div><div class="line">  // 会在任意路由跳转前执行，next一定要执行，否则路由不能跳转</div><div class="line">  console.log(&apos;beforeEach&apos;)</div><div class="line">  console.log(to, from)</div><div class="line">  next()</div><div class="line">&#125;)</div><div class="line"></div><div class="line">router.afterEach((to, from) =&gt; &#123;</div><div class="line">  console.log(&apos;afterEach&apos;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>单个路由钩子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">routes: [</div><div class="line">    &#123;</div><div class="line">      path: &apos;/foo&apos;,</div><div class="line">      component: Foo,</div><div class="line">      beforeEnter: (to, from, next) =&gt; &#123;</div><div class="line">        // 在进入前执行，to参数就是当前路由</div><div class="line">        // ...</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  ]</div></pre></td></tr></table></figure>
+<p>路由组件钩子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">beforeRouteEnter (to, from, next) &#123;</div><div class="line">  // 在渲染该组件的对应路由被 confirm 前调用</div><div class="line">  // 不！能！获取组件实例 `this`</div><div class="line">  // 因为当守卫执行前，组件实例还没被创建</div><div class="line">&#125;,</div><div class="line">beforeRouteUpdate (to, from, next) &#123;</div><div class="line">  // 在当前路由改变，但是该组件被复用时调用</div><div class="line">  // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，</div><div class="line">  // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。</div><div class="line">  // 可以访问组件实例 `this`</div><div class="line">&#125;,</div><div class="line">beforeRouteLeave (to, from, next) &#123;</div><div class="line">  // 导航离开该组件的对应路由时调用</div><div class="line">  // 可以访问组件实例 `this`</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h2><p>app.vue里面的router-view是最顶层的出口(渲染最高级路由匹配到的组件)，一个被渲染组件中可以包含自己的嵌套router-view，则需要配合着在routes里面使用children配置，示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">// user里面嵌套</div><div class="line">&lt;template&gt;</div><div class="line">  &lt;div class=&quot;user&quot;&gt;</div><div class="line">    &lt;h1&gt;&#123;&#123; user.params.id &#125;&#125;&lt;/h1&gt;</div><div class="line">    &lt;router-view&gt;&lt;/router-view&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">// routes里面配置children</div><div class="line">routes: [</div><div class="line">  &#123;</div><div class="line">    path: &apos;/user/:id&apos;,</div><div class="line">    name: &apos;user&apos;,</div><div class="line">    component: User,</div><div class="line">    children: [</div><div class="line">      &#123;</div><div class="line">        path: &apos;profile&apos;,</div><div class="line">        name: &apos;userProfile&apos;,</div><div class="line">        component: UserProfile</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        path: &apos;posts&apos;,</div><div class="line">        name: &apos;userPosts&apos;,</div><div class="line">        component: UserPosts</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+<h2 id="动态路由匹配"><a href="#动态路由匹配" class="headerlink" title="动态路由匹配"></a>动态路由匹配</h2><p>动态路由匹配就是把某种模式匹配到的所有路由映射到同一个组件，可以通过在路由路径中使用<font color="#B22222">动态路径参数</font>来实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div class=&quot;topicItem&quot;&gt;</div><div class="line">    &lt;router-link :to=&quot;&#123;name: &apos;details&apos;, params: &#123;id: topic.id&#125;&quot;&gt;</div><div class="line">      &lt;div class=&quot;topicItem-style&quot;&gt;&#123;&#123; topic.title &#125;&#125;&lt;/div&gt;</div><div class="line">    &lt;/router-link&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line"></div><div class="line">routes: [</div><div class="line">  &#123;</div><div class="line">    path: &apos;details/:id&apos;,</div><div class="line">    name: &apos;details&apos;,</div><div class="line">    component: Details</div><div class="line">  &#125;</div><div class="line">]</div><div class="line"></div><div class="line">&lt;template&gt;</div><div class="line">  &lt;div class=&quot;details&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; $route.params.id &#125;&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div></pre></td></tr></table></figure>
+<h2 id="v-show和v-if"><a href="#v-show和v-if" class="headerlink" title="v-show和v-if"></a>v-show和v-if</h2><p>v-show：元素一直存在，通过切换元素的CSS属性display来显示或者隐藏。<br>v-if：为false时DOM树上无此元素，通过操作DOM来删除/添加页面的DOM元素。可以和v-else-if、v-else配合使用，且能添加在template元素上面，渲染结果将不包含template元素。</p>
+<h2 id="vue-loader"><a href="#vue-loader" class="headerlink" title="vue-loader"></a>vue-loader</h2><p>vue-loader是一个webpack的loader，可以将template+script+style类型的Vue组件转换为javaScript模块。<br>它支持ES6，允许style使用Sass、template使用Jade等，即允许vue组件的组成部分使用其他的webpack的loader；对每个组件模拟出CSS作用域。</p>
+<h2 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h2><p>父传子：父组件v-bind:data=”data”传递值，子组件props获取值，获取到的值可以像data中定义的数据那样使用。<br>子传父：子组件$emit触发自定义事件，父组件v-on监听子组件触发的事件。<br>非父子：定义一个空的Vue实例eventBus，第一个组件中通过eventBus.$emit传递，第二个组件创建组件的钩子中通过eventBus.$on监听。</p>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>八大生命周期：</p>
+<p>beforeCreate：可添加loading事件<br>created：此时data已经初始化了，可结束loading事件，调用异步请求<br>beforeMount<br>mounted：挂载元素，获取到DOM节点<br>beforeUpdate<br>updated<br>beforeDestroy：可写一个确认停止时间的确认框<br>destroyed</p>
+<h2 id="双向绑定：订阅者模式"><a href="#双向绑定：订阅者模式" class="headerlink" title="双向绑定：订阅者模式"></a>双向绑定：订阅者模式</h2><p>observer（监听）：对vue示例的data对象中的所有属性重写getter/setter，使用Object.defineproperty。<br>Dep（订阅器）：getter中可触发addsub动作向Dep中添加订阅者，setter可触发notify通知Watcher。<br>Watcher（观察者）：view视图与Model层连接的通道，视图变化时通知data改变，data变化时通知Directive更新。<br>Directive：使用不同的方法更改不同指令的更新。</p>
+<h2 id="图片懒加载预加载概念、使用场景…"><a href="#图片懒加载预加载概念、使用场景…" class="headerlink" title="图片懒加载预加载概念、使用场景…"></a>图片懒加载预加载概念、使用场景…</h2><p>懒加载：即为延迟加载，在符合条件时才加载。此种方式会减轻服务器前端压力。<br>预加载：即为提前加载，当用户需要查看时可直接从本地缓存中渲染。此种方式会加大服务器前端压力。</p>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>同源需满足：域名相同 + 协议相同 + 端口相同。只要有一个不同浏览器就会阻止跨域操作。</p>
+<ul>
+<li>单项跨域：新建img、script、iframe、link元素，通过src,href属性设置目标url实现跨域请求。</li>
+<li>内部服务器代理请求url，vue是配置proxyTable</li>
+<li>JSONP：网页中添加一个<code>&lt;script&gt;</code>元素，向服务器请求JSON数据，服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。</li>
+</ul>
+<h2 id="map-filter-reduce"><a href="#map-filter-reduce" class="headerlink" title="map filter reduce"></a>map filter reduce</h2><p>三个函数的参数都是一个回调函数，并且都会对数组中的每一个元素执行回调函数，map和filter返回一个新的数组，但是map返回的数组包含所有元素执行回调函数之后的结果即使存在undefined，filter返回的数组包含执行回调函数测试之后成功的元素，reduce返回的是函数累计处理的结果（callback的第一个参数是累加器，第二个参数是当前正在处理的元素）。</p>
+<h2 id="函数作用域和块级作用域"><a href="#函数作用域和块级作用域" class="headerlink" title="函数作用域和块级作用域"></a>函数作用域和块级作用域</h2><p>{}就是一个语句块。</p>
+<p>ES5和ES6中的函数作用域的概念是一样的：创建函数后在花括号中声明的变量只能在当前函数中起作用，不论变量是通过var、let、const哪个声明的都不能在函数外访问。</p>
+<p>块级作用域是ES6提出来的：在语句块中声明的变量只在当前语句块起作用，一般指if(…){…};while{…}…这些语句形成的语句块，且变量只能通过let、const声明（否则就不是块级作用域了），保证了外部不能访问语句块中的变量。</p>
+<h2 id="var、let、const"><a href="#var、let、const" class="headerlink" title="var、let、const"></a>var、let、const</h2><p>var：存在变量提升，变量声明提升到顶部，顶部到变量声明语句结束前访问变量得到undefined。<br>let：也存在变量提升，变量声明提升到顶部，但是顶部到变量声明结束前访问会报错。<br>const：使用const声明的变量其实是对该值的只读引用，使用const声明的原始数据类型声明后就不能再改变，使用const声明的对象可以改变对象的属性值但是不可以给该对象赋值。</p>
+<h2 id="箭头函数与普通函数"><a href="#箭头函数与普通函数" class="headerlink" title="箭头函数与普通函数"></a>箭头函数与普通函数</h2><p>若箭头函数的返回值只有一个表达式可以省略{}，若返回一个对象字面量则需写成：<code>() =&gt; ({foo: bar})</code></p>
+<p>箭头函数没有自己的this值，它的this值继承于外围作用域；箭头函数也不会获取它们的arguments对象。</p>
+<p>arguments对象：是一个对应于传递给函数的类数组对象（只有length和索引，没有数组的方法），是在所有非箭头函数中都可以使用的，假如说给普通函数传递了三个参数，那么可以通过argumentd[0]来引用。typeof arguments返回’Object’，可以使用索引确定单个参数的类型typeof arguments[0]。</p>
+<p>把arguments转换为真实的数组：<code>var arr = Array.prototype.slice.call(arguments)</code></p>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>全局作用域下：浏览器中执行console.log(this)返回window；node中console.log(this)返回global。</p>
+<p>纯粹的函数调用：普通函数调用如test()，指向全局变量，浏览器中window，node中global。<br>严格模式：严格模式下执行如test()类型的函数调用，undefined。<br>作为对象的方法调用：函数是对象中的一个方法，调用函数，this指向这个对象。</p>
+<p>做构造函数使用：有new时指向new出来的对象，没有new时指向window。</p>
+<h2 id="前端缓存"><a href="#前端缓存" class="headerlink" title="前端缓存"></a>前端缓存</h2><p>cookie：存储容量小4k以内，在网络请求时可发送，不建议存储重要数据。<br>LocalStorage：html5的本地缓存方案，如果不手动清除，数据永远不会过期。<br>SessionStorage：本地缓存，关闭浏览器时清除数据。</p>
+<h2 id="js定义函数"><a href="#js定义函数" class="headerlink" title="js定义函数"></a>js定义函数</h2><ul>
+<li>函数声明表达式：<code>function name(params){...}</code></li>
+<li>function操作符：<code>var xxx = function [name可选](params){...}</code></li>
+<li>Function构造函数：<code>new Function([参数,参数],functionBody)</code></li>
+<li>箭头函数：(param) =&gt; { statements }</li>
+</ul>
+<h2 id="http状态码"><a href="#http状态码" class="headerlink" title="http状态码"></a>http状态码</h2><ul>
+<li>1xx：消息</li>
+<li>2xx：成功<blockquote>
+<p>202：服务器已接受请求，但尚未处理<br>204：服务器成功处理了请求，没有返回任何内容</p>
+</blockquote>
+</li>
+<li>3xx：重定向<blockquote>
+<p>301: 重定向<br>302：临时重定向  </p>
+</blockquote>
+</li>
+<li>4xx：客户端错误<blockquote>
+<p>404：请求的资源不存在  </p>
+</blockquote>
+</li>
+<li>5xx：服务器端错误</li>
+</ul>
+<h2 id="javaScript数据存储"><a href="#javaScript数据存储" class="headerlink" title="javaScript数据存储"></a>javaScript数据存储</h2><p>栈（stack）：后进先出，存储基础数据类型（Number、String、Null、Undefined、Boolean）、按值访问、存储的值大小固定、系统自动分配存储空间、主要用来执行程序、空间小运行效率高。<br>堆（heap）：无序存储可根据引用直接获取、存储引用数据类型（Array、Object、函数）、按引用访问、存储的值大小不固定可动态调整、程序员代码分配空间、主要用来存放对象、空间大运行效率低。</p>
+<p>引用数据类型的值是保存在堆内存中的对象，我们操作不能直接操作对象的堆内存空间，实际上我们操作的是对象的引用，引用的含义是保存在栈内存中的一个地址，该地址与堆内存中实际值相关联。</p>
+<p>访问堆内存中的引用数据类型时需要先访问存储在栈内存中的该对象的地址引用（或地址指针），然后再从堆内存中取出数据。</p>
+<p>JavaScript内存生命周期：分配所需内存；使用分配到的内存（读、写）；不需要时释放归还内存。</p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>定义：闭包是指有权访问另一个函数作用域中的变量的函数。<br>创建闭包的最常用方法：在一个函数内创建另一个函数，通过另一个函数访问这个函数内的局部变量。<br>闭包的使用场合：设计私有的方法和变量。<br>闭包的缺点：常驻内存，会增大内存使用量，使用不当易造成内存泄露。<br>闭包的好处：避免全局变量的污染；私有成员的存在；希望一个变量常驻内存中。</p>
+<p>闭包的特性：</p>
+<ul>
+<li>函数嵌套函数</li>
+<li>函数内部可以引用外部的参数和变量</li>
+<li>参数和变量不会被垃圾回收机制回收</li>
+</ul>
+<p>闭包的常见用途：</p>
+<ul>
+<li>创建特权方法用于访问控制</li>
+<li>事件处理程序及回调</li>
+</ul>
+<h2 id="更改this的方法"><a href="#更改this的方法" class="headerlink" title="更改this的方法"></a>更改this的方法</h2><ul>
+<li>call：接受两个参数，第一个参数obj绑定this的值，后面接受的是不定参数。</li>
+<li>apply：接受两个参数，第一个参数obj绑定this的值，第二个是一个参数数组。</li>
+<li>bind：接受一个参数obj，绑定this的值。</li>
+</ul>
+<h2 id="去除字符串中的空格"><a href="#去除字符串中的空格" class="headerlink" title="去除字符串中的空格"></a>去除字符串中的空格</h2><ul>
+<li>trim方法可以去掉字符串首尾的空格</li>
+<li>replace方法可以去掉所有空格</li>
+</ul>
+<h2 id="数组去重的方法-冒泡-gt-indexOf-gt-filter"><a href="#数组去重的方法-冒泡-gt-indexOf-gt-filter" class="headerlink" title="数组去重的方法 冒泡-&gt;indexOf-&gt;filter"></a>数组去重的方法 冒泡-&gt;indexOf-&gt;filter</h2><ol>
+<li>可以使用冒泡排序，然后再依次对比相邻元素是否相等，相等的话通过数组的splice方法删除一个。</li>
+<li>因为使用冒泡排序太麻烦，所以可以使用sort排序再通过splice方法删除。</li>
+<li>先排序再遍历删除重复元素还是太麻烦，因此可以使用indexOf查看值在新数组中是否存在，如果不存在则push进去。</li>
+<li>filter的测试函数结合indexOf可以更好的实现去重。</li>
+<li>最方便的当然是使用ES6中的Set或者Map实现去重了。</li>
+</ol>
+<h2 id="反转数组"><a href="#反转数组" class="headerlink" title="反转数组"></a>反转数组</h2><ol>
+<li>for循环反转数组，定义一个新数组，for循环反向遍历原数组，依次push元素到新数组中。</li>
+<li>pop+push实现反转数组，定义一个新数组，使用pop方法依次删除原数组尾部元素，然后使用pop依次把push方法返回的被删除元素添加到新数组尾部。</li>
+<li>shift+unshift实现反转数组，定义一个新数组，使用shift方法依次删除原数组头部元素，然后使用unshift依次把shift方法返回的被删除元素添加到新数组头部。</li>
+<li>最便捷的还是使用reverse方法反转数组。</li>
+</ol>
+<h2 id="取出数组最大值"><a href="#取出数组最大值" class="headerlink" title="取出数组最大值"></a>取出数组最大值</h2><ol>
+<li>for循环取最大值，定义一个变量，依次与数组内元素做对比，小于数组中元素时把该元素赋值给变量。</li>
+<li>排序（冒泡、快排）按照从大到小的顺序，然后取第一个元素。</li>
+<li>Math.max方法可以取数组中的最大值。</li>
+</ol>
+<h2 id="webpack、转移速度慢时怎么办"><a href="#webpack、转移速度慢时怎么办" class="headerlink" title="webpack、转移速度慢时怎么办"></a>webpack、转移速度慢时怎么办</h2><p>webpack是一个JavaScript应用程序的静态模块打包器，webpack本身只能识别JavaScript，但是webpack的loader可以将所有非js类型的文件转化为webpack能够处理的模块。</p>
+<h2 id="盒子模型！！！！！"><a href="#盒子模型！！！！！" class="headerlink" title="盒子模型！！！！！"></a>盒子模型！！！！！</h2><p>盒模型是元素大小的呈现方式，由content、padding、border、margin组成。<br>IE下的盒子模型：width包含border、padding，content部分包含padding、border。<br>w3c标准盒模型：width/height仅止content部分的width/height，盒子大小由content、padding、border决定。<br>怪异模型（box-sizing：border-box）：width/height是content+padding+border，盒子大小由width和height决定。</p>
+<h2 id="闭包和匿名函数的关系"><a href="#闭包和匿名函数的关系" class="headerlink" title="闭包和匿名函数的关系"></a>闭包和匿名函数的关系</h2><p>匿名函数：就是没有名字的函数。<br>闭包：函数中定义的子函数。</p>
+<p>匿名函数的最大用途就是创建闭包，并且可以构建命名空间，减少全局变量的使用。</p>
+<h2 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h2><p>立即执行函数通常是指声明完之后立即执行的函数，这类函数通常不需要名字，只是函数的一种调用方式，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(function() &#123;</div><div class="line">  console.log(&apos;你好)</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+<p>立即执行的匿名函数并不是函数，因为已经执行过了，所以它是一个结果，这个结果是对当前这个匿名函数执行结果的一个引用。</p>
+<h2 id="深拷贝、浅拷贝"><a href="#深拷贝、浅拷贝" class="headerlink" title="深拷贝、浅拷贝"></a>深拷贝、浅拷贝</h2><p>深拷贝和浅拷贝只是针对Object和Array这样的复杂类型的。</p>
+<p>浅拷贝：将a赋值给b，但是改变b时a也会被改变，意味着a和b其实指向同一个内存，这就是浅拷贝。<br>深拷贝：把b放在新内存里，把a的属性全部复制（包括属性的子属性）到b中，之后a与b相互独立，这就是深拷贝。</p>
+<h2 id="Dom事件模型"><a href="#Dom事件模型" class="headerlink" title="Dom事件模型"></a>Dom事件模型</h2><p>Dom事件模型包含四方面的内容：事件流、主浏览器的事件模型、事件对象、注册与移除事件监听器。</p>
+<p>事件流：html元素产生一个事件时，该元素节点与根节点之间的路径上所经过的节点都会收到这个事件，这个传播过程就叫做事件流。<br>JavaScript的时间流主要经历三个阶段：事件捕获、目标出发、时间冒泡(有的不经过冒泡阶段)。</p>
+<p>DOM标准的事件处理模型有冒泡型事件和捕获型事件两种。<br>冒泡型事件：DOM树上理解是事件从叶子结点沿祖先节点一直向上传递直到根节点；浏览器视图html元素排列层次上理解是从具有从属关系的最确定元素一直传递到最不确定的目标元素。<br>捕获型事件：由DOM树最顶层元素一直到最精确的元素。<br>DOM标准事件模型支持这两种事件模型，可以说是它们两个的结合体。</p>
+<p>事件对象：IE中事件对象是window的event属性，在标准的DOM浏览器中事件对象包含在target中。<br>注册与移除事件监听器：</p>
+<p>注册与移除事件监听器：DOM标准的浏览器中通过元素的addEventListener方法注册（注：此方法支持冒泡型和捕获型的事件处理）。移除监听器调用element的removeEventListener方法。以上两个方法都是三个参数：1.事件名称，2.回调处理函数observer，3.注明处理函数是在那个阶段被调用，true为捕获阶段。</p>
+<h2 id="get、post"><a href="#get、post" class="headerlink" title="get、post"></a>get、post</h2><p>get与post都是使用http的方法。</p>
+<p>get获取数据很安全，不会改变数据源，并且对同一URL的多个请求返回同样的结果，get请求的数据放在URL之后，以？分割URL和传输数据，参数之间以&amp;连接，get提交的数据是有大小限制的，拼接起来是完整的URL，因此不能大于浏览器及服务器对URL长度的限制。<br>post可能修改数据源，post把提交的数据放在http包的包体中，post提交的数据是没有大小限制的主要看服务器的处理能力。</p>
+<p>用途：get主要用来从服务获取数据，post主要用于向服务器提交数据。</p>
+<h2 id="双向绑定缺点"><a href="#双向绑定缺点" class="headerlink" title="双向绑定缺点"></a>双向绑定缺点</h2><p>单向绑定是单向数据流，所有数据的变化都可以被记录和跟踪，状态变化需要手动操作，可以追寻源头，便于维护。缺点是代码量大、数据的流转过程变长。<br>双向绑定的优点是在表单交互等场景下会简化大量的代码量。缺点是都是“暗箱操作”，无法追踪局部状态，若组件数据变化来源不止一个时容易弄混数据流。</p>
+<h2 id="翻转二叉树"><a href="#翻转二叉树" class="headerlink" title="翻转二叉树"></a>翻转二叉树</h2><p>主要思想是二叉树存在的话交换当前节点的左右分支，然后判断左右子树是否存在，存在的话在递归左右分支的节点。</p>
+<h2 id="DOM重绘、重排"><a href="#DOM重绘、重排" class="headerlink" title="DOM重绘、重排"></a>DOM重绘、重排</h2><p>重绘重排都是浏览器上面的行为，重绘不一定引起重排，重排一定会引起重绘。</p>
+<p>重绘的情况有：元素背景色改变，不会带来渲染树的改变时就是重绘。<br>重排的情况有：布局的改变，元素几何属性的改变，元素内容的变化，删除已经渲染过的元素，DOM树结构变化（增减、移动节点等），浏览器窗口尺寸的变化等。</p>
+<h2 id="居中"><a href="#居中" class="headerlink" title="居中"></a>居中</h2><p>水平居中：</p>
+<ol>
+<li>行内元素：text-align=center</li>
+<li>固定宽度的块状元素：margin: 0 auto;</li>
+<li>不定宽度的块状元素：父元素position：relative，子元素position：absolute、left：50%、transform：translateX（-50%）;第二种方案：父元素text-align：center，子元素display：inline。</li>
+<li>flex实现水平居中：父元素display：flex、justify-content：center。</li>
+</ol>
+<p>垂直居中：</p>
+<ol>
+<li>父元素高度确定的单行文本：line-height=height。</li>
+<li>父元素高度确定的多行文本：display：table-cell，vertical-align：middle。</li>
+<li>flex布局实现垂直居中：父元素display：flex、align-items：center。</li>
+</ol>
+<h2 id="浏览器内核"><a href="#浏览器内核" class="headerlink" title="浏览器内核"></a>浏览器内核</h2><p>渲染引擎：获取网页内容并整理讯息，计算网页的显示方式，输出至显示器或打印机。<br>js引擎：解析和执行JS来实现网页的动态效果。</p>
+<h2 id="src与href的区别"><a href="#src与href的区别" class="headerlink" title="src与href的区别"></a>src与href的区别</h2><p>src：指向外部资源的位置，浏览器解析到该元素使会暂停对其他资源的处理，直至把该外部资源加载、编译、执行完毕，即把指定内容嵌入到文档当前标签所在位置。</p>
+<p>href：指向网络资源的所在位置，建立和当前文档或当前元素的链接，浏览器会并行下载资源且不会停止对当前文档的处理。</p>
+<h2 id="页面中有大量图片时如何优化"><a href="#页面中有大量图片时如何优化" class="headerlink" title="页面中有大量图片时如何优化"></a>页面中有大量图片时如何优化</h2><ol>
+<li>页面未可是区域内的图片做成懒加载。</li>
+<li>ppt、幻灯片等可做成预加载，优先加载当前显示图片的前一张与后一张。</li>
+<li>图片过大时可采用特殊编码的图片，先加载一张压缩特别厉害的压缩图，提高用户体验。</li>
+<li>若图片显示位置小于原图片大小，应在服务器端先根据需要把图片压缩至与位置大小相同再显示。</li>
+</ol>
+<h2 id="html语义化"><a href="#html语义化" class="headerlink" title="html语义化"></a>html语义化</h2><p>根据内容结构，选择合适的标签，便于开发者阅读和写出更优雅的代码同时，便于浏览器的解析。</p>
+<p>必要性：</p>
+<ol>
+<li>有利于SEO，有助于爬虫获取更多的有效信息，爬虫是根据标签来确定上下文和各个关键字的权重的。</li>
+<li>语义话的html在没有CSS的情况下也能呈现较好的内容结构与代码结构。</li>
+</ol>
+<h2 id="搜索引擎优化SEO"><a href="#搜索引擎优化SEO" class="headerlink" title="搜索引擎优化SEO"></a>搜索引擎优化SEO</h2><ol>
+<li>语义化的html代码。</li>
+<li>重要内容的html代码放前面，搜索引擎抓去是从上到下的，要保证重要内容一定会被抓取到。</li>
+<li>重要内容不要用js输出。</li>
+<li>非装饰性图片一定要加alt。</li>
+<li>合理的title、description、keywords，这三个权重依次减小，title放前面且不同页面title要不同。</li>
+</ol>
+<h2 id="doctype"><a href="#doctype" class="headerlink" title="doctype"></a>doctype</h2><p><code>&lt;!DOCTYPE html&gt;</code>写在html标签之前，告诉浏览器当前HTML版本。</p>
+<h2 id="img标签的title和alt"><a href="#img标签的title和alt" class="headerlink" title="img标签的title和alt"></a>img标签的title和alt</h2><p>title：为图片添加相关信息，在鼠标滑动到图片上时显示。<br>alt：图片内容的等价描述，是img特有的属性，用于图片无法加载显示、读屏器阅读图片，除了纯装饰的图片外都必须设置有意义的值，搜索引擎会重点分析。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>基本数据类型：undefined、null、NaN、Number、String、Boolean、Symbol(ES6)<br>复杂数据类型：Object<br>object又可分为三个子类型：数组、狭义的对象、函数  </p>
+<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><ol>
+<li>简单的for循环</li>
+<li>for…in：遍历key，返回所有<font color="#B22222">可枚举属性</font>。</li>
+<li>for…of：遍历value，循环Array、Map、Set、String、TypedArray、arguments的可迭代属性，且在循环中忽略不可迭代属性。</li>
+<li>filter：可遍历数组，接受一个函数为参数，返回一个包含所有执行回调函数时值为true的原数组元素的数组。</li>
+<li>forEach：对数组中的每一个元素执行回调函数，forEach对空数组无效，且忽略数组中被删除或者未初始化的项，不支持continue,break,return。</li>
+<li>map：返回一个包含所有元素执行回调函数后返回的结果的新数组，只有数组中有值的元素才会执行回调函数。</li>
+</ol>
+<h2 id="数组的方法"><a href="#数组的方法" class="headerlink" title="数组的方法"></a>数组的方法</h2><ul>
+<li>push：将一个或者多个元素添加到数组的末尾，返回值为新数组的长度。</li>
+<li>unshift：将一个或多个元素添加到数组的头部，返回值为新数组的长度。</li>
+<li>concat：用于合并两个或者多个数组，不修改现有数组，返回一个新数组。</li>
+<li>slice：拷贝数组从开始到结束（不包含结束）的元素，返回一个新数组。</li>
+<li>shift：删除数组中的第一个元素，返回该元素的值，会更改数组的长度。</li>
+<li>pop：删除数组中的最后一个元素，返回该元素的值，会更改数组长度。</li>
+<li>splice：通过删除现有元素 / 添加新元素 来更改数组内容，返回由被删除元素组成的数组。</li>
+<li>indexOf：查找给定元素的第一个索引，返回索引值，如果没找到则返回-1。</li>
+<li>join：将一个数组或者类数组对象的所有元素拼接为字符串，参数是分隔符，空参数默认分隔符为‘,’ ，返回值为字符串。</li>
+<li>find：找到满足回调函数测试的第一个元素的值，并返回这个元素值，若未找到则返回undefined。</li>
+<li>findIndex：找到满足回调函数测试的第一个元素的索引，并返回这个元素的索引，若未找到则返回-1。</li>
+</ul>
+<h2 id="字符串的方法"><a href="#字符串的方法" class="headerlink" title="字符串的方法"></a>字符串的方法</h2><ul>
+<li>concat：连接一个或多个字符串</li>
+<li>indexOf：可以从左到右查找字符串中给定值的第一个索引，可以使用第二个参数指定开始查找位置，没找到则返回-1。区分大小写</li>
+<li>lastIndexOf：可以查找字符串中给定值的最后一个索引，可以使用第二个参数指定开始查找位置，没找到则返回-1。区分大小写</li>
+<li>slice：复制字符串的一部分。</li>
+<li>substr：返回字符串中给定位置到指定字符数的字符，可用来提取或者拷贝子字符串。</li>
+<li>substring：返回一个开始索引到结束索引（不包含）的字符串子集。</li>
+<li>split：把字符串分割为数组，不给参数则每个字符都分割。</li>
+<li>trim：删除字符串首尾的空白字符（tab、空格、space等）。</li>
+<li>search：参数是一个正则表达式，返回在字符串中首次匹配项的索引，否则返回-1。</li>
+</ul>
+<h2 id="Object的常用方法"><a href="#Object的常用方法" class="headerlink" title="Object的常用方法"></a>Object的常用方法</h2><ul>
+<li>Object.toString()：返回一个表示该对象的字符串。</li>
+<li>Object.assign(target, obj)：拷贝源对象中所有的可枚举属性到目标对象中，返回值为目标对象。第一个参数是目标对象，第二个参数是源对象。浅拷贝：具有相同键时源属性值覆盖目标属性值。</li>
+<li>Object.entries(obj)：返回一个给定对象自身可枚举属性的键值对数组。</li>
+<li>Object.keys(obj)：返回一个由一个给定对象的自身可枚举属性组成的数组。</li>
+<li>Object.hasOwnProperty(‘name’)：判断自身是否具有指定的属性。</li>
+</ul>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><p>为了<font color="#B22222">操作文档</font>出现了一个API为DOM（文档对象模型）：页面中的整个文档、文档头部、里面的div等都是文档所属的DOM的一部分。我们可以通过JavaScript来访问和操作存储在DOM中的内容。</p>
+<p>整个HTMl文档可以看作是一个对象树（DOM树），div等标签都可看作是一个对象，每个对象又称为一个<font color="#B22222">节点</font>，我们可以使用document、window等元素的API来操作DOM。</p>
+<h2 id="document"><a href="#document" class="headerlink" title="document"></a>document</h2><p>浏览器下载到一个网页通常是HTML，这个HTMl就是document（这也是DOM树当中的一个节点node），document通常是DOM树的根节点，它包含了title、URL等属性，我们可以在JS中直接访问到。</p>
+<p>注：document是DOM的一个对象。</p>
+<p>常用的document属性：</p>
+<ul>
+<li>document.title：返回当前文档的标题。</li>
+<li>document.URL：返回当前文档的url。</li>
+<li>document.getElementByID()：返回对拥有指定ID的第一个对象的引用。</li>
+<li>document.getElementsByName()：返回带有指定名称的对象的集合。</li>
+<li>document.getElementsByClassName()：返回文档中所有指定类名的元素集合，作为<strong>NodeList对象集合</strong>（类似于数组的数据结构，但是仅仅提供了length属性，没有提供数组中的push、pop等方法）。</li>
+</ul>
+<h2 id="window"><a href="#window" class="headerlink" title="window"></a>window</h2><p>为了操作浏览器诞生了一个API为BOM（浏览器对象模型），而window就是BOM的一个对象，通过window我们可以获取窗口位置、确定窗口大小、弹出对话框、关闭当前窗口等。</p>
+<p>常用的window属性：</p>
+<ul>
+<li>地址栏属性location：location.href可以获取和修改当前地址栏的URL信息。</li>
+<li>历史记录属性history：history.forward()相当于浏览器的前进按钮；history.backward()相当于浏览器的后退按钮；history.go()前进或后退，正数前进，负数后退，0表示自己。</li>
+<li>浏览器版本信息属性navigator：navigaror.userAgent获取当前浏览器的版本信息。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习总结/" rel="tag"># 学习总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/04/2018-03-04/" rel="next" title="2018-03-04">
+                <i class="fa fa-chevron-left"></i> 2018-03-04
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/26/多个ssh-key配置/" rel="prev" title="多个ssh-key配置">
+                多个ssh-key配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识总结"><span class="nav-number">1.</span> <span class="nav-text">知识总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-react区别与联系"><span class="nav-number">1.1.</span> <span class="nav-text">vue react区别与联系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由钩子"><span class="nav-number">1.2.</span> <span class="nav-text">路由钩子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嵌套路由"><span class="nav-number">1.3.</span> <span class="nav-text">嵌套路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态路由匹配"><span class="nav-number">1.4.</span> <span class="nav-text">动态路由匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-show和v-if"><span class="nav-number">1.5.</span> <span class="nav-text">v-show和v-if</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-loader"><span class="nav-number">1.6.</span> <span class="nav-text">vue-loader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件通信"><span class="nav-number">1.7.</span> <span class="nav-text">组件通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期"><span class="nav-number">1.8.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向绑定：订阅者模式"><span class="nav-number">1.9.</span> <span class="nav-text">双向绑定：订阅者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片懒加载预加载概念、使用场景…"><span class="nav-number">1.10.</span> <span class="nav-text">图片懒加载预加载概念、使用场景…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域"><span class="nav-number">1.11.</span> <span class="nav-text">跨域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map-filter-reduce"><span class="nav-number">1.12.</span> <span class="nav-text">map filter reduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数作用域和块级作用域"><span class="nav-number">1.13.</span> <span class="nav-text">函数作用域和块级作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var、let、const"><span class="nav-number">1.14.</span> <span class="nav-text">var、let、const</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#箭头函数与普通函数"><span class="nav-number">1.15.</span> <span class="nav-text">箭头函数与普通函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this"><span class="nav-number">1.16.</span> <span class="nav-text">this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端缓存"><span class="nav-number">1.17.</span> <span class="nav-text">前端缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js定义函数"><span class="nav-number">1.18.</span> <span class="nav-text">js定义函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http状态码"><span class="nav-number">1.19.</span> <span class="nav-text">http状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#javaScript数据存储"><span class="nav-number">1.20.</span> <span class="nav-text">javaScript数据存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">1.21.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改this的方法"><span class="nav-number">1.22.</span> <span class="nav-text">更改this的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去除字符串中的空格"><span class="nav-number">1.23.</span> <span class="nav-text">去除字符串中的空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组去重的方法-冒泡-gt-indexOf-gt-filter"><span class="nav-number">1.24.</span> <span class="nav-text">数组去重的方法 冒泡->indexOf->filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反转数组"><span class="nav-number">1.25.</span> <span class="nav-text">反转数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取出数组最大值"><span class="nav-number">1.26.</span> <span class="nav-text">取出数组最大值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack、转移速度慢时怎么办"><span class="nav-number">1.27.</span> <span class="nav-text">webpack、转移速度慢时怎么办</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盒子模型！！！！！"><span class="nav-number">1.28.</span> <span class="nav-text">盒子模型！！！！！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包和匿名函数的关系"><span class="nav-number">1.29.</span> <span class="nav-text">闭包和匿名函数的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#立即执行函数"><span class="nav-number">1.30.</span> <span class="nav-text">立即执行函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深拷贝、浅拷贝"><span class="nav-number">1.31.</span> <span class="nav-text">深拷贝、浅拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dom事件模型"><span class="nav-number">1.32.</span> <span class="nav-text">Dom事件模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get、post"><span class="nav-number">1.33.</span> <span class="nav-text">get、post</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向绑定缺点"><span class="nav-number">1.34.</span> <span class="nav-text">双向绑定缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻转二叉树"><span class="nav-number">1.35.</span> <span class="nav-text">翻转二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM重绘、重排"><span class="nav-number">1.36.</span> <span class="nav-text">DOM重绘、重排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#居中"><span class="nav-number">1.37.</span> <span class="nav-text">居中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器内核"><span class="nav-number">1.38.</span> <span class="nav-text">浏览器内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#src与href的区别"><span class="nav-number">1.39.</span> <span class="nav-text">src与href的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面中有大量图片时如何优化"><span class="nav-number">1.40.</span> <span class="nav-text">页面中有大量图片时如何优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html语义化"><span class="nav-number">1.41.</span> <span class="nav-text">html语义化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索引擎优化SEO"><span class="nav-number">1.42.</span> <span class="nav-text">搜索引擎优化SEO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#doctype"><span class="nav-number">1.43.</span> <span class="nav-text">doctype</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#img标签的title和alt"><span class="nav-number">1.44.</span> <span class="nav-text">img标签的title和alt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.45.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历"><span class="nav-number">1.46.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组的方法"><span class="nav-number">1.47.</span> <span class="nav-text">数组的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串的方法"><span class="nav-number">1.48.</span> <span class="nav-text">字符串的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object的常用方法"><span class="nav-number">1.49.</span> <span class="nav-text">Object的常用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM"><span class="nav-number">1.50.</span> <span class="nav-text">DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#document"><span class="nav-number">1.51.</span> <span class="nav-text">document</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#window"><span class="nav-number">1.52.</span> <span class="nav-text">window</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/04/02/2018-04-02/';
+          this.page.identifier = '2018/04/02/2018-04-02/';
+          this.page.title = '2018-04-02';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Reflect一. 概述Reflect对象与Proxy对象一样，也是 ES6 为了操作对象而提供的新 API。Reflect对象的设计目的有这样几个：  将Object对象的一些明显属于语言内部的方法（比如Object.defineProperty），放到Reflect对象上。现阶段，某些方法同时在Object和Reflect对象上部署，未来的新方法将只部署在Reflect对象上。也就是说，从Re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reflect">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/Reflect/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="Reflect一. 概述Reflect对象与Proxy对象一样，也是 ES6 为了操作对象而提供的新 API。Reflect对象的设计目的有这样几个：  将Object对象的一些明显属于语言内部的方法（比如Object.defineProperty），放到Reflect对象上。现阶段，某些方法同时在Object和Reflect对象上部署，未来的新方法将只部署在Reflect对象上。也就是说，从Re">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.873Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reflect">
+<meta name="twitter:description" content="Reflect一. 概述Reflect对象与Proxy对象一样，也是 ES6 为了操作对象而提供的新 API。Reflect对象的设计目的有这样几个：  将Object对象的一些明显属于语言内部的方法（比如Object.defineProperty），放到Reflect对象上。现阶段，某些方法同时在Object和Reflect对象上部署，未来的新方法将只部署在Reflect对象上。也就是说，从Re">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/27/Reflect/"/>
+
+
+
+
+
+  <title>Reflect | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/Reflect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Reflect</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T23:08:31+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/27/Reflect/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/27/Reflect/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Reflect"><a href="#Reflect" class="headerlink" title="Reflect"></a>Reflect</h1><h2 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a>一. 概述</h2><p>Reflect对象与Proxy对象一样，也是 ES6 为了操作对象而提供的新 API。Reflect对象的设计目的有这样几个：</p>
+<ol>
+<li>将Object对象的一些明显属于语言内部的方法（比如Object.defineProperty），放到Reflect对象上。现阶段，某些方法同时在Object和Reflect对象上部署，未来的新方法将只部署在Reflect对象上。也就是说，从Reflect对象上可以拿到语言内部的方法。<a id="more"></a></li>
+<li><p>修改某些Object方法的返回结果，让其变得更合理。比如，Object.defineProperty(obj, name, desc)在无法定义属性时，会抛出一个错误，而Reflect.defineProperty(obj, name, desc)则会返回false。</p>
+</li>
+<li><p>让Object操作都变成函数行为。某些Object操作是命令式，比如name in obj和delete obj[name]，而Reflect.has(obj, name)和Reflect.deleteProperty(obj, name)让它们变成了函数行为。<br><code>Reflect.has(Object, &#39;assign&#39;) // true</code></p>
+</li>
+<li><p>Reflect对象的方法与Proxy对象的方法一一对应，只要是Proxy对象的方法，就能在Reflect对象上找到对应的方法。这就让Proxy对象可以方便地调用对应的Reflect方法，完成默认行为，作为修改行为的基础。也就是说，不管Proxy怎么修改默认行为，你总可以在Reflect上获取默认行为。</p>
+</li>
+</ol>
+<p>每一个Proxy对象的拦截操作（get、delete、has），内部都调用对应的Reflect方法，保证原生行为能够正常执行。添加的工作，就是将每一个操作输出一行日志。</p>
+<h2 id="二-静态方法（13个）"><a href="#二-静态方法（13个）" class="headerlink" title="二. 静态方法（13个）"></a>二. 静态方法（13个）</h2><p>Reflect不是构造函数， 要使用的时候直接通过Reflect.method()调用。</p>
+<p>这些方法的作用，大部分与Object对象的同名方法的作用都是相同的，而且它与Proxy对象的方法一一对应,它使得我们可以直接操纵对象的原生行为</p>
+<h3 id="1-Reflect-apply-target-thisArg-args"><a href="#1-Reflect-apply-target-thisArg-args" class="headerlink" title="1. Reflect.apply(target,thisArg,args)"></a>1. Reflect.apply(target,thisArg,args)</h3><p>Reflect.apply方法等同于Function.prototype.apply.call(func, thisArg, args)，用于绑定this对象后执行给定函数。<br>三个参数：</p>
+<ol>
+<li>func：需要执行的函数；</li>
+<li>thisArg：需要执行函数的上下文this；</li>
+<li>args：一个数组或者伪数组，会作为执行函数的参数。</li>
+</ol>
+<p>要执行一个函数f，并给它传一组参数args， 还要绑定this，就用Reflect：<br><code>Reflect.apply(f, obj, args)</code></p>
+<p><code>const ages = [11, 33, 12, 54, 18, 96];
+// 旧写法
+const oldest = Math.max.apply(Math, ages);
+const type = Object.prototype.toString.call(youngest);
+// 新写法
+const oldest = Reflect.apply(Math.max, Math, ages);
+const type = Reflect.apply(Object.prototype.toString, youngest, []);</code></p>
+<h3 id="2-Reflect-construct-target-args"><a href="#2-Reflect-construct-target-args" class="headerlink" title="2. Reflect.construct(target,args)"></a>2. Reflect.construct(target,args)</h3><p>Reflect.construct方法等同于new target(…args)，这提供了一种不使用new，来调用构造函数的方法。<br><code>function Greeting(name) {
+  this.name = name;
+}
+// new 的写法
+const instance = new Greeting(&#39;张三&#39;);
+// Reflect.construct 的写法
+const instance = Reflect.construct(Greeting, [&#39;张三&#39;]);</code></p>
+<p>通过不确定长度的参数实例化一个构造函数：<br><code>var obj = Reflect.construct(F, args)</code></p>
+<h3 id="3-Reflect-get-target-name-receiver"><a href="#3-Reflect-get-target-name-receiver" class="headerlink" title="3. Reflect.get(target,name,receiver)"></a>3. Reflect.get(target,name,receiver)</h3><p>Reflect.get方法查找并返回target对象的name属性，如果没有该属性，则返回undefined。<br><code>var myObject = {
+  foo: 1,
+  bar: 2,
+  get baz() {
+    return this.foo + this.bar;
+  },
+}
+Reflect.get(myObject, &#39;foo&#39;) // 1</code></p>
+<p>如果name属性部署了读取函数（getter），则读取函数的this绑定receiver。<br><code>var myObject = {
+  foo: 1,
+  bar: 2,
+  get baz() {
+    return this.foo + this.bar;
+  },
+};
+var myReceiverObject = {
+  foo: 4,
+  bar: 4,
+};
+Reflect.get(myObject, &#39;baz&#39;, myReceiverObject) // 8</code></p>
+<p>如果第一个参数不是对象，Reflect.get方法会报错。</p>
+<h3 id="4-Reflect-set-target-name-value-receiver"><a href="#4-Reflect-set-target-name-value-receiver" class="headerlink" title="4. Reflect.set(target,name,value,receiver)"></a>4. Reflect.set(target,name,value,receiver)</h3><p>Reflect.set方法设置target对象的name属性等于value。<br><code>var myObject = {
+  foo: 1,
+  set bar(value) {
+    return this.foo = value;
+  },
+}
+myObject.foo         // 1
+Reflect.set(myObject, &#39;foo&#39;, 2);
+myObject.foo         // 2</code></p>
+<p>如果name属性设置了赋值函数，则赋值函数的this绑定receiver。<br><code>var myObject = {
+  foo: 1,
+  set bar(value) {
+    return this.foo = value;
+  },
+};
+var myReceiverObject = {
+  foo: 0,
+};
+Reflect.set(myObject, &#39;bar&#39;, 2, myReceiverObject);
+myObject.foo // 1
+myReceiverObject.foo // 2</code><br>注意，Reflect.set会触发Proxy.defineProperty拦截。</p>
+<h3 id="5-Reflect-defineProperty-target-name-desc"><a href="#5-Reflect-defineProperty-target-name-desc" class="headerlink" title="5. Reflect.defineProperty(target,name,desc)"></a>5. Reflect.defineProperty(target,name,desc)</h3><p>Reflect.defineProperty方法基本等同于Object.defineProperty，用来为对象定义属性。未来，Object.defineProperty会被逐渐废除。<br><code>function MyDate() {
+  /*…*/
+}
+// 旧写法
+Object.defineProperty(MyDate, &#39;now&#39;, {
+  value: () =&gt; Date.now()
+});
+// 新写法
+Reflect.defineProperty(MyDate, &#39;now&#39;, {
+  value: () =&gt; Date.now()
+});</code><br>如果Reflect.defineProperty的第一个参数不是对象，就会抛出错误，比如Reflect.defineProperty(1, ‘foo’)。</p>
+<h3 id="6-Reflect-deleteProperty-target-name"><a href="#6-Reflect-deleteProperty-target-name" class="headerlink" title="6. Reflect.deleteProperty(target,name)"></a>6. Reflect.deleteProperty(target,name)</h3><p>Reflect.deleteProperty方法等同于delete obj[name]，用于删除对象的属性。<br>该方法返回一个布尔值。如果删除成功，或者被删除的属性不存在，返回true；删除失败，被删除的属性依然存在，返回false。<br><code>const myObj = { foo: &#39;bar&#39; };
+delete myObj.foo;  //true
+Reflect.deleteProperty(myObj, &#39;foo&#39;); // true</code></p>
+<h3 id="7-Reflect-has-target-name"><a href="#7-Reflect-has-target-name" class="headerlink" title="7. Reflect.has(target,name)"></a>7. Reflect.has(target,name)</h3><p>Reflect.has方法对应name in obj里面的in运算符。<br><code>var myObject = {
+  foo: 1,
+};
+&#39;foo&#39; in myObject // true 
+Reflect.has(myObject, &#39;foo&#39;) // true
+Reflect.has(myObject, &#39;bar&#39;)     //false</code><br>如果第一个参数不是对象，Reflect.has和in运算符都会报错。</p>
+<h3 id="8-Reflect-ownKeys-target"><a href="#8-Reflect-ownKeys-target" class="headerlink" title="8. Reflect.ownKeys(target)"></a>8. Reflect.ownKeys(target)</h3><p>Reflect.ownKeys方法用于返回对象的所有属性，基本等同于Object.getOwnPropertyNames与Object.getOwnPropertySymbols之和。<br><code>var myObject = {
+  foo: 1,
+  bar: 2,</code> <code>[Symbol.for(&#39;baz&#39;)]: 3,
+  [Symbol.for(&#39;bing&#39;)]: 4,</code> <code>};
+// 旧写法
+Object.getOwnPropertyNames(myObject)
+// [&#39;foo&#39;, &#39;bar&#39;]
+Object.getOwnPropertySymbols(myObject)
+//[Symbol.for(&#39;baz&#39;), Symbol.for(&#39;bing&#39;)]
+// 新写法
+Reflect.ownKeys(myObject)
+// [&#39;foo&#39;, &#39;bar&#39;, Symbol.for(&#39;baz&#39;), Symbol.for(&#39;bing&#39;)]</code></p>
+<h3 id="9-Reflect-isExtensible-target"><a href="#9-Reflect-isExtensible-target" class="headerlink" title="9. Reflect.isExtensible(target)"></a>9. Reflect.isExtensible(target)</h3><p>Reflect.isExtensible方法对应Object.isExtensible，返回一个布尔值，表示当前对象是否可扩展。<br><code>const myObject = {};
+// 旧写法
+Object.isExtensible(myObject) // true
+// 新写法
+Reflect.isExtensible(myObject) // true</code></p>
+<p>如果参数不是对象，Object.isExtensible会返回false，因为非对象本来就是不可扩展的，而Reflect.isExtensible会报错。<br><code>Object.isExtensible(1) // false
+Reflect.isExtensible(1) // 报错</code></p>
+<h3 id="10-Reflect-preventExtensions-target"><a href="#10-Reflect-preventExtensions-target" class="headerlink" title="10. Reflect.preventExtensions(target)"></a>10. Reflect.preventExtensions(target)</h3><p>Reflect.preventExtensions对应Object.preventExtensions方法，用于让一个对象变为不可扩展。它返回一个布尔值，表示是否操作成功<br><code>var myObject = {};
+// 旧写法
+Object.isExtensible(myObject) // true
+// 新写法
+Reflect.preventExtensions(myObject) // true</code></p>
+<p>如果参数不是对象，Object.isExtensible在 ES5 环境报错，在 ES6 环境返回这个参数，而Reflect.preventExtensions会报错。</p>
+<h3 id="11-Reflect-getOwnPropertyDescriptor-target-name"><a href="#11-Reflect-getOwnPropertyDescriptor-target-name" class="headerlink" title="11. Reflect.getOwnPropertyDescriptor(target, name)"></a>11. Reflect.getOwnPropertyDescriptor(target, name)</h3><p>Reflect.getOwnPropertyDescriptor基本等同于Object.getOwnPropertyDescriptor，用于得到指定属性的描述对象，将来会替代掉后者。<br><code>var myObject = {};
+Object.defineProperty(myObject, &#39;hidden&#39;, {
+  value: true,
+  enumerable: false,
+});
+// 旧写法
+var theDescriptor = Object.getOwnPropertyDescriptor(myObject, &#39;hidden&#39;);
+// 新写法
+var theDescriptor = Reflect.getOwnPropertyDescriptor(myObject, &#39;hidden&#39;);</code></p>
+<p>Reflect.getOwnPropertyDescriptor和Object.getOwnPropertyDescriptor的一个区别是，如果第一个参数不是对象，Object.getOwnPropertyDescriptor(1, ‘foo’)不报错，返回undefined，而Reflect.getOwnPropertyDescriptor(1, ‘foo’)会抛出错误，表示参数非法。</p>
+<h3 id="12-Reflect-getPrototypeOf-target"><a href="#12-Reflect-getPrototypeOf-target" class="headerlink" title="12. Reflect.getPrototypeOf(target)"></a>12. Reflect.getPrototypeOf(target)</h3><p>Reflect.getPrototypeOf方法用于读取对象的<strong>proto</strong>属性，对应Object.getPrototypeOf(obj)。<br><code>const myObj = new FancyThing();
+// 旧写法
+Object.getPrototypeOf(myObj) === FancyThing.prototype;
+// 新写法
+Reflect.getPrototypeOf(myObj) === FancyThing.prototype;</code></p>
+<p>Reflect.getPrototypeOf和Object.getPrototypeOf的一个区别是，如果参数不是对象，Object.getPrototypeOf会将这个参数转为对象，然后再运行，而Reflect.getPrototypeOf会报错。<br><code>Object.getPrototypeOf(1) // Number {[[PrimitiveValue]]: 0}
+Reflect.getPrototypeOf(1) // 报错</code></p>
+<h3 id="13-Reflect-setPrototypeOf-target-prototype"><a href="#13-Reflect-setPrototypeOf-target-prototype" class="headerlink" title="13. Reflect.setPrototypeOf(target, prototype)"></a>13. Reflect.setPrototypeOf(target, prototype)</h3><p>Reflect.setPrototypeOf方法用于设置对象的<strong>proto</strong>属性，返回第一个参数对象，对应Object.setPrototypeOf(obj, newProto)。<br><code>const myObj = new FancyThing();
+// 旧写法
+Object.setPrototypeOf(myObj, OtherThing.prototype);
+// 新写法
+Reflect.setPrototypeOf(myObj, OtherThing.prototype);</code></p>
+<p>如果第一个参数不是对象，Object.setPrototypeOf会返回第一个参数本身，而Reflect.setPrototypeOf会报错。<br><code>Object.setPrototypeOf(1, {})
+// 1
+Reflect.setPrototypeOf(1, {})
+// TypeError: Reflect.setPrototypeOf called on non-object</code></p>
+<p>如果第一个参数是undefined或null，Object.setPrototypeOf和Reflect.setPrototypeOf都会报错。<br><code>Object.setPrototypeOf(null, {})
+// TypeError: Object.setPrototypeOf called on null or undefined
+Reflect.setPrototypeOf(null, {})
+// TypeError: Reflect.setPrototypeOf called on non-object</code></p>
+<h1 id="三-使用Proxy实现观察者模式"><a href="#三-使用Proxy实现观察者模式" class="headerlink" title="三. 使用Proxy实现观察者模式"></a>三. 使用Proxy实现观察者模式</h1><p>观察者模式（Observer mode）指的是函数自动观察数据对象，一旦对象有变化，函数就会自动执行。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/27/Proxy/" rel="next" title="Proxy">
+                <i class="fa fa-chevron-left"></i> Proxy
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/27/Promise对象/" rel="prev" title="Promise对象">
+                Promise对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Reflect"><span class="nav-number">1.</span> <span class="nav-text">Reflect</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-概述"><span class="nav-number">1.1.</span> <span class="nav-text">一. 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-静态方法（13个）"><span class="nav-number">1.2.</span> <span class="nav-text">二. 静态方法（13个）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Reflect-apply-target-thisArg-args"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. Reflect.apply(target,thisArg,args)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Reflect-construct-target-args"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. Reflect.construct(target,args)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Reflect-get-target-name-receiver"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. Reflect.get(target,name,receiver)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Reflect-set-target-name-value-receiver"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. Reflect.set(target,name,value,receiver)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Reflect-defineProperty-target-name-desc"><span class="nav-number">1.2.5.</span> <span class="nav-text">5. Reflect.defineProperty(target,name,desc)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Reflect-deleteProperty-target-name"><span class="nav-number">1.2.6.</span> <span class="nav-text">6. Reflect.deleteProperty(target,name)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Reflect-has-target-name"><span class="nav-number">1.2.7.</span> <span class="nav-text">7. Reflect.has(target,name)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Reflect-ownKeys-target"><span class="nav-number">1.2.8.</span> <span class="nav-text">8. Reflect.ownKeys(target)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Reflect-isExtensible-target"><span class="nav-number">1.2.9.</span> <span class="nav-text">9. Reflect.isExtensible(target)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Reflect-preventExtensions-target"><span class="nav-number">1.2.10.</span> <span class="nav-text">10. Reflect.preventExtensions(target)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Reflect-getOwnPropertyDescriptor-target-name"><span class="nav-number">1.2.11.</span> <span class="nav-text">11. Reflect.getOwnPropertyDescriptor(target, name)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-Reflect-getPrototypeOf-target"><span class="nav-number">1.2.12.</span> <span class="nav-text">12. Reflect.getPrototypeOf(target)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-Reflect-setPrototypeOf-target-prototype"><span class="nav-number">1.2.13.</span> <span class="nav-text">13. Reflect.setPrototypeOf(target, prototype)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-使用Proxy实现观察者模式"><span class="nav-number">2.</span> <span class="nav-text">三. 使用Proxy实现观察者模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/27/Reflect/';
+          this.page.identifier = '2017/05/27/Reflect/';
+          this.page.title = 'Reflect';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

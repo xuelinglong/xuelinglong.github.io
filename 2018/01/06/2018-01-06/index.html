@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="周报," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本周做的事恢复系统、处理ssh连接问题、完善博客仓库、学习了一点点js单步调试。 遇到的困难ssh连接报错恢复系统之后git push 一直不成功。1ssh_exchange_identification: Connection closed by remote host 在解决这个问题的过程中又对ssh有了更深的了解，先说一下我最初的ssh配置过程：12345678910111213141516">
+<meta name="keywords" content="周报">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-01-06">
+<meta property="og:url" content="http://yoursite.com/2018/01/06/2018-01-06/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="本周做的事恢复系统、处理ssh连接问题、完善博客仓库、学习了一点点js单步调试。 遇到的困难ssh连接报错恢复系统之后git push 一直不成功。1ssh_exchange_identification: Connection closed by remote host 在解决这个问题的过程中又对ssh有了更深的了解，先说一下我最初的ssh配置过程：12345678910111213141516">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.864Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-01-06">
+<meta name="twitter:description" content="本周做的事恢复系统、处理ssh连接问题、完善博客仓库、学习了一点点js单步调试。 遇到的困难ssh连接报错恢复系统之后git push 一直不成功。1ssh_exchange_identification: Connection closed by remote host 在解决这个问题的过程中又对ssh有了更深的了解，先说一下我最初的ssh配置过程：12345678910111213141516">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/06/2018-01-06/"/>
+
+
+
+
+
+  <title>2018-01-06 | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/06/2018-01-06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2018-01-06</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-06T00:05:50+08:00">
+                2018-01-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/06/2018-01-06/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/01/06/2018-01-06/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="本周做的事"><a href="#本周做的事" class="headerlink" title="本周做的事"></a>本周做的事</h1><p>恢复系统、处理ssh连接问题、完善博客仓库、学习了一点点js单步调试。</p>
+<h1 id="遇到的困难"><a href="#遇到的困难" class="headerlink" title="遇到的困难"></a>遇到的困难</h1><h2 id="ssh连接报错"><a href="#ssh连接报错" class="headerlink" title="ssh连接报错"></a>ssh连接报错</h2><p>恢复系统之后git push 一直不成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh_exchange_identification: Connection closed by remote host</div></pre></td></tr></table></figure></p>
+<p>在解决这个问题的过程中又对ssh有了更深的了解，先说一下我最初的ssh配置过程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ cd ~/.ssh</div><div class="line"></div><div class="line">// xxxx@xxxx.com为我注册GitHub的邮箱</div><div class="line">$ ssh-keygen -t rsa -C &quot;xxxx@xxxx.com&quot;</div><div class="line"></div><div class="line">$ cat id_rsa.pub</div><div class="line">// 拷贝id_rsa.pub的内容到github的setting中添加新的SSH KEY</div><div class="line">// 查看到邮件即为添加成功</div><div class="line"></div><div class="line">$ ssh git@github.com</div><div class="line">// 这是连接成功时的显示</div><div class="line">Hi username! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</div><div class="line">// 我真实显示的内容，连接失败，此原因可以通过改为443端口解决</div><div class="line">ssh: connect to host github.com port 22: Operation timed out</div><div class="line"></div><div class="line">// 更改为443端口的配置过程：~/.ssh中添加config文件，文件内容：</div><div class="line">Host github.com</div><div class="line">  hostname ssh.github.com</div><div class="line">  Port 443</div><div class="line">$ ssh -T git@github.com      // 成功的标志与上面类似</div></pre></td></tr></table></figure></p>
+<p>查找了很多方法还是没能解决这个问题，最后求助别人才知道可以切换为https协议，切换之后就能正常提交代码了。<br><a id="more"></a></p>
+<h3 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h3><p>我又重新学习了创建ssh的过程，在这个过程中发现了几点之前不知道的地方。</p>
+<ol>
+<li><code>ssh-keygen -t rsa -C &quot;xxxx@xxxx.com&quot;</code>命令之后不能一路回车（第一次除外）因为一路回车的话代表着不起名字，不设密码，默认生成<code>id_rsa</code>和<code>id_rsa.pub</code>密钥对，如果不是第一次执行这个命令，那么新生成的密钥会覆盖之前生成的，这就会造成当前<code>id_rsa</code>与我们之前已经添加到GitHub上面的<code>id_rsa.pub</code>不匹配。</li>
+<li>除了ssh还有https协议可以使用，我还是对于git的使用了解的太少了，如果本来就知道这个的话完全可以先切换成https协议使用着，等后面在查找问题也可以，因此我发自己需要好好学习关于git的使用。</li>
+</ol>
+<h2 id="博客源文件与静态文件分开"><a href="#博客源文件与静态文件分开" class="headerlink" title="博客源文件与静态文件分开"></a>博客源文件与静态文件分开</h2><p>最初把博客迁移到Mac上面时是只生成了一个hexo根目录，里面的 _config.yml、scaffolds、source、themes、node_modules等文件都是从原电脑上拷贝过来的，这样就弄的特别麻烦，本次ssh连接接出问题之后查找了一些关于这方面的博客，发现了别人说的博客仓库使用两个分支：master存放静态网页，hexo存放源文件，那么下次再更换电脑的话就可以直接从远程仓库克隆然后再配置，这种方法比起拷贝文件真的是好太多了，所以就逐步摸索了一下此方案，以下是我摸索的过程：</p>
+<ol>
+<li>克隆远程博客仓库到本地：<code>git clone https;//github.com/xxx/xxx.git</code>；</li>
+<li>进入到仓库文件夹里面把本地 master 分支与远程 master 分支 同步：<code>git pull origin master:master</code>；</li>
+<li>新建一个本地 hexo 分支并切换到 hexo 分支： <code>git checkout -b hexo</code>;</li>
+<li>把本地 hexo 分支与远程 master 分支同步：<code>git pull origin master:hexo</code>;</li>
+<li>把之前迁移之时的hexo根目录拷贝到此仓库下</li>
+<li><code>git add hexo-blog   // hexo-blog是我的hexo根目录文件夹名称</code>;</li>
+<li><code>git commit -m &quot;xxx&quot;</code>;</li>
+<li><code>git push origin hexo</code>;</li>
+</ol>
+<p>但是到现在还有些疑惑：</p>
+<ol>
+<li>克隆完博客仓库之后不能进行npm instll操作，错误信息是没有package.json文件，这是为什么？</li>
+<li>有点想不明白远程的hexo分支是为了存放博客源文件，那么需不需要把之前master上面的提交同步到hexo分支上，虽然我已经做过这一步了，但是现在感觉之前master上面都是博客的静态网页，那么hexo应该不需要关心这些，只要把源文件上传上去就好了吧。</li>
+</ol>
+<h2 id="https与ssh"><a href="#https与ssh" class="headerlink" title="https与ssh"></a>https与ssh</h2><p>https协议：每个访问Git仓库的人都可以使用https协议进行克隆操作，此方式进行<code>git push</code>时每次都要输入用户名密码。</p>
+<p>ssh协议：不管想使用SSH进行克隆或提交中的任何一个操作，那么我们必须是项目的拥有者，如果不是项目的拥有者同时也想使用SSH进行读写操作的话，必须在仓库中添加的有与自己相对应的公钥。但是想拥有对仓库的写权限就必须使用SSH，这是一种更加安全的访问方式。</p>
+<h3 id="将https转变为SSH"><a href="#将https转变为SSH" class="headerlink" title="将https转变为SSH"></a>将https转变为SSH</h3><ol>
+<li>生成公私密钥对</li>
+<li>公钥添加到github上</li>
+<li><code>ssh git@github.com</code>验证是否添加成功</li>
+<li>保存代码最后一次的修改并提交</li>
+<li>删除项目</li>
+<li>使用ssh方式克隆项目：<code>git clone git@github.com:用户名/仓库名.git</code></li>
+<li>修改https：<code>git remote set-url origin git@github.com:用户名/仓库名.git</code>  (最重要的一步，前面的步骤可省略，后面即为ssh的url)</li>
+</ol>
+<h3 id="将ssh转变为https"><a href="#将ssh转变为https" class="headerlink" title="将ssh转变为https"></a>将ssh转变为https</h3><ol>
+<li>查看远程库信息：<code>git remote -v</code></li>
+<li>移除远程库：<code>git remote rm origin</code></li>
+<li>添加远程仓库：<code>git remote add origin https://xxxxxx</code></li>
+</ol>
+<h3 id="https与ssh互换总结起来为两步"><a href="#https与ssh互换总结起来为两步" class="headerlink" title="https与ssh互换总结起来为两步"></a>https与ssh互换总结起来为两步</h3><ol>
+<li>修改命令：<code>git remote set-url origin [url]</code> url的类型要分清楚!!!</li>
+<li>仓库先删后加：<code>git remote rm origin</code> <code>git remote add [url]</code>url的类型要分清楚!!!</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/周报/" rel="tag"># 周报</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/05/2017年度总结/" rel="next" title="2017年度总结">
+                <i class="fa fa-chevron-left"></i> 2017年度总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/20/2018-01-20/" rel="prev" title="2018-01-20">
+                2018-01-20 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本周做的事"><span class="nav-number">1.</span> <span class="nav-text">本周做的事</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到的困难"><span class="nav-number">2.</span> <span class="nav-text">遇到的困难</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ssh连接报错"><span class="nav-number">2.1.</span> <span class="nav-text">ssh连接报错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#收获"><span class="nav-number">2.1.1.</span> <span class="nav-text">收获</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客源文件与静态文件分开"><span class="nav-number">2.2.</span> <span class="nav-text">博客源文件与静态文件分开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#https与ssh"><span class="nav-number">2.3.</span> <span class="nav-text">https与ssh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将https转变为SSH"><span class="nav-number">2.3.1.</span> <span class="nav-text">将https转变为SSH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将ssh转变为https"><span class="nav-number">2.3.2.</span> <span class="nav-text">将ssh转变为https</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#https与ssh互换总结起来为两步"><span class="nav-number">2.3.3.</span> <span class="nav-text">https与ssh互换总结起来为两步</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/01/06/2018-01-06/';
+          this.page.identifier = '2018/01/06/2018-01-06/';
+          this.page.title = '2018-01-06';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

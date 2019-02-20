@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习总结," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Actions与async/awaitGenerator函数Generator函数是ES6提供的一种异步编程解决方案。 Generator函数是一个状态机，封存了多个内部状态，执行之后会返回一个遍历器对象，即Generator函数是一个状态机、也是一个遍历器生成函数。返回的遍历器对象可以遍历Generator函数内部的每一个状态。">
+<meta name="keywords" content="学习总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-03-04">
+<meta property="og:url" content="http://yoursite.com/2018/03/04/2018-03-04/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="Actions与async/awaitGenerator函数Generator函数是ES6提供的一种异步编程解决方案。 Generator函数是一个状态机，封存了多个内部状态，执行之后会返回一个遍历器对象，即Generator函数是一个状态机、也是一个遍历器生成函数。返回的遍历器对象可以遍历Generator函数内部的每一个状态。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.865Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-03-04">
+<meta name="twitter:description" content="Actions与async/awaitGenerator函数Generator函数是ES6提供的一种异步编程解决方案。 Generator函数是一个状态机，封存了多个内部状态，执行之后会返回一个遍历器对象，即Generator函数是一个状态机、也是一个遍历器生成函数。返回的遍历器对象可以遍历Generator函数内部的每一个状态。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/04/2018-03-04/"/>
+
+
+
+
+
+  <title>2018-03-04 | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/04/2018-03-04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2018-03-04</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-04T22:03:12+08:00">
+                2018-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/04/2018-03-04/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/04/2018-03-04/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Actions与async-await"><a href="#Actions与async-await" class="headerlink" title="Actions与async/await"></a>Actions与async/await</h1><h2 id="Generator函数"><a href="#Generator函数" class="headerlink" title="Generator函数"></a>Generator函数</h2><p>Generator函数是ES6提供的一种异步编程解决方案。</p>
+<p>Generator函数是一个状态机，封存了多个内部状态，执行之后会返回一个<font color="#B22222">遍历器对象</font>，即Generator函数<font color="#B22222">是一个状态机、也是一个遍历器生成函数</font>。返回的<font color="#DB7093">遍历器对象</font>可以<font color="#B22222">遍历Generator函数内部的每一个状态</font>。<br><a id="more"></a><br>特征：</p>
+<ol>
+<li>function关键字与函数名之间有一个<font color="#B22222"> * </font>号。</li>
+<li>函数体内部使用<font color="#B22222">yield</font>表达式，定义不同的内部状态。</li>
+<li>调用方法与普通函数一致，<code>functionName()</code>，但是<font color="#B22222">调用Generator函数</font>之后，函数并不执行，<font color="#B22222">返回</font>的并不是函数运行结果，而是<font color="#B22222">一个指向内部状态的指针对象</font>（遍历器对象Iterator Object）。</li>
+<li>需要调用遍历器对象的<font color="#DB7093">next</font>方法，才能使得<font color="#B22222">指针移向下一个状态</font>，即每次调用next方法，内部指针就从<font color="#B22222">函数头部</font>或者<font color="#B22222">上一次停下来的地方</font>开始执行，直到遇到<font color="#B22222">下一个yield表达式</font>或者<font color="#B22222">return语句</font>为止。</li>
+<li>Generator函数是<font color="#DB7093">分段执行</font>的，<font color="#DB7093">yield</font>是<font color="#B22222">暂停执行的标志</font>，而<font color="#DB7093">next方法</font>可以<font color="#B22222">恢复执行</font>。</li>
+<li><font color="#DB7093">next方法</font>返回一个有着 <font color="#B22222">value</font> 和 <font color="#B22222">done</font> 两个属性的对象。<font color="#DB7093">value</font>属性表示<strong>当前的内部状态的值</strong>，是<strong>yield表达式后面那个表达式的值</strong>；<font color="#DB7093">done</font>属性是一个<strong>布尔值</strong>，表示<strong>是否遍历结束</strong>。</li>
+</ol>
+<h3 id="yield表达式"><a href="#yield表达式" class="headerlink" title="yield表达式"></a>yield表达式</h3><p>Generator函数里面也可以没有yield语句，此时就变成了一个单纯的<font color="#B22222">暂缓执行函数</font>。</p>
+<p>遍历器对象的<font color="#DB7093">next</font>方法运行逻辑：</p>
+<ol>
+<li>遇到yield表达式，就暂停执行后面的操作，并将紧跟在yield后面的那个表达式的值，作为返回的对象的value属性值。</li>
+<li>下一次调用next方法时，再继续往下执行，直到遇到下一个yield表达式。</li>
+<li>如果没有再遇到新的yield表达式，就一直运行到函数结束，直到return语句为止，并将return语句后面的表达式的值，作为返回的对象的value属性值。</li>
+<li>如果该函数没有return语句，则返回的对象的value属性值为undefined。</li>
+<li>之后再调用next方法，一直返回<code>{ value: undefined, done: true }</code></li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>yield表达式只能用在Generator函数之内用在其他地方都会报错。</li>
+<li>yield表达式如果用在另一个表达式之中，必须放在圆括号里面。<code>function* demo() {console.log(&#39;Hello&#39; + (yield 123));}</code></li>
+<li>yield表达式用作函数参数或放在赋值表达式的右边，可以不加括号。</li>
+</ol>
+<h4 id="yield与return"><a href="#yield与return" class="headerlink" title="yield与return"></a>yield与return</h4><p>相似之处：都能返回紧跟在语句后面的表达式的值。<br>区别：每次遇到yield，函数<strong>暂停执行</strong>，下一次再从该位置继续向后执行。而return语句不具备位置记忆功能，一个函数里面可以执行<font color="#B22222">一个return语句</font>，<font color="#B22222">多个yield</font>。</p>
+<p>因为可以有多个yield，因此Generator函数可以返回一系列的值。</p>
+<h3 id="与Iterator接口的关系"><a href="#与Iterator接口的关系" class="headerlink" title="与Iterator接口的关系"></a>与Iterator接口的关系</h3><p>任意一个对象的<font color="#DB7093">Symbol.iterator</font>方法，等于<strong>该对象的遍历器生成函数</strong>，调用该函数会返回<strong>该对象的一个遍历器对象</strong>。</p>
+<p>因为Generator函数就是遍历器生成函数，因此把<font color="#DB7093">Generator</font><strong>赋值给</strong><font color="#B22222">对象的Symbol.iterator属性</font>，可以使该对象具有Iterator接口，可以被<font color="#B22222">…</font>运算符遍历了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var myIterable = &#123;&#125;;</div><div class="line">myIterable[Symbol.iterator] = function* () &#123;</div><div class="line">  yield 1;</div><div class="line">  yield 2;</div><div class="line">  yield 3;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">[...myIterable] // [1, 2, 3]</div></pre></td></tr></table></figure>
+<p>Generator 函数执行后返回一个遍历器对象。该对象本身也具有Symbol.iterator属性，执行后返回<font color="#B22222">自身</font>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function* gen()&#123;</div><div class="line">  // some code</div><div class="line">&#125;</div><div class="line"></div><div class="line">var g = gen();</div><div class="line"></div><div class="line">g[Symbol.iterator]() === g</div></pre></td></tr></table></figure>
+<h3 id="next方法的参数"><a href="#next方法的参数" class="headerlink" title="next方法的参数"></a>next方法的参数</h3><p>yield表达式本身没有值，或者说总是返回undefined。</p>
+<ol>
+<li>next方法可以带一个参数，参数会被当作上一个yield表达式的返回值。</li>
+<li>通过next方法，可以在Generator函数开始运行之后，继续向函数体内部注入值。即通过next方法，可以在Generator函数运行的不同阶段，从外部向内部注入不同的值，来调整函数行为。</li>
+<li>next方法的参数表示<font color="#B22222">上一个yield表达式的值</font>，因此在第一次使用的next方法带的参数是<strong>无效</strong>的。从语义上讲，第一个next方法用来启动遍历器对象，所以不需要带有参数。</li>
+<li>如果想要第一次next方法就带参数，需要在Generator函数的外部再包一层，</li>
+</ol>
+<h3 id="for…of循环"><a href="#for…of循环" class="headerlink" title="for…of循环"></a>for…of循环</h3><p>for…of循环可以<strong>自动遍历</strong> Generator 函数时生成的<font color="#DB7093">Iterator对象</font>，且此时不再需要调用next方法。</p>
+<p>注意：一旦next方法的返回对象的<font color="#DB7093">done</font>属性为<font color="#B22222">true</font>，for…of循环就会中止，且<strong>不包含该返回对象</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function* foo() &#123;</div><div class="line">  yield 1;</div><div class="line">  yield 2;</div><div class="line">  return 3;</div><div class="line">&#125;</div><div class="line"></div><div class="line">for (let v of foo()) &#123;</div><div class="line">  console.log(v);</div><div class="line">&#125;</div><div class="line">// 1 2</div></pre></td></tr></table></figure>
+<p><font color="#DB7093">for…of</font>循环、扩展运算符（<font color="#DB7093">…</font>）、<font color="#DB7093">解构赋值</font>和<font color="#DB7093">Array.from</font>方法内部调用的，都是遍历器接口。即它们都可以将 Generator 函数返回的 Iterator 对象，作为参数。</p>
+<h3 id="Generator-prototype-throw"><a href="#Generator-prototype-throw" class="headerlink" title="Generator.prototype.throw()"></a>Generator.prototype.throw()</h3><p>Generator函数返回的遍历器对象，都有一个<font color="#DB7093">throw</font>方法，可以在函数体内部<font color="#B22222">抛出错误</font>，然后在 Generator 函数体内捕获。</p>
+<p>throw方法可以接受一个参数，该参数会被<font color="#DB7093">catch</font>语句接收，建议抛出<font color="#DB7093">Error对象的实例</font>。</p>
+<ul>
+<li>如果 Generator 函数内部没有部署try…catch代码块，那么throw方法抛出的错误，将被外部try…catch代码块捕获。</li>
+<li>如果 Generator 函数内部和外部，都没有部署try…catch代码块，那么程序将报错，直接中断执行。</li>
+</ul>
+<p>throw方法被捕获之后，会附带执行一次next方法，即附带执行下一个yield表达式。</p>
+<h3 id="Generator-prototype-return"><a href="#Generator-prototype-return" class="headerlink" title="Generator.prototype.return()"></a>Generator.prototype.return()</h3><p>Generator函数返回的遍历器对象，有一个<font color="#DB7093">return</font>方法，可以<font color="#B22222">返回给定的值</font>，并且<font color="#B22222">终结遍历Generator函数</font>。</p>
+<ul>
+<li>如果return方法调用时，提供参数，则返回值的<font color="#DB7093">value</font>属性为<font color="#B22222">提供的参数</font><br>如果return方法调用时，不提供参数，则返回值的<font color="#DB7093">value</font>属性为<font color="#B22222">undefined</font>，<font color="#DB7093">done</font>属性为<font color="#B22222">true</font>。</li>
+<li>如果 Generator 函数内部有<font color="#DB7093">try…finally</font>代码块，那么<font color="#DB7093">return</font>方法会推迟到<font color="#B22222">finally</font>代码块执行完再执行。并且调用完return方法之后会立即开始执行<font color="#B22222">finally代码块</font>，finally代码块执行完毕后再执行<font color="#B22222">return</font>方法。</li>
+</ul>
+<h2 id="async函数"><a href="#async函数" class="headerlink" title="async函数"></a>async函数</h2><p>async函数使得异步操作变得更加方便，它有以下几个特点：</p>
+<ol>
+<li>内置执行器，即async函数可以像普通函数那样执行：<code>asyncReadFile()</code>。</li>
+<li>async表示函数内存在异步操作，<font color="#DB7093">await</font>表示紧跟在后面的表达式需要等待结果。</li>
+<li>async函数的<font color="#DB7093">await</font>命令后面，可以是 <font color="#B22222">Promise</font> 对象和<font color="#B22222">原始类型的值（数值、字符串和布尔值，但这时等同于同步操作）</font>。</li>
+<li>async函数的<font color="#B22222">返回值是Promise</font>，我们可以用<font color="#B22222">then</font>方法指定下一步的操作。</li>
+<li>async函数可以看作是<font color="#B22222">多个异步操作包装成的一个Promise对象</font>，await命令就是内部then命令的语法糖。</li>
+</ol>
+<h2 id="actions与async-await"><a href="#actions与async-await" class="headerlink" title="actions与async/await"></a>actions与async/await</h2><p>在我的<a href="https://github.com/xuelinglong/vue-CNode" target="_blank" rel="external">vue-CNode项目</a>中使用[node中文社区]的API，登录时使用accesstoken，登录的mutation完成后需要<strong>触发获取用户数据的action</strong>，这就是我遇到的<font color="#DB7093">组合actions</font>情况，此时观看<a href="https://vuex.vuejs.org/zh-cn/actions.html" target="_blank" rel="external">vuex官方文档action章节</a>学习组合action的内容，理解如下：</p>
+<ul>
+<li>action通常是异步的，我们可以组合多个action，以处理更加复杂的异步流程。</li>
+<li><font color="#DB7093">action的处理函数</font>返回一个<font color="#B22222">Promise</font>。</li>
+<li><font color="#DB7093">store.dispatch</font>可以处理<font color="#DC143C">action的处理函数返回的Promise</font>。</li>
+<li><font color="#DB7093">store.dispatch</font>仍旧<font color="#DC143C">返回Promise</font>。</li>
+</ul>
+<p>以登录操作为例：登录 –&gt; 获取用户数据 / 获取用户收藏的主题，这是异步操作，有先后顺序之分，登陆成功后以获取到的loginname为参数执行下面的获取用户数据和用户收藏的主题，使用async/await：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">const actions = &#123;</div><div class="line">    async [type.LOGIN_USER](context) &#123;</div><div class="line">        try &#123;</div><div class="line">            const res = await axios.post(&apos;accesstoken&apos;, &#123;</div><div class="line">                accesstoken: &apos;af0a22ca-d49f-47ec-afef-51b9cabf4c3c&apos;</div><div class="line">            &#125;);</div><div class="line">            await context.commit(type.LOGIN_USER, &#123;</div><div class="line">                data: res.data</div><div class="line">            &#125;);</div><div class="line">            await context.dispatch(type.FETCH_USERDATA, &#123;</div><div class="line">                loginname: res.data.loginname</div><div class="line">            &#125;);</div><div class="line">            await context.dispatch(type.FETCH_TOPIC_COLLECT, &#123;</div><div class="line">                loginname: res.data.loginname</div><div class="line">            &#125;);</div><div class="line">        &#125; catch (err) &#123;</div><div class="line">            console.log(err);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意：一个 <font color="#DB7093">store.dispatch</font> 在<font color="#DC143C">不同模块中</font>可以<font color="#DC143C">触发多个 action</font> 函数。在这种情况下，只有<font color="#DC143C">当所有触发函数完成后，返回的 Promise 才会执行</font>。</p>
+<h1 id="vuex推荐的action写法"><a href="#vuex推荐的action写法" class="headerlink" title="vuex推荐的action写法"></a>vuex推荐的action写法</h1><p>之前我的做法是用<strong>常量</strong>替代<strong>Mutation的事件类型</strong>，action函数名与Mutation事件类型一致，都为常量，但是现在思考发现mutation是同步函数，action可以通过组合来实现异步操作，那么action并不会单纯的只对应一个mutation，即有时一个action里面可以触发别的action，此种情况下我们还是把一个完整的操作写成一个action比较好，从函数名就能看出此action是做什么的。</p>
+<p>以上面提到的登陆操作为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">const actions = &#123;</div><div class="line">    async loginUser(context) &#123;</div><div class="line">        try &#123;</div><div class="line">            const res = await axios.post(&apos;accesstoken&apos;, &#123;</div><div class="line">                accesstoken: &apos;af0a22ca-d49f-47ec-afef-51b9cabf4c3c&apos;</div><div class="line">            &#125;);</div><div class="line">            await context.commit(type.LOGIN_USER, &#123;</div><div class="line">                data: res.data</div><div class="line">            &#125;);</div><div class="line">            await context.dispatch(&apos;fetchUserData&apos;, &#123;</div><div class="line">                loginname: res.data.loginname</div><div class="line">            &#125;);</div><div class="line">            await context.dispatch(&apos;fetchUserCollectedTopic&apos;, &#123;</div><div class="line">                loginname: res.data.loginname</div><div class="line">            &#125;);</div><div class="line">        &#125; catch (err) &#123;</div><div class="line">            console.log(err);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 组件中触发action</div><div class="line">this.$store.dispatch(&apos;loginUser&apos;);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习总结/" rel="tag"># 学习总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/22/2018-02-22/" rel="next" title="2018-02-22">
+                <i class="fa fa-chevron-left"></i> 2018-02-22
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/02/2018-04-02/" rel="prev" title="2018-04-02">
+                2018-04-02 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Actions与async-await"><span class="nav-number">1.</span> <span class="nav-text">Actions与async/await</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Generator函数"><span class="nav-number">1.1.</span> <span class="nav-text">Generator函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#yield表达式"><span class="nav-number">1.1.1.</span> <span class="nav-text">yield表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#yield与return"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">yield与return</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与Iterator接口的关系"><span class="nav-number">1.1.2.</span> <span class="nav-text">与Iterator接口的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next方法的参数"><span class="nav-number">1.1.3.</span> <span class="nav-text">next方法的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for…of循环"><span class="nav-number">1.1.4.</span> <span class="nav-text">for…of循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator-prototype-throw"><span class="nav-number">1.1.5.</span> <span class="nav-text">Generator.prototype.throw()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator-prototype-return"><span class="nav-number">1.1.6.</span> <span class="nav-text">Generator.prototype.return()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#async函数"><span class="nav-number">1.2.</span> <span class="nav-text">async函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#actions与async-await"><span class="nav-number">1.3.</span> <span class="nav-text">actions与async/await</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vuex推荐的action写法"><span class="nav-number">2.</span> <span class="nav-text">vuex推荐的action写法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/03/04/2018-03-04/';
+          this.page.identifier = '2018/03/04/2018-03-04/';
+          this.page.title = '2018-03-04';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

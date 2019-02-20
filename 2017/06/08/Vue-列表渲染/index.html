@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vue.js," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="v-for用 v-for 指令根据一组数组的选项列表进行渲染。v-for 指令需要以 item in items 形式的特殊语法， items 是源数据数组并且 item 是数组元素迭代的别名。">
+<meta name="keywords" content="Vue.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-列表渲染">
+<meta property="og:url" content="http://yoursite.com/2017/06/08/Vue-列表渲染/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="v-for用 v-for 指令根据一组数组的选项列表进行渲染。v-for 指令需要以 item in items 形式的特殊语法， items 是源数据数组并且 item 是数组元素迭代的别名。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-54fe167c4d5fb043.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-afb57fe80426fa40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-467c347cfc50e44f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-d86441a79eac9b15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-45ed010a893053dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-ee1b869d6656a40b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-af56a295a6cfb67d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-e5abadc06013854e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-22a59488b1e64b33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1393082-3f2500e57f5aa971.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.874Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue-列表渲染">
+<meta name="twitter:description" content="v-for用 v-for 指令根据一组数组的选项列表进行渲染。v-for 指令需要以 item in items 形式的特殊语法， items 是源数据数组并且 item 是数组元素迭代的别名。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1393082-54fe167c4d5fb043.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/08/Vue-列表渲染/"/>
+
+
+
+
+
+  <title>Vue-列表渲染 | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/08/Vue-列表渲染/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue-列表渲染</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-08T20:04:04+08:00">
+                2017-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/08/Vue-列表渲染/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/08/Vue-列表渲染/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h1><p>用 v-for 指令根据一组数组的选项列表进行渲染。<br>v-for 指令需要以 item in items 形式的特殊语法， items 是源数据数组并且 item 是数组元素迭代的别名。<br><a id="more"></a></p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app-1&quot;&gt;</div><div class="line">        &lt;ol&gt;            &lt;!--有序列表--&gt;</div><div class="line">        &lt;!--  v-for 指令可以绑定数组的数据来渲染一个项目列表  --&gt;</div><div class="line">            &lt;li v-for=&quot;todo in todos&quot;&gt;</div><div class="line">            &lt;!--&lt;li v-for=&quot;todo of todos&quot;&gt;   结果相同--&gt;</div><div class="line">                &#123;&#123; todo.text &#125;&#125;</div><div class="line">            &lt;/li&gt;</div><div class="line">        &lt;/ol&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        var app1 = new Vue(&#123;</div><div class="line">            el: &apos;#app-1&apos;,</div><div class="line">            data: &#123;</div><div class="line">                todos: [</div><div class="line">                &#123; text: &apos;学习 JavaScript&apos; &#125;,</div><div class="line">                &#123; text: &apos;学习 Vue&apos; &#125;,</div><div class="line">                &#123; text: &apos;整个牛项目&apos; &#125;          </div><div class="line">                ]         </div><div class="line">            &#125;       //app1.todos.push(&#123;text:&apos;111&apos;&#125;) 列表中添加一行显示信息</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>运行结果：<br><img src="http://upload-images.jianshu.io/upload_images/1393082-54fe167c4d5fb043.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=&quot;app-2&quot;&gt;      &lt;!--无序列表--&gt;</div><div class="line">        &lt;li v-for=&quot;item in items&quot;&gt;</div><div class="line">        &lt;!--&lt;li v-for=&quot;item of items&quot;&gt;    结果相同--&gt;  </div><div class="line">            &#123;&#123; item.message &#125;&#125;</div><div class="line">        &lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        var app2 = new Vue(&#123;</div><div class="line">            el: &apos;#app-2&apos;,</div><div class="line">            data: &#123;</div><div class="line">                items: [</div><div class="line">                &#123;message: &apos;Foo&apos; &#125;,</div><div class="line">                &#123;message: &apos;Bar&apos; &#125;</div><div class="line">                ]</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1393082-afb57fe80426fa40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>在 v-for 块中，我们拥有对父作用域属性的完全访问权限。 v-for 还支持一个可选的第二个参数为当前项的索引。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=&quot;app-3&quot;&gt;      &lt;!--无序列表--&gt;</div><div class="line">        &lt;!--index作为v-for的第二个参数（可选参数）表示当前项的索引--&gt;</div><div class="line">        &lt;li v-for=&quot;(item, index) in items&quot;&gt;</div><div class="line">        &lt;!--&lt;li v-for=&quot;(item, index) of items&quot;&gt;    结果相同--&gt;       </div><div class="line">            &#123;&#123; parentMessage &#125;&#125; - &#123;&#123; index &#125;&#125; - &#123;&#123; item.message &#125;&#125;</div><div class="line">            &lt;!--输出形式为：Parent-索引号-值 --&gt;</div><div class="line">        &lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        var app3 = new Vue(&#123;</div><div class="line">            el: &apos;#app-3&apos;,</div><div class="line">            data: &#123;</div><div class="line">                parentMessage: &apos;Parent&apos;,</div><div class="line">                items: [</div><div class="line">                &#123;message: &apos;Foo&apos; &#125;,</div><div class="line">                &#123;message: &apos;Bar&apos; &#125;</div><div class="line">                ]</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1393082-467c347cfc50e44f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>可以用 of 替代 in 作为分隔符，因为它是最接近 JavaScript 迭代器的语法。</p>
+<h2 id="Template-v-for"><a href="#Template-v-for" class="headerlink" title="Template v-for"></a>Template v-for</h2><p>如同 v-if 模板：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;vm-3&quot;&gt;</div><div class="line">        &lt;template v-if=&quot;ok&quot;&gt;</div><div class="line">            &lt;h1&gt;Title&lt;/h1&gt;</div><div class="line">            &lt;p&gt;Paragraph 1&lt;/p&gt;</div><div class="line">            &lt;p&gt;Paragraph 2&lt;/p&gt;</div><div class="line">        &lt;/template&gt;   </div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        var vm3 = new Vue(&#123;</div><div class="line">            el: &apos;#vm-3&apos;,   //app3.$el === document.getElementById(&apos;app-3&apos;) // -&gt; true</div><div class="line">            data: &#123;   </div><div class="line">            ok: true</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>你也可以用带有 v-for 的<code>&lt;template&gt;</code>标签来渲染多个元素块：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">  &lt;template v-for=&quot;item in items&quot;&gt;</div><div class="line">    &lt;li&gt;&#123;&#123; item.msg &#125;&#125;&lt;/li&gt;</div><div class="line">    &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;</div><div class="line">  &lt;/template&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="迭代对象v-for"><a href="#迭代对象v-for" class="headerlink" title="迭代对象v-for"></a>迭代对象v-for</h2><p>可以用 v-for 通过一个对象的属性来迭代：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=&quot;repeat-object&quot; class=&quot;demo&quot;&gt;</div><div class="line">        &lt;li v-for=&quot;value in object&quot;&gt;</div><div class="line">            &#123;&#123; value &#125;&#125;</div><div class="line">        &lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        new Vue(&#123;</div><div class="line">            el: &apos;#repeat-object&apos;,</div><div class="line">            data: &#123;</div><div class="line">                object: &#123;</div><div class="line">                FirstName: &apos;John&apos;,</div><div class="line">                LastName: &apos;Doe&apos;,</div><div class="line">                Age: 30</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>运行结果：<br><img src="http://upload-images.jianshu.io/upload_images/1393082-d86441a79eac9b15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>可以提供第二个的参数为键名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=&quot;repeat-object1&quot;&gt;</div><div class="line">        &lt;li v-for=&quot;(value, key) in object&quot;&gt;</div><div class="line">            &#123;&#123; key &#125;&#125; : &#123;&#123; value &#125;&#125;</div><div class="line">        &lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        new Vue(&#123;</div><div class="line">            el: &apos;#repeat-object1&apos;,</div><div class="line">            data: &#123;</div><div class="line">                object: &#123;</div><div class="line">                FirstName: &apos;John&apos;,</div><div class="line">                LastName: &apos;Doe&apos;,</div><div class="line">                Age: 30</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1393082-45ed010a893053dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>可以提供第三个参数为索引：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div v-for=&quot;(value, key, index) in object&quot;&gt;</div><div class="line">  &#123;&#123; index &#125;&#125;. &#123;&#123; key &#125;&#125; : &#123;&#123; value &#125;&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1393082-ee1b869d6656a40b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><strong>在遍历对象时，是按 Object.keys() 的结果遍历，但是不能保证它的结果在不同的 JavaScript 引擎下是一致的。</strong></p>
+<h2 id="整数迭代v-for"><a href="#整数迭代v-for" class="headerlink" title="整数迭代v-for"></a>整数迭代v-for</h2><p>v-for 也可以取整数。此时它将重复多次模板。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;range&quot; class=&quot;demo&quot;&gt;</div><div class="line">    &lt;span v-for=&quot;n in 10&quot;&gt;&#123;&#123; n &#125;&#125; &lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    new Vue(&#123; el: &apos;#range&apos; &#125;)</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>结果：<br><img src="http://upload-images.jianshu.io/upload_images/1393082-af56a295a6cfb67d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="v-for-VS-v-if"><a href="#v-for-VS-v-if" class="headerlink" title="v-for VS v-if"></a>v-for VS v-if</h2><p>当它们处于同一节点， v-for 的优先级比 v-if 更高，这意味着 v-if 将分别重复运行于每个 v-if 循环中。<br>当你想<strong>为仅有的一些项渲染节点时</strong>，这种优先级的机制会十分有用，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;li v-for=&quot;todo in todos&quot; v-if=&quot;!todo.isComplete&quot;&gt;</div><div class="line">  &#123;&#123; todo &#125;&#125;        &lt;!--代码只传递了未complete的todos--&gt;</div><div class="line">&lt;/li&gt;</div></pre></td></tr></table></figure></p>
+<p>如果目的是有条件地跳过循环的执行，那么将 v-if 置于包装元素 (或 <template>)上。如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul v-if=&quot;shouldRenderTodos&quot;&gt;</div><div class="line">  &lt;li v-for=&quot;todo in todos&quot;&gt;</div><div class="line">    &#123;&#123; todo &#125;&#125;</div><div class="line">  &lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure></template></p>
+<h1 id="key"><a href="#key" class="headerlink" title="key"></a>key</h1><p>当 Vue.js 用 v-for 正在更新已渲染过的元素列表时，它默认用 “就地复用” 策略。如果数据项的顺序被改变，Vue将不是移动 DOM 元素来匹配数据项的顺序， 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。这个类似 Vue 1.x 的 track-by=”$index” 。</p>
+<p>Vue 1.x 的 track-by=”$index” :<br>如果没有唯一的键供追踪，可以使用 track-by=”$index”，它强制让 v-for 进入原位更新模式：片断不会被移动，而是简单地以对应索引的新值刷新。这种模式也能处理数据数组中重复的值。<br>这让数据替换非常高效，但是也会付出一定的代价。因为这时 DOM 节点不再映射数组元素顺序的改变，不能同步临时状态（比如 <input> 元素的值）以及组件的私有状态。因此，如果 v-for 块包含 <input> 元素或子组件，要小心使用 track-by=”$index”</p>
+<p>为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 key 属性。理想的 key 值是每项都有唯一 id。这个特殊的属性相当于 Vue 1.x 的 track-by ，但它的工作方式类似于一个属性，所以你需要用 v-bind 来绑定动态值（在这里使用简写）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div v-for=&quot;item in items&quot; :key=&quot;item.id&quot;&gt;</div><div class="line">  &lt;!-- 内容 --&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>建议尽可能使用 v-for 来提供 key ，除非迭代 DOM 内容足够简单，或者你是故意要依赖于默认行为来获得性能提升。</p>
+<p>因为它是 Vue 识别节点的一个通用机制， key 并不特别与 v-for 关联，key 还具有其他用途。</p>
+<h1 id="数组更新检测"><a href="#数组更新检测" class="headerlink" title="数组更新检测"></a>数组更新检测</h1><h2 id="变异方法"><a href="#变异方法" class="headerlink" title="变异方法"></a>变异方法</h2><p>Vue 包含一组观察数组的变异方法，所以它们也将会触发视图更新：</p>
+<ol>
+<li>push()     ：向数组的末尾添加一个或多个元素，并返回新的长度；</li>
+<li>pop()      ：删除并返回数组的最后一个元素；</li>
+<li>shift()   ：把数组的第一个元素从其中删除并返回第一个元素的值；</li>
+<li>unshift()  ：向数组的开头添加一个或更多元素，并返回新的长度；</li>
+<li>splice()   ：向/从数组中添加/删除项目，然后返回被删除的项目；</li>
+<li>sort()       ：于对数组的元素进行排序；</li>
+<li>reverse()    ： 颠倒数组中元素的顺序；</li>
+</ol>
+<h2 id="重塑数组"><a href="#重塑数组" class="headerlink" title="重塑数组"></a>重塑数组</h2><p><strong>变异方法</strong>会改变被这些方法调用的原始数组。<br><strong>非变异方法</strong>不会改变原始数组，但总是返回一个新数组。</p>
+<p>非变异方法（3个）：</p>
+<ol>
+<li>filter()</li>
+<li>concat()    ：连接两个或多个数组，返回被连接数组的一个副本；</li>
+<li>slice()      ：从已有的数组中返回选定的元素；</li>
+</ol>
+<p>当使用非变异方法时，可以用新数组替换旧数组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=&quot;app-2&quot;&gt;      &lt;!--无序列表--&gt;</div><div class="line">    &lt;li v-for=&quot;item in items&quot;&gt;</div><div class="line">    &lt;!--&lt;li v-for=&quot;item of items&quot;&gt;--&gt;</div><div class="line">        &#123;&#123; item.message &#125;&#125;</div><div class="line">    &lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    var app2 = new Vue(&#123;</div><div class="line">        el: &apos;#app-2&apos;,</div><div class="line">        data: &#123;</div><div class="line">            items: [</div><div class="line">            &#123;message: &apos;Foo&apos; &#125;,</div><div class="line">            &#123;message: &apos;Bar&apos; &#125;</div><div class="line">            ]</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">    app2.items = app2.items.filter(function (item) &#123;   //非变异方法filter</div><div class="line">        return item.message.match(/Foo/)      </div><div class="line">    &#125;)</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>运行结果：<br><img src="http://upload-images.jianshu.io/upload_images/1393082-e5abadc06013854e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>Vue 实现了一些智能启发式方法来最大化 DOM 元素重用，所以用一个含有相同元素的数组去替换原来的数组是非常高效的操作。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>由于 JavaScript 的限制， Vue 不能检测以下变动的数组：</p>
+<ol>
+<li>当你利用索引直接设置一个项时：<br>例如： <code>vm.items[indexOfItem] = newValue</code><blockquote>
+<p>解决方法：实现和 vm.items[indexOfItem] = newValue 相同的效果， 同时也将触发状态更新。</p>
+<blockquote>
+<ol>
+<li><code>// Vue.set
+Vue.set(example1.items, indexOfItem, newValue)</code></li>
+<li><code>// Array.prototype.splice
+example1.items.splice(indexOfItem, 1, newValue)</code></li>
+</ol>
+</blockquote>
+</blockquote>
+</li>
+<li>当你修改数组的长度时：<br>例如：<code>vm.items.length = newLength</code><blockquote>
+<p>解决方法：实现和 vm.items.length = newLength 相同的效果， 同时也将触发状态更新。</p>
+<blockquote>
+<p><code>//Array.prototype.splice
+example1.items.splice(newLength)</code></p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<h1 id="显示过滤-排序结果"><a href="#显示过滤-排序结果" class="headerlink" title="显示过滤/排序结果"></a>显示过滤/排序结果</h1><p>当我们想要显示一个数组的过滤或排序副本，而不实际改变或重置原始数据 时，可以创建返回过滤或排序数组的计算属性。</p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;range1&quot; class=&quot;demo1&quot;&gt;</div><div class="line">        &lt;ul&gt;</div><div class="line">            &lt;li v-for=&quot;n in evenNumbers&quot;&gt;&#123;&#123; n &#125;&#125;&lt;/li&gt;</div><div class="line">        &lt;/ul&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        new Vue(&#123;</div><div class="line">            el: &apos;#range1&apos;,</div><div class="line">            data: &#123;</div><div class="line">                numbers: [ 1, 2, 3, 4, 5 ]</div><div class="line">             &#125;,</div><div class="line">            computed: &#123;</div><div class="line">                evenNumbers: function () &#123;</div><div class="line">                    return this.numbers.filter(function (number) &#123;</div><div class="line">                        return number % 2 === 0</div><div class="line">                    &#125;)</div><div class="line">                &#125;</div><div class="line">            &#125; </div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>运行结果：<br><img src="http://upload-images.jianshu.io/upload_images/1393082-22a59488b1e64b33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>或者，也可以在计算属性不适用的情况下 (例如，在嵌套 v-for 循环中) 使用 method 方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;range2&quot; class=&quot;demo2&quot;&gt;</div><div class="line">        &lt;ul&gt;</div><div class="line">            &lt;li v-for=&quot;n in even(numbers)&quot;&gt;&#123;&#123; n &#125;&#125;&lt;/li&gt;</div><div class="line">        &lt;/ul&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        new Vue(&#123;</div><div class="line">            el: &apos;#range2&apos;,</div><div class="line">            data: &#123;</div><div class="line">                numbers: [ 1, 2, 3, 4, 5 ]</div><div class="line">             &#125;,</div><div class="line">            methods: &#123;</div><div class="line">                even: function (numbers) &#123;</div><div class="line">                    return numbers.filter(function (number) &#123;</div><div class="line">                        return number % 2 === 0</div><div class="line">                    &#125;)</div><div class="line">                &#125;</div><div class="line">            &#125; </div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>运行结果（同上）：<br><img src="http://upload-images.jianshu.io/upload_images/1393082-3f2500e57f5aa971.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue-js/" rel="tag"># Vue.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/07/Vue-条件渲染/" rel="next" title="Vue-条件渲染">
+                <i class="fa fa-chevron-left"></i> Vue-条件渲染
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/08/Vue-事件处理器/" rel="prev" title="Vue-事件处理器">
+                Vue-事件处理器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#v-for"><span class="nav-number">1.</span> <span class="nav-text">v-for</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本用法"><span class="nav-number">1.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Template-v-for"><span class="nav-number">1.2.</span> <span class="nav-text">Template v-for</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代对象v-for"><span class="nav-number">1.3.</span> <span class="nav-text">迭代对象v-for</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数迭代v-for"><span class="nav-number">1.4.</span> <span class="nav-text">整数迭代v-for</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-for-VS-v-if"><span class="nav-number">1.5.</span> <span class="nav-text">v-for VS v-if</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#key"><span class="nav-number">2.</span> <span class="nav-text">key</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组更新检测"><span class="nav-number">3.</span> <span class="nav-text">数组更新检测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变异方法"><span class="nav-number">3.1.</span> <span class="nav-text">变异方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重塑数组"><span class="nav-number">3.2.</span> <span class="nav-text">重塑数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">3.3.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示过滤-排序结果"><span class="nav-number">4.</span> <span class="nav-text">显示过滤/排序结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/06/08/Vue-列表渲染/';
+          this.page.identifier = '2017/06/08/Vue-列表渲染/';
+          this.page.title = 'Vue-列表渲染';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

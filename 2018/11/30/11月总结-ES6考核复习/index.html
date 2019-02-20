@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="月度总结," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习范围近期公司前端组开展基础知识考核，我发现这些都是我目前所欠缺的部分，故本月学习主要围绕在每次知识考核的内容。 考核内容：ES6的ESmodule、Reflect、Class、Proxy、Generator、Promise、Iterator。 Proxy(代理器)proxy可以理解为在目标对象之前增加一层拦截，访问目标对象必须经过这层拦截，在拦截中可以对外界的访问进行过滤和改写。 ES6提供P">
+<meta name="keywords" content="月度总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11月总结[ES6考核复习]">
+<meta property="og:url" content="http://yoursite.com/2018/11/30/11月总结-ES6考核复习/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="学习范围近期公司前端组开展基础知识考核，我发现这些都是我目前所欠缺的部分，故本月学习主要围绕在每次知识考核的内容。 考核内容：ES6的ESmodule、Reflect、Class、Proxy、Generator、Promise、Iterator。 Proxy(代理器)proxy可以理解为在目标对象之前增加一层拦截，访问目标对象必须经过这层拦截，在拦截中可以对外界的访问进行过滤和改写。 ES6提供P">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1393082-719660a32f36b3ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1393082-24eaa53d942ec50c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1393082-3ce3e31979101330.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-12-04T02:19:02.863Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="11月总结[ES6考核复习]">
+<meta name="twitter:description" content="学习范围近期公司前端组开展基础知识考核，我发现这些都是我目前所欠缺的部分，故本月学习主要围绕在每次知识考核的内容。 考核内容：ES6的ESmodule、Reflect、Class、Proxy、Generator、Promise、Iterator。 Proxy(代理器)proxy可以理解为在目标对象之前增加一层拦截，访问目标对象必须经过这层拦截，在拦截中可以对外界的访问进行过滤和改写。 ES6提供P">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1393082-719660a32f36b3ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/30/11月总结-ES6考核复习/"/>
+
+
+
+
+
+  <title>11月总结[ES6考核复习] | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/30/11月总结-ES6考核复习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">11月总结[ES6考核复习]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-30T23:12:39+08:00">
+                2018-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/30/11月总结-ES6考核复习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/30/11月总结-ES6考核复习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="学习范围"><a href="#学习范围" class="headerlink" title="学习范围"></a>学习范围</h1><p>近期公司前端组开展基础知识考核，我发现这些都是我目前所欠缺的部分，故本月学习主要围绕在每次知识考核的内容。</p>
+<p>考核内容：ES6的ESmodule、Reflect、Class、Proxy、Generator、Promise、Iterator。</p>
+<h2 id="Proxy-代理器"><a href="#Proxy-代理器" class="headerlink" title="Proxy(代理器)"></a>Proxy(代理器)</h2><p>proxy可以理解为在目标对象之前增加一层拦截，访问目标对象必须经过这层拦截，在拦截中可以对外界的访问进行过滤和改写。</p>
+<p>ES6提供Proxy构造函数，用来生成Proxy实例，Proxy构造函数有两个参数target(要拦截的目标对象)、handler(定制拦截行为的一个对象)。</p>
+<p>Proxy 支持的拦截操作：</p>
+<ul>
+<li>get(target目标对象, propKey属性名, receiver(proxy实例本身)：拦截对象属性的读取；</li>
+<li>set(target目标对象, propKey属性名, value属性值, receiver(proxy实例本身))：拦截对象属性的设置；</li>
+<li>has(target目标对象, propKey需要查询的属性名)：拦截propKey in proxy的操作，返回一个布尔值，即判断对象是否具有某个属性时生效；</li>
+<li>apply(target目标对象, object目标对象的上下文对象, args目标对象的参数数组)：拦截 Proxy 实例作为函数调用的操作；</li>
+<li>construct(target目标对象, args构造函数的参数对象, NewTarget创造实例对象时new命令作用的构造函数)：拦截 Proxy 实例作为构造函数调用的操作；</li>
+</ul>
+<a id="more"></a>
+<h3 id="get方法注意点："><a href="#get方法注意点：" class="headerlink" title="get方法注意点："></a>get方法注意点：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">let obj = &#123;</div><div class="line">  name: &apos;哈哈&apos;,</div><div class="line">  id: 1</div><div class="line">&#125;</div><div class="line">let proxyObj = new Proxy(obj, &#123;</div><div class="line">  get: function (target, key, value, receiver) &#123;</div><div class="line">    if(key==&apos;settleId&apos; || key in target) &#123;</div><div class="line">      return key==&apos;settleId&apos; ? target.id : target.key;</div><div class="line">    &#125;else &#123;</div><div class="line">      throw new ReferenceError(&quot;Property \&quot;&quot; + key + &quot;\&quot; does not exist.&quot;);</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  set (target, property, value) &#123;</div><div class="line">    if(property==&apos;settleId&apos;) &#123;</div><div class="line">      return Reflect.set(target, &apos;settleId&apos;, target.id, receiver);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">  console.log(proxyObj.settleId);   // 1</div><div class="line">  console.log(proxyObj.age);  // 报错Uncaught ReferenceError: Property &quot;age&quot; does not exist.</div></pre></td></tr></table></figure>
+<ul>
+<li>如果handler是一个空对象，则没有任何拦截效果，访问proxy等同于访问target。</li>
+<li>若访问目标对象不存在的属性，只会返回undefined，但是设置拦截函数之后会抛出一个错误。</li>
+<li>如果一个属性不可配置（configurable）且不可写（writable），则 Proxy 不能修改该属性，否则通过 Proxy 对象访问该属性会报错。</li>
+</ul>
+<h3 id="set方法注意点："><a href="#set方法注意点：" class="headerlink" title="set方法注意点："></a>set方法注意点：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">let obj = &#123;</div><div class="line">  name: &apos;哈哈&apos;,</div><div class="line">  id: 1</div><div class="line">&#125;</div><div class="line">let proxyObj = new Proxy(obj, &#123;</div><div class="line">  get: function (target, property, value) &#123;</div><div class="line">    invariant(property, &apos;get&apos;);</div><div class="line">    // 对于满足条件的 age 属性以及其他属性，直接保存</div><div class="line">    return target[property];</div><div class="line">  &#125;,</div><div class="line">  set: function (target, property, value) &#123;</div><div class="line">    if(property==&apos;age&apos;) &#123;</div><div class="line">      if(!Number.isInteger(value)) &#123;</div><div class="line">        throw new TypeError(&apos;The age is not an integer&apos;);</div><div class="line">      &#125;</div><div class="line">      if (value &gt; 200) &#123;</div><div class="line">        throw new RangeError(&apos;The age seems invalid&apos;);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    invariant(property, &apos;set&apos;);</div><div class="line">    // 对于满足条件的 age 属性以及其他属性，直接保存</div><div class="line">    target[property] = value;</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">function invariant (key, action) &#123;</div><div class="line">  if (key[0] === &apos;_&apos;) &#123;</div><div class="line">    throw new Error(`Invalid attempt to $&#123;action&#125; private &quot;$&#123;key&#125;&quot; property`);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">  </div><div class="line">proxyObj.age = 100;  // 存储</div><div class="line">console.log(obj);</div><div class="line">proxyObj._pro = 300;  // 报错Uncaught Error: Invalid attempt to set private &quot;_pro&quot; property.</div></pre></td></tr></table></figure>
+<ul>
+<li>结合get和set方法，就可以做到防止内部属性(属性名第一个字符使用下划线)被外部读写；</li>
+<li>如果目标对象自身的某个属性，不可写且不可配置，那么set方法将不起作用；</li>
+</ul>
+<h3 id="apply方法注意点："><a href="#apply方法注意点：" class="headerlink" title="apply方法注意点："></a>apply方法注意点：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">let proxyObj = new Proxy(sum, &#123;</div><div class="line">  apply: function (target, ctx, args) &#123;</div><div class="line">    return Reflect.apply(...arguments)</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">function sum (left, right) &#123;</div><div class="line">  return left + right;</div><div class="line">&#125;;</div><div class="line">  </div><div class="line">proxyObj(1, 2); // 6</div><div class="line">proxyObj.call(null, 5, 6); // 22</div><div class="line">proxyObj.apply(null, [7, 8]); // 30</div></pre></td></tr></table></figure>
+<ul>
+<li>每当执行proxy函数（直接调用或call和apply调用），就会被apply方法拦截；</li>
+<li>直接调用Reflect.apply方法，也会被拦截；</li>
+</ul>
+<h3 id="has方法注意点："><a href="#has方法注意点：" class="headerlink" title="has方法注意点："></a>has方法注意点：</h3><ul>
+<li>如果原对象不可配置或者禁止扩展，这时has拦截会报错；</li>
+<li>has方法拦截的是HasProperty操作，而不是HasOwnProperty操作，即has方法不判断一个属性是对象自身的属性，还是继承的属性；</li>
+</ul>
+<h3 id="construct方法注意点："><a href="#construct方法注意点：" class="headerlink" title="construct方法注意点："></a>construct方法注意点：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let proxyObj = new Proxy(function ()&#123;&#125;, &#123;</div><div class="line">  construct: function (target, args) &#123;</div><div class="line">    return &#123;value: args[0]*10&#125;;</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">  </div><div class="line">(new proxyObj(2)).value;  // 20</div></pre></td></tr></table></figure>
+<ul>
+<li>construct方法返回的必须是一个对象，否则会报错；</li>
+</ul>
+<h2 id="Reflect"><a href="#Reflect" class="headerlink" title="Reflect"></a>Reflect</h2><p>Reflect也是ES6为了操作对象而提供的新API，类似Proxy。Reflect与Proxy方法一一对应，也是13个。</p>
+<p>Reflect的设计目的：</p>
+<ol>
+<li>把Object的语言内部的方法放在Reflect上，即从Reflect对象上可以拿到语言内部的方法。</li>
+<li>使修改Object方法的返回结果更合理，在无法定义属性时不会报错而是返回false。</li>
+<li>让Object的操作都变成函数行为，如删除对象属性：老写法delect obj(‘name’) —&gt; 新写法Reflect.deleteProperty(obj, name)；如判断对象中是否含有xxx属性：老写法name in obj —&gt; 新写法Reflect.has(obj, name)。</li>
+<li>Reflect对象的方法与Proxy对象的方法一一对应，我理解为使用Proxy修改默认行为，使用Reflect获取默认行为。</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/1393082-719660a32f36b3ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>Reflect.get(target, name, receiver)：查找并返回target的name属性，如果没有该属性则返回undefined；如果name属性部署了读取函数，则读取函数的this绑定receiver；</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1393082-24eaa53d942ec50c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="reflect-get.png"></p>
+<ul>
+<li>Reflect.set(target, name, value, receiver)：设置target对象的name属性等于value；如果name属性设置了赋值函数，则赋值函数的this绑定receiver；</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1393082-3ce3e31979101330.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="reflect-set.png"></p>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><p>constructor是一个用于创建和初始化使用class创建的对象的方法，一个类只能拥有一个constructor方法，即使没有明显定义constructor，也会默认被添加一个空的constructor，一个构造函数可以使用super关键字来调用一个父类的构造函数。</p>
+<h3 id="prototype属性"><a href="#prototype属性" class="headerlink" title="prototype属性"></a>prototype属性</h3><p>可以理解为prototype就是把所有对象连接起来的桥梁，把所有实例对象需要共享的属性和方法放在里面，形成一个prototype对象，实例一旦被创建就会自动引用prototype对象的属性和方法。一旦更改prototype对象里面属性的值，所有实 例里面该属性值都会同时变化。</p>
+<p>实例的属性和方法可分为2种：1.引用的prototype中的属性与方法。2.构造函数中的本地属性与方法。</p>
+<p>同理讲一个类有固定的属性，但是类的实例却有不同的属性值。</p>
+<h3 id="super"><a href="#super" class="headerlink" title="super"></a>super</h3><p>super用来调用父类的构造函数，必须在this之前使用。super作为函数调用时，代表的是父类的构造函数，但是super内部的this指向子类。且super()只能用在子类的构造函数中。</p>
+<p>在普通方法中，super作为对象使用，那么它指向父类的原型对象，在静态方法中指向父类。</p>
+<h2 id="Generator函数"><a href="#Generator函数" class="headerlink" title="Generator函数"></a>Generator函数</h2><p>Generator函数返回一个遍历器对象，返回的遍历器对象可以依次遍历generator函数内部的每一个状态。</p>
+<p>Generator函数的特点是function* name(){…}，函数内部有yield表达式，且直接调用generator函数它并不会立即执行，因为它返回一个指向内部状态的指针对象，必须调用next方法才能使指针移向下一个状态，next方法若是含有参数，则会替代本个yield表达式的值，通常返回的是普通对象{value:xxx,done:false}，当done为true时遍历结束。</p>
+<p>一个Generator函数内部可以调用另外的generator函数，只需要使用yield* name()即可。</p>
+<h2 id="module"><a href="#module" class="headerlink" title="module"></a>module</h2><h3 id="export"><a href="#export" class="headerlink" title="export"></a>export</h3><p>export只能输出变量、函数方法、类这三种，export输出有两种写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">export var firstName = &apos;Michael&apos;;</div><div class="line">// 两种方式是等价的</div><div class="line">var year = 1958;</div><div class="line">export &#123;year&#125;;  // 使用大括号指定所要输出的一组变量</div></pre></td></tr></table></figure>
+<p>export导出的变量可以被使用as重命名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function quickSort()&#123;...&#125;</div><div class="line">export &#123;</div><div class="line">  quickSort as sortFun1</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>export输出的是对外的接口，因此其与值是动态绑定的，即通过该接口可以获取到模块内部实时的值。</p>
+<h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><p>export用来导出接口，import可以用来加载模块，import命令接受一对大括号，里面指定从其他模块导入的变量名，注意这里的变量名必须与被导入模块对外接口的名称相同。也可以使用as关键字对导入的变量进行重命名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import &#123;quickSort as sortFun1&#125; from &apos;./sort.js&apos;;</div></pre></td></tr></table></figure>
+<ul>
+<li>import是输入接口，所以不允许也不建议在加载的时候改写接口。建议凡是输入的变量都完全当作是只读的，不要轻易改变它的属性。</li>
+<li>import命令的from指定文件的位置，可以是绝对路径也可以是相对路径，且文件名的.js后缀可以省略，且路径写到文件夹时会默认读取下面的index.js，因此index.js文件读取的时候路径中可以省略index.js。</li>
+<li>import命令会提升到模块头部首先执行。</li>
+<li>import是静态执行，因此不能使用表达式、变量、if结构这些只有在运行时才能得到结果的语法结构。</li>
+<li>import ‘load’ 仅仅执行load模块，不输入任何值。</li>
+<li>多次执行同一句import命令，只会执行一次。</li>
+</ul>
+<p>模块的整体加载：可用*指定一个对象，所有输出值都加载在这个对象上面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// type.js</div><div class="line">export const LOGIN = &apos;LOGIN&apos;;</div><div class="line">export const FETCH_MOVIE = &apos;FETCH_MOVIE&apos;;</div><div class="line"></div><div class="line">// index.js</div><div class="line">import * as type from &apos;type.js&apos;;</div><div class="line">console.log(type.FETCH_MOVIE);</div></pre></td></tr></table></figure>
+<h3 id="export-default命令"><a href="#export-default命令" class="headerlink" title="export default命令"></a>export default命令</h3><p>使用import时必须知道所要加载的变量名或函数名，否则无法加载，为了方便，可以使用export default命令，export default命令为模块指定默认输出，其他模块加载该模块时import命令可以为该匿名函数指定任意名字。</p>
+<ul>
+<li>export default也可以用在非匿名函数之前，加载时视同匿名函数加载。</li>
+<li>export default导出，使用import语句加载时不需要大括号。</li>
+<li>一个模块只能有一个默认输出，即export default一个模块只能有一个。</li>
+<li>export default本质是输出一个叫做default的变量或方法，然后我们可以为它取任意名字，因此export default后面不能跟变量声明语句。</li>
+<li>因为export default本质是将后面的值赋给default变量，因此可以直接将一个值写在后面，export default 12不会报错是因为有对外接口default，而export 12报错是因为没有对外的接口。</li>
+</ul>
+<h3 id="export-与-import-的复合写法"><a href="#export-与-import-的复合写法" class="headerlink" title="export 与 import 的复合写法"></a>export 与 import 的复合写法</h3><p>在一个模块中先输入后输出同一个模块，可以使用export与import的复合写法，相当于对外转发了接口，但是接口并没有实际被导入本模块，因此本模块中并不能直接使用接口中的内容。</p>
+<h2 id="考核题目回顾及解析"><a href="#考核题目回顾及解析" class="headerlink" title="考核题目回顾及解析"></a>考核题目回顾及解析</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">以下代码的执行后，变量result的值是多少?</div><div class="line">const target = new Date(2018, 5, 5);</div><div class="line">const handler = &#123;&#125;;</div><div class="line">const proxy = new Proxy(target, handler);</div><div class="line"></div><div class="line">var result = proxy.getDate();</div><div class="line"></div><div class="line">答案: 执行失败，报错: TypeError: this is not a Date object.</div><div class="line">主要原因就是在 Proxy 代理的情况下，目标对象内部的this关键字会指向 Proxy 代理</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">有代码如下:</div><div class="line">const proxy = new Proxy(&#123;&#125;, &#123;</div><div class="line">  get: function(target, property, receiver) &#123;</div><div class="line">    return receiver;</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">const obj = Object.create(proxy);</div><div class="line"></div><div class="line">那么，说法表达式的结果为true的有哪些？</div><div class="line">A. obj.name == obj</div><div class="line">B. obj.name === obj</div><div class="line">C. proxy.getReceiver === proxy</div><div class="line">D. proxy.getReceiver == proxy</div><div class="line"></div><div class="line">答案: A,B,C,D</div><div class="line">解析: proxy对象的getReceiver属性是由proxy对象提供的，receiver指向proxy对象。另外，get方法可以被继承，Object.create创建了obj，而obj的原型是proxy，调用name的时候，实际得到的是自身。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">有代码如下:</div><div class="line">var twice = &#123;</div><div class="line">  apply (target, ctx, args) &#123;</div><div class="line">    return Reflect.apply(...arguments) * 2;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">function sum (left, right) &#123;</div><div class="line">  return left + right;</div><div class="line">&#125;;</div><div class="line">var proxy = new Proxy(sum, twice);</div><div class="line"></div><div class="line">var a = proxy(1, 5)</div><div class="line">var b = proxy.call(null, 2, 5)</div><div class="line">var c = proxy.apply(null, [3, 5])</div><div class="line"></div><div class="line">那么，a，b，c的值分别是多少？</div><div class="line">答案: 12 ，14，16</div><div class="line">解析: proxy是一个Proxy实例，当实例通过函数调用或者通过call、apply方法调用时就会触发Proxy对apply方法的拦截。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">以下代码的输出结果是什么？</div><div class="line">Promise.resolve(5)</div><div class="line">  .then()</div><div class="line">  .then(res =&gt; &#123;</div><div class="line">    console.log(res)</div><div class="line">    return 3</div><div class="line">    &#125;)</div><div class="line">  .then(() =&gt; &#123;&#125;)</div><div class="line">  .then(res =&gt; &#123; console.log(res) &#125;)</div><div class="line"></div><div class="line">答案：5，undefined</div><div class="line">解析：promise有一个自动传递机制，then后面为空，所以会把resolve的值传递下去，因此第一个输出5，后续返回3，但是之后的then返回undefined，因此最后的res就是undefined。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">以下代码打印出什么：</div><div class="line">let o = &#123;</div><div class="line">  a:0</div><div class="line">&#125;</div><div class="line"></div><div class="line">o = new Proxy(o,&#123;</div><div class="line">  set(target, key, value, proxy) &#123; </div><div class="line">    if (typeof value !== &apos;number&apos;)return </div><div class="line">    return Reflect.set(target, key, value, proxy); &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">o.a = &apos;1&apos;</div><div class="line">console.log(o.a)</div><div class="line">答案：0</div><div class="line">解析：因为o.a=&apos;1&apos;会触发set拦截，且&apos;1&apos;是非Number，因此会直接执行return，且不修改原对象，后续再访问o.a依然是0。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">const promise1=new Promise((resolve,reject)=&gt;&#123;</div><div class="line">  setTimeout(()=&gt;&#123;</div><div class="line">    resolve(&apos;success&apos;)</div><div class="line">  &#125;,1000)</div><div class="line">&#125;)</div><div class="line">const promise2 = promise1.then(()=&gt;&#123;</div><div class="line">  throw new Error(&apos;error!!!&apos;);</div><div class="line">&#125;)</div><div class="line">console.log(&apos;promise1&apos;,promise1)</div><div class="line">console.log(&apos;promise2&apos;,promise2)</div><div class="line">setTimeout(()=&gt;&#123;</div><div class="line">  console.log(&apos;promise1&apos;,promise1)</div><div class="line">  console.log(&apos;promise2&apos;,promise2)</div><div class="line">&#125;,2000)</div><div class="line">以上代码执行结果是什么？</div><div class="line">执行结果：</div><div class="line">  1. promise1, Promise &#123;&lt;pending&gt;&#125;</div><div class="line">  2. promise2, Promise &#123;&lt;pending&gt;&#125;</div><div class="line">  3. Uncaught (in promise) Error: error!!! (抛异常)</div><div class="line">  4. promise1, Promise &#123;&lt;resolved: &quot;success&quot;&gt;&#125;</div><div class="line">  5. promise2, Promise &#123;&lt;rejected: Error: error!!!&gt;&#125;  </div><div class="line">解析：</div><div class="line">首先会打印出promise1，但是promise1中有个定时器，此时还并未执行resolve，因此会处于pending状态。</div><div class="line">promise2是由promise1执行结束后再执行的，因为promise1还未执行完毕，因此promise2也处于pending状态。</div><div class="line">等到定时器一秒后，promise执行了resolve(&apos;success&apos;)，promise状态变为fulfilled。此时执行promise2，</div><div class="line">但是在promise2内抛出一个Error，因此控制台会打印出Error的内容。</div><div class="line">等到2秒钟后，第二个定时器触发，直接输出promise1，</div><div class="line">此时promise状态已经变为fulfilled，不会再更改，因此输出&#123;&apos;success&apos;&#125;。</div><div class="line">promise2状态已经变为rejected，其内容就为Error: error!!!</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">const ADD_COLUMN_URL = &quot;/pc/addColumn&quot;;</div><div class="line">function* loadUI() &#123;</div><div class="line">  console.log(&quot;show loading&quot;);</div><div class="line">  yield* postAction();</div><div class="line">  console.log(&quot;hide loading&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">function *postAction()&#123;</div><div class="line">  let postUrl = yield ADD_COLUMN_URL;</div><div class="line">  let postData = yield Object.create(null);</div><div class="line">  const result = yield request(postUrl,postData);</div><div class="line">  if(result.success)&#123;</div><div class="line">    alert(&quot;添加成功！&quot;);</div><div class="line">  &#125;else&#123;</div><div class="line">    alert(&quot;失败！&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function request(url,data)&#123;</div><div class="line">  fetch(url,data).then(res =&gt; res.json())</div><div class="line">  .then(data =&gt; &#123;</div><div class="line">    load.next(data)</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">const load = loadUI();</div><div class="line">load.next();</div><div class="line">/**</div><div class="line"> * todo</div><div class="line"> * 实现新增列</div><div class="line"> * 新增数据为&#123;name:&quot;还款日期&quot;&#125;</div><div class="line">**/</div><div class="line"></div><div class="line">问：实现todo需求，以下选项正确的有？【多选】</div><div class="line">A.</div><div class="line">load.next();</div><div class="line">load.next(&#123;name:&quot;还款日期&quot;&#125;);</div><div class="line"></div><div class="line">B.</div><div class="line">load.next(ADD_COLUMN_URL);</div><div class="line">load.next(&#123;name:&quot;还款日期&quot;&#125;);</div><div class="line"></div><div class="line">C.</div><div class="line">load.next();</div><div class="line">load.next(&#123;name:&quot;还款日期&quot;&#125;);</div><div class="line"></div><div class="line">D.</div><div class="line">load.next().next(&#123;name:&quot;还款日期&quot;&#125;);</div><div class="line"></div><div class="line">答案：B、C</div><div class="line">解析：因为Generator.prototype.return会直接返回</div><div class="line">done为true,value为return后面的参数，并会中断后面的操作，所以A错误；next方法返回的是一个普通对象&#123;value:ADD_COLUMN_URL,done:false&#125;而不是迭代器，因此不能.next.next连续使用，所以D错误。</div><div class="line">并且中断后续的操作。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">按要求导出 ES6 模块，以下选项中b.js写法正确的有？</div><div class="line">//a.js</div><div class="line">import &#123; age &#125; from &apos;./b&apos;</div><div class="line">console.log(age) // 18</div><div class="line"></div><div class="line">//b.js</div><div class="line"></div><div class="line">A.</div><div class="line">export const age = 18</div><div class="line"></div><div class="line">B.</div><div class="line">const age = 18;</div><div class="line">export age;</div><div class="line"></div><div class="line">C.</div><div class="line">const age = 18;</div><div class="line">export &#123; age &#125;;</div><div class="line"></div><div class="line">D.</div><div class="line">export default &#123; age: 18 &#125;;</div><div class="line">答案：A、C</div><div class="line">解析：export default只能导出变量、方法、类，因此D错误。</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/月度总结/" rel="tag"># 月度总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/29/10月总结/" rel="next" title="10月总结[redux为主]">
+                <i class="fa fa-chevron-left"></i> 10月总结[redux为主]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/20/js类型转换与react组件通信-md/" rel="prev" title="js类型转换与react组件通信">
+                js类型转换与react组件通信 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#学习范围"><span class="nav-number">1.</span> <span class="nav-text">学习范围</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy-代理器"><span class="nav-number">1.1.</span> <span class="nav-text">Proxy(代理器)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#get方法注意点："><span class="nav-number">1.1.1.</span> <span class="nav-text">get方法注意点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set方法注意点："><span class="nav-number">1.1.2.</span> <span class="nav-text">set方法注意点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apply方法注意点："><span class="nav-number">1.1.3.</span> <span class="nav-text">apply方法注意点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#has方法注意点："><span class="nav-number">1.1.4.</span> <span class="nav-text">has方法注意点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#construct方法注意点："><span class="nav-number">1.1.5.</span> <span class="nav-text">construct方法注意点：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reflect"><span class="nav-number">1.2.</span> <span class="nav-text">Reflect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class"><span class="nav-number">1.3.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor-NaN"><span class="nav-number">1.3.1.</span> <span class="nav-text">constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prototype属性"><span class="nav-number">1.3.2.</span> <span class="nav-text">prototype属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super"><span class="nav-number">1.3.3.</span> <span class="nav-text">super</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generator函数"><span class="nav-number">1.4.</span> <span class="nav-text">Generator函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#module"><span class="nav-number">1.5.</span> <span class="nav-text">module</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#export"><span class="nav-number">1.5.1.</span> <span class="nav-text">export</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import"><span class="nav-number">1.5.2.</span> <span class="nav-text">import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export-default命令"><span class="nav-number">1.5.3.</span> <span class="nav-text">export default命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export-与-import-的复合写法"><span class="nav-number">1.5.4.</span> <span class="nav-text">export 与 import 的复合写法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#考核题目回顾及解析"><span class="nav-number">1.6.</span> <span class="nav-text">考核题目回顾及解析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/11/30/11月总结-ES6考核复习/';
+          this.page.identifier = '2018/11/30/11月总结-ES6考核复习/';
+          this.page.title = '11月总结[ES6考核复习]';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
