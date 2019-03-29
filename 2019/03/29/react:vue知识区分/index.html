@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="面试准备," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="知识盲区回顾：类型判断、闭包、Promise与Async/await、react/vue生命周期等区分引用类型和基础类型的含义与区别基本类型：存放的是数据本身(如str1)，且把一个基本类型(str1)变量赋值给另外一个变量(str2)时，其实是分配了一个新的内存空间(str2的内存空间)，所以改变其中一个变量值(如str1)对另外一个变量(str2)无影响。 引用类型：存放的是数据地址(对象在堆">
+<meta name="keywords" content="面试准备">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react&#x2F;vue知识区分">
+<meta property="og:url" content="http://yoursite.com/2019/03/29/react:vue知识区分/index.html">
+<meta property="og:site_name" content="Vue">
+<meta property="og:description" content="知识盲区回顾：类型判断、闭包、Promise与Async/await、react/vue生命周期等区分引用类型和基础类型的含义与区别基本类型：存放的是数据本身(如str1)，且把一个基本类型(str1)变量赋值给另外一个变量(str2)时，其实是分配了一个新的内存空间(str2的内存空间)，所以改变其中一个变量值(如str1)对另外一个变量(str2)无影响。 引用类型：存放的是数据地址(对象在堆">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1393082-31d41cfc4aea51c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1393082-141f5726b7f53c00.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-03-29T10:05:50.217Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react&#x2F;vue知识区分">
+<meta name="twitter:description" content="知识盲区回顾：类型判断、闭包、Promise与Async/await、react/vue生命周期等区分引用类型和基础类型的含义与区别基本类型：存放的是数据本身(如str1)，且把一个基本类型(str1)变量赋值给另外一个变量(str2)时，其实是分配了一个新的内存空间(str2的内存空间)，所以改变其中一个变量值(如str1)对另外一个变量(str2)无影响。 引用类型：存放的是数据地址(对象在堆">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1393082-31d41cfc4aea51c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/29/react:vue知识区分/"/>
+
+
+
+
+
+  <title>react/vue知识区分 | Vue</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vue</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/29/react:vue知识区分/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xue Ling">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vue">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">react/vue知识区分</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-29T14:04:19+08:00">
+                2019-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/29/react:vue知识区分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/29/react:vue知识区分/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="知识盲区回顾：类型判断、闭包、Promise与Async-await、react-vue生命周期等区分"><a href="#知识盲区回顾：类型判断、闭包、Promise与Async-await、react-vue生命周期等区分" class="headerlink" title="知识盲区回顾：类型判断、闭包、Promise与Async/await、react/vue生命周期等区分"></a>知识盲区回顾：类型判断、闭包、Promise与Async/await、react/vue生命周期等区分</h1><h2 id="引用类型和基础类型的含义与区别"><a href="#引用类型和基础类型的含义与区别" class="headerlink" title="引用类型和基础类型的含义与区别"></a>引用类型和基础类型的含义与区别</h2><p>基本类型：存放的是数据本身(如str1)，且把一个基本类型(str1)变量赋值给另外一个变量(str2)时，其实是分配了一个新的内存空间(str2的内存空间)，所以改变其中一个变量值(如str1)对另外一个变量(str2)无影响。</p>
+<p>引用类型：存放的是数据地址(对象在堆内存中的地址指针)。把一个引用类型(obj1)变量赋值给另外一个变量(obj2)时，其实是复制了obj1中的地址指针赋值给obj2，此时obj1与obj2中的地址指向对内存中的同一个位置，因此改写obj1会同时改变obj2，同理改变obj2也会同时改变obj1。</p>
+<a id="more"></a>
+<p>区别：</p>
+<ol>
+<li>基本类型的值是一经确定就不可变的；引用类型的值是可变的(可以为引用类型添加属性和方法，或者删除其属性和方法)。</li>
+<li>基本类型的比较是值的比较；引用类型的比较是引用的比较(即比较两个对象的堆内存中的地址)</li>
+<li>基本类型的变量是存放在栈内存的；引用类型的值是同时保存在栈内存(保存变量标识符、和指向堆内存中该对象的指针)和堆内存()中的对象(引用类型的值是按引用访问的)</li>
+</ol>
+<h2 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断"></a>类型判断</h2><p>基本类型除null外，都可用typeof得到正确类型；NaN是Number类型，且不等于它自身。</p>
+<p>对象除了函数都会显示Object。获得变量的正确类型可使用Object.prototype.toString.call(xxx)。</p>
+<p>判断是否为数组还有一种特殊方法是Array.isArray(xxx)。</p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>JavaScript变量作用域分为两种：全局变量、局部变量。</p>
+<p>JavaScript中，函数内部可以直接读取全局变量，但是在函数外部无法读取函数内的局部变量。</p>
+<p>我们有时需要得到函数内部的局部变量，通常情况下这是不行的，闭包就是为了解决此种情况而产生的变通方法。原理是在函数f1内部再定义一个函数f2，此时f1中的所有局部变量对f2都是可见的，但是f2中的局部变量对f1仍然是不可见的，若把f2作为返回值那么我们就可以在f1外部读取它的内部变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function f1() &#123;</div><div class="line">  let n=1;</div><div class="line">  function f2() &#123;</div><div class="line">    console.log(n);</div><div class="line">  &#125;;</div><div class="line">  return f2;</div><div class="line">&#125;</div><div class="line">var test = f1();</div><div class="line">test(); // 1</div></pre></td></tr></table></figure>
+<p>含义：简单来说闭包是指有权访问另一个函数作用域中的变量的函数。</p>
+<p>用途：1.读取函数内部的变量；2.让某些变量的饿值始终保存在内存中。</p>
+<p>闭包的特性：</p>
+<ul>
+<li>函数嵌套函数</li>
+<li>函数内部可以读取外部的变量</li>
+<li>参数和变量不会被垃圾回收机制回收</li>
+</ul>
+<p>创建闭包的常用方法：在一个函数内部创建另一个函数，同个另一个函数访问这个函数内部的局部变量。</p>
+<p>闭包的缺点：常驻内存，会增加内存使用量，使用不当会造成内存泄漏。</p>
+<p>闭包的优点：避免全局变量的污染；允许私有成员的存在；可以达到使某个变量常驻内存的目的。</p>
+<p>闭包的使用场合：设计私有的方法和变量；创建特权方法用于访问控制；事件处理程序及回调。</p>
+<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>JavaScript是单线程的，就导致一些耗费时间的操作会阻塞当前运行线程，为了解决这个问题，出现了“同步”和“异步”这两个概念。</p>
+<p>“同步”是指在一个任务梯队里面，只有当前一个任务取到返回值才会继续进行下一个任务。</p>
+<p>“异步”是指在一个任务梯队里面，前面的函数开始执行时即使未立即拿到返回值，也会进行下一个函数，然后在将来通过回调函数拿到返回值，这就是异步。</p>
+<p>回调地狱：当多个异步任务需要顺序执行时，层层回调会造成回调地狱。</p>
+<p>Promise：Promise对象内部保存着异步操作的结果，并通过链式调用的方式避免了回调函数层层嵌套的写法。</p>
+<p>含义：简单来讲就是一个内部存储着异步操作(未来才会结束)的结果的容器。</p>
+<p>特性：</p>
+<ol>
+<li>Promise函数接收一个函数作为参数，分别为resolve(一个把Promise从pending变为fufilled的函数)、reject(一个把Promise从pending变为rejected的函数)。</li>
+<li>Promise对象的状态不受外界影响，有三种状态：pending（进行中）、fufilled(已成功)、rejected(已失败)。且只有异步操作的结果能决定当前是哪一种状态。</li>
+<li>Promise一旦状态改变，就不会再变，任何时候都会得到这个结果。只有两种可能：pending-&gt;fufilled、pending-&gt;rejected。</li>
+<li>Promise实例生成后可以使用then方法分别指定resolved状态和rejected状态的回调函数，模式为</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">promise.then(res =&gt; &#123;</div><div class="line">  resolve函数内容</div><div class="line">&#125;, err =&gt; &#123;</div><div class="line">  rejected函数内容</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>缺陷：</p>
+<ol>
+<li>Promise一旦创建就会立即执行，一经执行，无法中断，除非抛出异常。</li>
+<li>Promise函数虽然改变了回调地狱的写法，但根本上还是嵌套函数。</li>
+<li>在Promise外部无法通过try/catch捕获内部抛出的异常。</li>
+</ol>
+<p>Promise我的应用场景：用户使用token登录-&gt;登录成功取得账户信息-&gt;使用用户名获取用户信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">export const actions = &#123;</div><div class="line">  get:(url, params, cb) =&gt; &#123;</div><div class="line">    axios.get(url, &#123;params: params&#125;).then(res =&gt; &#123;</div><div class="line">      let DATA = res.data.data;</div><div class="line">      cb &amp;&amp; cb(DATA);</div><div class="line">    &#125;)</div><div class="line">  &#125;,</div><div class="line">  post:(url, params, cb) =&gt; &#123;</div><div class="line">    axios.post(url, params).then(res =&gt; &#123;</div><div class="line">      let DATA = res.data;</div><div class="line">      cb &amp;&amp; cb(DATA);</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Async函数"><a href="#Async函数" class="headerlink" title="Async函数"></a>Async函数</h2><p>Async函数是ES7中新的异步操作方案，它使异步操作变得更加方便，有以下特点：</p>
+<ol>
+<li>内置执行器，即可以像普通函数那样执行，AsyncFunName()。</li>
+<li>表示内部存在异步操作，await表示紧跟在后面的表达式需要等待结果</li>
+<li>await函数外面可以是Promise对象和原始类型的值</li>
+<li>Async函数可看作多个异步操作包装成的一个Promise对象，await命令就是内部then方法的语法糖。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">loginFun(params) &#123;</div><div class="line">  axios.post(&apos;url&apos;,&#123;num: params.num&#125;).then(res =&gt; &#123;</div><div class="line">    getAccountInfo(res.name);</div><div class="line">    getAuthorInfo(res.name);</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">async loginFun(params) &#123;</div><div class="line">  try &#123;</div><div class="line">    const res = await axios.post(&apos;url&apos;,&#123;num:params.num&#125;)</div><div class="line">    await getAccountInfo(res.name);</div><div class="line">    await getAuthorInfo(res.name);</div><div class="line">  &#125; catch (err) &#123;</div><div class="line">    console.log(err);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="SPA"><a href="#SPA" class="headerlink" title="SPA"></a>SPA</h2><p>SPA是单页Web应用，浏览器一开始会加载必需的HTML、css、javascript，之后所有的操作都在这张页面上完成，这一切都由JavaScript控制。</p>
+<p>特点：</p>
+<ul>
+<li>更好的用户体验，让用户在web app感受native app的速度和流畅。</li>
+<li>MVVM：前后端各负其责。</li>
+<li>ajax：业务逻辑在本地操作，数据通过AJAX同步、提交。</li>
+<li>路由：在URL中采用#号作为当前路由的地址，改变#号后的参数，页面并不会重载。</li>
+</ul>
+<p>注意：单页面跳转仅刷新局部资源，公共资源(js、css等)仅需加载一次，常用于PC端官网、购物等网站。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1393082-31d41cfc4aea51c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="单页面应用结构图.png"></p>
+<p>路由：前端路由目前主要有两种方法，1.利用URL的hash，就是常用的锚点操作。2.利用HTML5的history模式，</p>
+<h2 id="多页面应用"><a href="#多页面应用" class="headerlink" title="多页面应用"></a>多页面应用</h2><p>多页面跳转刷新所有资源，每个公共资源(js、css等)需选择性重新加载，常用于app或客户端等。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1393082-141f5726b7f53c00.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="多页面应用结构图.png"></p>
+<h2 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h2><h3 id="组件通信-react"><a href="#组件通信-react" class="headerlink" title="组件通信-react"></a>组件通信-react</h3><p>1.父子组件沟通</p>
+<blockquote>
+<p>父组件更新组件状态 –&gt; 通过传递props更新子组件状态。<br>父组件传递回调函数给子组件 –&gt; 子组件调用触发 –&gt; 父组件更新组件状态。</p>
+</blockquote>
+<p>2.兄弟组件沟通</p>
+<blockquote>
+<p>通过props传递父组件回调函数。<br>使用context达到沟通效果。</p>
+</blockquote>
+<h3 id="组件通信-vue"><a href="#组件通信-vue" class="headerlink" title="组件通信-vue"></a>组件通信-vue</h3><p>父传子：父组件v-bind:data=”data”传递值，子组件props获取值，获取到的值可以像data中定义的数据那样使用。</p>
+<p>子传父：子组件$emit触发自定义事件，父组件v-on监听子组件触发的事件。</p>
+<p>非父子：定义一个空的Vue实例eventBus，第一个组件中通过eventBus.$emit传递，第二个组件创建组件的钩子中通过eventBus.$on监听。</p>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><h3 id="生命周期-vue"><a href="#生命周期-vue" class="headerlink" title="生命周期-vue"></a>生命周期-vue</h3><p>八大生命周期：</p>
+<p>beforeCreate：可添加loading事件<br>created：此时data已经初始化了，可结束loading事件，调用异步请求<br>beforeMount<br>mounted：挂载元素，获取到DOM节点<br>beforeUpdate<br>updated<br>beforeDestroy：可写一个确认停止时间的确认框<br>destroyed</p>
+<ul>
+<li>第一次页面加载时触发 beforeCreate, created, beforeMount, mounted 这几个钩子，data 数据在 created 中可获取到。</li>
+<li>更新数据时触发 beforeUpdate 和 updated 钩子，且在 beforeUpdate 触发时，数据已更新完毕。</li>
+<li>销毁完成后，vue不再对组件内元素的改变做出响应。但是原先生成的dom元素还存在，可以理解为执行了destroy操作，后续就不再受vue控制了。</li>
+</ul>
+<h3 id="生命周期-react"><a href="#生命周期-react" class="headerlink" title="生命周期-react"></a>生命周期-react</h3><p>React的组件的生命周期分为三个过程：</p>
+<p>装载过程(Mount)：第一次把组件渲染到DOM树的过程；<br>更新过程(Update)：组件进行渲染更新的过程；<br>卸载过程(Unmount)：组件从DOM树中删除的过程。</p>
+<p>挂载阶段</p>
+<ul>
+<li>constructor()在组件创建阶段调用，且从父组件接收props：constructor(props)。</li>
+<li>componentWillMount() 在组件即将挂载时调用。</li>
+<li>render() 组件渲染至 DOM，必须有返回值，返回null或false表示不渲染任何DOM元素。</li>
+<li>componentDidMount() 在组件挂载完成时调用。</li>
+</ul>
+<p>更新阶段</p>
+<ul>
+<li>componentWillReceiveProps(nextProps)在组件进行更新以及父组件render函数（不管数据是否发生了改变）被调用后执行，this.props取得当前的props，nextProps传入的是要更新的props。</li>
+<li>shouldComponentUpdate(nextProps, nextState)：返回布尔值，true表示要更新，false表示不更新。</li>
+<li>componentWillUpdate(nextProps,nextState)：预更新函数。</li>
+<li>render：渲染函数。</li>
+<li>componentDidUpdate(prevProps,PrevState)：更新完成函数。</li>
+</ul>
+<p>卸载阶段</p>
+<ul>
+<li>compontentWillUnmount() 组件即将被卸载。</li>
+</ul>
+<h2 id="组件化设计"><a href="#组件化设计" class="headerlink" title="组件化设计"></a>组件化设计</h2><p>组件化设计的要点在于分拆组件，将复杂的UI和逻辑拆分开来，第一是减小开发难度，第二能够更清晰的组织代码，第三是增加复用。</p>
+<ul>
+<li>将组件尽可能的细分，便于复用和优化。</li>
+<li>尽量使拆分后的组件更容易判断是否更新。</li>
+</ul>
+<h2 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h2><ul>
+<li>集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</li>
+<li>此种方式下集中存储的是全局通用且状态持久的数据，此类状态的变更都会留下记录。</li>
+<li>此外，每个实例/组件仍然可以拥有和管理自己的私有状态。</li>
+<li>适用于多个组件共享状态，如果应用比较简单，不建议使用。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试准备/" rel="tag"># 面试准备</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/29/html-css回顾/" rel="next" title="html/css回顾">
+                <i class="fa fa-chevron-left"></i> html/css回顾
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xue Ling</p>
+              <p class="site-description motion-element" itemprop="description">ES6</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识盲区回顾：类型判断、闭包、Promise与Async-await、react-vue生命周期等区分"><span class="nav-number">1.</span> <span class="nav-text">知识盲区回顾：类型判断、闭包、Promise与Async/await、react/vue生命周期等区分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型和基础类型的含义与区别"><span class="nav-number">1.1.</span> <span class="nav-text">引用类型和基础类型的含义与区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型判断"><span class="nav-number">1.2.</span> <span class="nav-text">类型判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">1.3.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise"><span class="nav-number">1.4.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Async函数"><span class="nav-number">1.5.</span> <span class="nav-text">Async函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPA"><span class="nav-number">1.6.</span> <span class="nav-text">SPA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多页面应用"><span class="nav-number">1.7.</span> <span class="nav-text">多页面应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件通信"><span class="nav-number">1.8.</span> <span class="nav-text">组件通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件通信-react"><span class="nav-number">1.8.1.</span> <span class="nav-text">组件通信-react</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件通信-vue"><span class="nav-number">1.8.2.</span> <span class="nav-text">组件通信-vue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期"><span class="nav-number">1.9.</span> <span class="nav-text">生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期-vue"><span class="nav-number">1.9.1.</span> <span class="nav-text">生命周期-vue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期-react"><span class="nav-number">1.9.2.</span> <span class="nav-text">生命周期-react</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件化设计"><span class="nav-number">1.10.</span> <span class="nav-text">组件化设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态管理"><span class="nav-number">1.11.</span> <span class="nav-text">状态管理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xue Ling</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xuelinglong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/03/29/react:vue知识区分/';
+          this.page.identifier = '2019/03/29/react:vue知识区分/';
+          this.page.title = 'react/vue知识区分';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xuelinglong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
