@@ -79,24 +79,18 @@
 
 
 
-<meta name="description" content="汇总面试题目原生与前端知识闭包的使用场景1.使用闭包代替全局变量  2.在函数外或在其他函数中访问某一函数内部的变量">
+<meta name="description" content="汇总面试题目原生与前端知识闭包的使用场景1.使用闭包代替全局变量 12345678910(function() &amp;#123;  var age = 222;  function outer()&amp;#123;      console.log(test2);  &amp;#125;  outer();&amp;#125;)();console.log(age); // age is not defined 2.在函数">
 <meta name="keywords" content="面试准备">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试回顾">
 <meta property="og:url" content="http://yoursite.com/2019/07/01/面试回顾-md/index.html">
 <meta property="og:site_name" content="Vue">
-<meta property="og:description" content="汇总面试题目原生与前端知识闭包的使用场景1.使用闭包代替全局变量  2.在函数外或在其他函数中访问某一函数内部的变量">
+<meta property="og:description" content="汇总面试题目原生与前端知识闭包的使用场景1.使用闭包代替全局变量 12345678910(function() &amp;#123;  var age = 222;  function outer()&amp;#123;      console.log(test2);  &amp;#125;  outer();&amp;#125;)();console.log(age); // age is not defined 2.在函数">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1393082-79f3e5ccc5a85077.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1393082-9146c9690be53803.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1393082-5ef5f7864c3d2906.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1393082-2e00f198d14b187d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1393082-9b778ade4eb0ee09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-07-18T10:08:30.163Z">
+<meta property="og:updated_time" content="2019-08-29T12:24:09.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试回顾">
-<meta name="twitter:description" content="汇总面试题目原生与前端知识闭包的使用场景1.使用闭包代替全局变量  2.在函数外或在其他函数中访问某一函数内部的变量">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1393082-79f3e5ccc5a85077.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:description" content="汇总面试题目原生与前端知识闭包的使用场景1.使用闭包代替全局变量 12345678910(function() &amp;#123;  var age = 222;  function outer()&amp;#123;      console.log(test2);  &amp;#125;  outer();&amp;#125;)();console.log(age); // age is not defined 2.在函数">
 
 
 
@@ -318,21 +312,22 @@
 
       
         <h1 id="汇总面试题目"><a href="#汇总面试题目" class="headerlink" title="汇总面试题目"></a>汇总面试题目</h1><h2 id="原生与前端知识"><a href="#原生与前端知识" class="headerlink" title="原生与前端知识"></a>原生与前端知识</h2><h3 id="闭包的使用场景"><a href="#闭包的使用场景" class="headerlink" title="闭包的使用场景"></a>闭包的使用场景</h3><p>1.使用闭包代替全局变量</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1393082-79f3e5ccc5a85077.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="代替全局变量.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">(function() &#123;</div><div class="line">  var age = 222;</div><div class="line"></div><div class="line">  function outer()&#123;</div><div class="line">      console.log(test2);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  outer();</div><div class="line">&#125;)();</div><div class="line">console.log(age); // age is not defined</div></pre></td></tr></table></figure>
 <p>2.在函数外或在其他函数中访问某一函数内部的变量</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1393082-9146c9690be53803.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="访问函数内部的变量.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function f1() &#123;</div><div class="line">  var test = 111;</div><div class="line">  test_temp = function() &#123;</div><div class="line">    return test;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">f1();</div><div class="line">console.log(test_temp()); // 111</div><div class="line"></div><div class="line">(function f2() &#123;</div><div class="line">  console.log(test_temp()); // 111</div><div class="line">&#125;)();</div><div class="line"></div><div class="line">test_temp = null;</div><div class="line">console.log(test_temp); // null</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>3.在函数执行之前为要执行的函数提供具体参数,如setTimeOut</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1393082-5ef5f7864c3d2906.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="setTimeOut传递参数"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function fun1(obj) &#123;</div><div class="line">  var age = obj.age;</div><div class="line">  return function() &#123;</div><div class="line">    console.log(age);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var obj = &#123;</div><div class="line">  age: 1</div><div class="line">&#125;</div><div class="line"></div><div class="line">var getAge = fun1(obj);</div><div class="line">setTimeout(getAge, 1000);</div></pre></td></tr></table></figure>
 <p>4.对象设置特权方法</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1393082-2e00f198d14b187d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="对象设计特权方法.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function fun() &#123;</div><div class="line">  var name = &apos;tom&apos;;</div><div class="line"></div><div class="line">  this.getName = function() &#123;</div><div class="line">    return name;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  this.setName = function(newName) &#123;</div><div class="line">    name = newName;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var Fun = new fun();</div><div class="line">console.log(Fun.name);  // undefined</div><div class="line">console.log(Fun.getName());  // tom</div><div class="line">Fun.setName(&apos;lily&apos;);</div><div class="line">console.log(Fun.getName()); // lily</div></pre></td></tr></table></figure>
 <h3 id="深拷贝与浅拷贝"><a href="#深拷贝与浅拷贝" class="headerlink" title="深拷贝与浅拷贝"></a>深拷贝与浅拷贝</h3><p>指的是对于Object、Array这种引用类型，当从一个变量复制引用类型的值时，复制的其实是一个指针，两个变量指向同一个堆对象，改变其中一个变量，另一个也会受到影响。</p>
 <p>浅拷贝：拷贝引用。</p>
 <p>深拷贝：拷贝实例(新的实例与之前的实例互不影响)。</p>
 <p>浅拷贝包括：Array.prototype.slice()，Array.prototype.concat()，</p>
 <p>深拷贝常用方法：JSON.parse(JSON.stringify(obj))、fon…in加递归</p>
 <p>JOSN对象中的stringify可以把一个js对象序列化为一个JSON字符串，parse可以把JSON字符串反序列化为一个js对象，通过这两个方法，也可以实现对象的深复制。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1393082-9b778ade4eb0ee09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="深拷贝.png">此方法待完善</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">function isObj(obj) &#123;</div><div class="line">  return (typeof obj === &apos;object&apos; || typeof obj === &apos;function&apos;) &amp;&amp; obj !== null</div><div class="line">&#125;</div><div class="line"></div><div class="line">function deepCopy(obj) &#123;</div><div class="line">  let tempObj = Array.isArray(obj) ? [] : &#123;&#125;</div><div class="line">  for(let key in obj) &#123;</div><div class="line">    tempObj[key] = isObj(obj[key]) ? deepCopy(obj[key]) : obj[key];</div><div class="line"></div><div class="line">    return tempObj</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var obj1 = &#123;</div><div class="line">  name: &apos;lily&apos;,</div><div class="line">  score: [1,2,3],</div><div class="line">  getName: function() &#123;</div><div class="line">    return this.name</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var obj2 = deepCopy(obj1);</div><div class="line"></div><div class="line">obj1.name = &apos;luna&apos;;</div><div class="line"></div><div class="line">console.log(obj1);</div><div class="line">console.log(obj2);</div></pre></td></tr></table></figure>
+<p>此方法待完善</p>
 <h3 id="Promise的finally、all、race等方法"><a href="#Promise的finally、all、race等方法" class="headerlink" title="Promise的finally、all、race等方法"></a>Promise的finally、all、race等方法</h3><p>finally是不管promise对象最后状态如何，都会执行的操作;finally方法的回调函数不接收任何参数，所以finally里面的操作是与promise状态无关的。</p>
 <p>all用于将多个promise实例包装成一个新的promise实例；接受一个数组（内部是一个个的promise实例，若不是则会调用resolve方法转换为promise实例再处理）为参数；只要有一个promise被rejected那么p就会变成rejected状态（第一个被rejected的promise实例的返回值会传递给p的回调函数），必须所有的promise都fulfilled那么p才会fulfilled（所有promise实例的返回值组成一个数组传递给p的回调函数）。</p>
 <p><code>const p = Promise.all([p1, p2, p3])</code></p>
