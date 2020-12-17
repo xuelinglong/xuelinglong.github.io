@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Vue.js," />
+  <meta name="keywords" content="Vue.js,">
 
 
 
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/06/Vue计算属性/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/06/Vue计算属性/">
 
 
 
@@ -138,7 +138,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -148,13 +148,13 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Vue</span>
         <span class="logo-line-after"><i></i></span>
@@ -184,7 +184,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -194,7 +194,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -228,20 +228,20 @@
   
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/06/Vue计算属性/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xue Ling">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Vue">
     </span>
 
@@ -282,8 +282,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/06/06/Vue计算属性/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/06/06/Vue计算属性/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/06/Vue计算属性/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -312,14 +311,14 @@
 
       
         <h1 id="3-1-计算属性"><a href="#3-1-计算属性" class="headerlink" title="3.1 计算属性"></a>3.1 计算属性</h1><p>模板内的表达式是非常便利的，但是它们实际上只用于简单的运算。在模板中放入太多的逻辑会让模板过重且难以维护。因此对于任何复杂逻辑，我们都应当使用<strong>计算属性</strong>。<br><a id="more"></a></p>
-<h2 id="基础例子"><a href="#基础例子" class="headerlink" title="基础例子"></a>基础例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;example&quot;&gt;</div><div class="line">    &lt;p&gt;Original message: &quot;&#123;&#123; message &#125;&#125;&quot;&lt;/p&gt;</div><div class="line">    &lt;p&gt;Computed reversed message: &quot;&#123;&#123; reversedMessage &#125;&#125;&quot;&lt;/p&gt;</div><div class="line">                                    &lt;!-- 模板中可以绑定计算属性  --&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">    var vm = new Vue(&#123;</div><div class="line">        el: &apos;#example&apos;,</div><div class="line">        data: &#123;</div><div class="line">            message: &apos;Hello&apos;</div><div class="line">        &#125;,</div><div class="line">        computed: &#123;</div><div class="line">            // a computed getter       reversedMessage是一个计算属性</div><div class="line">            reversedMessage: function () &#123;   </div><div class="line">            //我们提供的函数将用作属性 vm.reversedMessage 的 getter </div><div class="line">            // `this` points to the vm instance</div><div class="line">            return this.message.split(&apos;&apos;).reverse().join(&apos;&apos;)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h2 id="基础例子"><a href="#基础例子" class="headerlink" title="基础例子"></a>基础例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;example&quot;&gt;</span><br><span class="line">    &lt;p&gt;Original message: &quot;&#123;&#123; message &#125;&#125;&quot;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;Computed reversed message: &quot;&#123;&#123; reversedMessage &#125;&#125;&quot;&lt;/p&gt;</span><br><span class="line">                                    &lt;!-- 模板中可以绑定计算属性  --&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var vm = new Vue(&#123;</span><br><span class="line">        el: &apos;#example&apos;,</span><br><span class="line">        data: &#123;</span><br><span class="line">            message: &apos;Hello&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        computed: &#123;</span><br><span class="line">            // a computed getter       reversedMessage是一个计算属性</span><br><span class="line">            reversedMessage: function () &#123;   </span><br><span class="line">            //我们提供的函数将用作属性 vm.reversedMessage 的 getter </span><br><span class="line">            // `this` points to the vm instance</span><br><span class="line">            return this.message.split(&apos;&apos;).reverse().join(&apos;&apos;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <p>Vue 知道 vm.reversedMessage 依赖于 vm.message ，因此当 vm.message 发生改变时，所有依赖于 vm.reversedMessage 的绑定也会更新。</p>
 <p>以声明的方式创建的这种依赖关系：计算属性的 getter 是没有副作用，这使得它易于测试和推理。</p>
-<h2 id="计算缓存-vs-Methods"><a href="#计算缓存-vs-Methods" class="headerlink" title="计算缓存 vs Methods"></a>计算缓存 vs Methods</h2><p>可以通过调用表达式中的 method 来达到同样的效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;example&quot;&gt;</div><div class="line">    &lt;p&gt;Original message: &quot;&#123;&#123; message &#125;&#125;&quot;&lt;/p&gt;</div><div class="line">   &lt;p&gt;Reversed message: &quot;&#123;&#123; reversedMessage() &#125;&#125;&quot;&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">    var vm = new Vue(&#123;</div><div class="line">        el: &apos;#example&apos;,</div><div class="line">        data: &#123;</div><div class="line">            message: &apos;Hello&apos;</div><div class="line">        &#125;,</div><div class="line">        // in component</div><div class="line">        methods: &#123;</div><div class="line">            reversedMessage: function () &#123;</div><div class="line">                return this.message.split(&apos;&apos;).reverse().join(&apos;&apos;)</div><div class="line">             &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="计算缓存-vs-Methods"><a href="#计算缓存-vs-Methods" class="headerlink" title="计算缓存 vs Methods"></a>计算缓存 vs Methods</h2><p>可以通过调用表达式中的 method 来达到同样的效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;example&quot;&gt;</span><br><span class="line">    &lt;p&gt;Original message: &quot;&#123;&#123; message &#125;&#125;&quot;&lt;/p&gt;</span><br><span class="line">   &lt;p&gt;Reversed message: &quot;&#123;&#123; reversedMessage() &#125;&#125;&quot;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var vm = new Vue(&#123;</span><br><span class="line">        el: &apos;#example&apos;,</span><br><span class="line">        data: &#123;</span><br><span class="line">            message: &apos;Hello&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        // in component</span><br><span class="line">        methods: &#123;</span><br><span class="line">            reversedMessage: function () &#123;</span><br><span class="line">                return this.message.split(&apos;&apos;).reverse().join(&apos;&apos;)</span><br><span class="line">             &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
 <p>不同点：<br>计算属性是<strong>基于它们的依赖进行缓存的</strong>。<br>计算属性只有在它的相关依赖发生改变时才会重新求值。<br>即只要 message 还没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果，而不必再次执行函数。<br>只要发生重新渲染，method 调用总会执行该函数（method没有缓存）。</p>
 <h2 id="computed属性vs-Watched属性"><a href="#computed属性vs-Watched属性" class="headerlink" title="computed属性vs Watched属性"></a>computed属性vs Watched属性</h2><p>watch 属性：是Vue 提供的一种更通用的来观察和响应 Vue 实例上的数据变动的方式</p>
-<p>当你有一些数据需要随着其它数据变动而变动时，更好的想法是使用 computed 属性而不是命令式的 watch 回调：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;demo&quot;&gt;&#123;&#123; fullName &#125;&#125;&lt;/div&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    var vm = new Vue(&#123;</div><div class="line">        el: &apos;#demo&apos;,</div><div class="line">        data: &#123;</div><div class="line">            firstName: &apos;Foo&apos;,</div><div class="line">            lastName: &apos;Bar&apos;,</div><div class="line">        //  fullName: &apos;Foo Bar&apos;</div><div class="line">        &#125;,</div><div class="line">        // watch: &#123;</div><div class="line">        //     firstName: function (val) &#123;</div><div class="line">        //     this.fullName = val + &apos; &apos; + this.lastName</div><div class="line">        //     &#125;,</div><div class="line">        //     lastName: function (val) &#123;</div><div class="line">        //     this.fullName = this.firstName + &apos; &apos; + val</div><div class="line">        //     &#125;</div><div class="line">        // &#125;   //命令式和重复的代码</div><div class="line"></div><div class="line">        computed: &#123;</div><div class="line">            fullName: function () &#123;</div><div class="line">            return this.firstName + &apos; &apos; + this.lastName</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;)    </div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="计算setter"><a href="#计算setter" class="headerlink" title="计算setter"></a>计算setter</h2><p>计算属性默认只有 getter ，不过在需要时你也可以提供一个 setter ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;demo&quot;&gt;&#123;&#123; fullName &#125;&#125;&lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        var vm = new Vue(&#123;</div><div class="line">            el: &apos;#demo&apos;,</div><div class="line">            data: &#123;</div><div class="line">                firstName: &apos;Foo&apos;,</div><div class="line">                lastName: &apos;Bar&apos;,</div><div class="line">            &#125;,</div><div class="line">            computed: &#123;</div><div class="line">                fullName:&#123;</div><div class="line">                    get: function () &#123;</div><div class="line">                        return this.firstName + &apos; &apos; + this.lastName</div><div class="line">                    &#125;,</div><div class="line">                    set: function (newValue) &#123;</div><div class="line">                        var names = newValue.split(&apos; &apos;) </div><div class="line">                        //把字符串以 空格 分为字符串数组</div><div class="line">                        this.firstName = names[0]</div><div class="line">                        this.lastName = names[names.length - 1]</div><div class="line">                    &#125;</div><div class="line">                &#125; </div><div class="line">            &#125;</div><div class="line">        &#125;)    </div><div class="line">    &lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>当你有一些数据需要随着其它数据变动而变动时，更好的想法是使用 computed 属性而不是命令式的 watch 回调：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;demo&quot;&gt;&#123;&#123; fullName &#125;&#125;&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var vm = new Vue(&#123;</span><br><span class="line">        el: &apos;#demo&apos;,</span><br><span class="line">        data: &#123;</span><br><span class="line">            firstName: &apos;Foo&apos;,</span><br><span class="line">            lastName: &apos;Bar&apos;,</span><br><span class="line">        //  fullName: &apos;Foo Bar&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        // watch: &#123;</span><br><span class="line">        //     firstName: function (val) &#123;</span><br><span class="line">        //     this.fullName = val + &apos; &apos; + this.lastName</span><br><span class="line">        //     &#125;,</span><br><span class="line">        //     lastName: function (val) &#123;</span><br><span class="line">        //     this.fullName = this.firstName + &apos; &apos; + val</span><br><span class="line">        //     &#125;</span><br><span class="line">        // &#125;   //命令式和重复的代码</span><br><span class="line"></span><br><span class="line">        computed: &#123;</span><br><span class="line">            fullName: function () &#123;</span><br><span class="line">            return this.firstName + &apos; &apos; + this.lastName</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)    </span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="计算setter"><a href="#计算setter" class="headerlink" title="计算setter"></a>计算setter</h2><p>计算属性默认只有 getter ，不过在需要时你也可以提供一个 setter ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;demo&quot;&gt;&#123;&#123; fullName &#125;&#125;&lt;/div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var vm = new Vue(&#123;</span><br><span class="line">            el: &apos;#demo&apos;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                firstName: &apos;Foo&apos;,</span><br><span class="line">                lastName: &apos;Bar&apos;,</span><br><span class="line">            &#125;,</span><br><span class="line">            computed: &#123;</span><br><span class="line">                fullName:&#123;</span><br><span class="line">                    get: function () &#123;</span><br><span class="line">                        return this.firstName + &apos; &apos; + this.lastName</span><br><span class="line">                    &#125;,</span><br><span class="line">                    set: function (newValue) &#123;</span><br><span class="line">                        var names = newValue.split(&apos; &apos;) </span><br><span class="line">                        //把字符串以 空格 分为字符串数组</span><br><span class="line">                        this.firstName = names[0]</span><br><span class="line">                        this.lastName = names[names.length - 1]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)    </span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
 <p>现在在运行 vm.fullName = ‘John Doe’ 时， setter 会被调用， vm.firstName 和 vm.lastName 也相应地会被更新。</p>
 <h2 id="观察Watchers"><a href="#观察Watchers" class="headerlink" title="观察Watchers"></a>观察Watchers</h2><p>Vue 提供一个更通用的方法通过 watch 选项，来响应数据的变化。</p>
 <p>但是当我们想要在数据变化响应时，执行异步操作或开销较大的操作，就需要一个自定义的 watcher 。</p>
@@ -440,7 +439,7 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">Xue Ling</p>
               <p class="site-description motion-element" itemprop="description">ES6</p>
@@ -453,7 +452,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -466,7 +465,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -519,7 +518,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
